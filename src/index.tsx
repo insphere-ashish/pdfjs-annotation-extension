@@ -22,6 +22,18 @@ interface AppOptions {
     [key: string]: string;
 }
 
+const shouldSaveNow = (a: IAnnotationStore) => {
+    if (a?.type === 11) {
+        const txt = a?.contentsObj?.text ?? '';
+        return txt.trim().length > 0;
+    }
+    return true;
+};
+
+const isNoteAnnotation = (a: IAnnotationStore) => {
+    return a?.type == 11;
+};
+
 class PdfjsAnnotationExtension {
     PDFJS_PDFViewerApplication: PDFViewerApplication // PDF.js 的 PDFViewerApplication 对象
     PDFJS_EventBus: EventBus // PDF.js 的 EventBus 对象
@@ -68,6 +80,12 @@ class PdfjsAnnotationExtension {
 
         // 处理地址栏参数
         this.parseHashParams()
+
+        // custom code for e-court
+        this.appOptions[HASH_PARAMS_USERNAME] = document.getElementById('docViewerContainer').dataset['userName']
+        this.appOptions[HASH_PARAMS_GET_URL] = document.getElementById('docViewerContainer').dataset['annoGet']
+        this.appOptions[HASH_PARAMS_POST_URL] = document.getElementById('docViewerContainer').dataset['annoPost']
+
         // 创建画笔实例
         this.painter = new Painter({
             userName: this.getOption(HASH_PARAMS_USERNAME),
@@ -77,11 +95,19 @@ class PdfjsAnnotationExtension {
                 this.customToolbarRef.current.activeAnnotation(annotationDefinitions[0])
             },
             onWebSelectionSelected: range => {
-                this.customPopbarRef.current.open(range)
+                // this.customPopbarRef.current.open(range) // custom code -- commented customPopbar for e-court
             },
             onStoreAdd: (annotation, isOriginal, currentAnnotation) => {
                 this.customCommentRef.current.addAnnotation(annotation)
-                if (isOriginal) return
+                if (isOriginal) return;
+                // custom code -- e-court auto open comment sidebar if note type
+                if (isNoteAnnotation(annotation)) {
+                    this.toggleComment(true)
+                }
+                if (shouldSaveNow(annotation)) {
+                    this.saveData() // -----------------------------------------    custom code -- e-court auto save after modified
+                }
+                // console.log('%c [ add annotation onStoreAdd ]', 'font-size:13px; background:#d10d00; color:#ff8989;', annotation)
                 if (currentAnnotation.isOnce) {
                     this.painter.selectAnnotation(annotation.id)
                 }
@@ -92,12 +118,13 @@ class PdfjsAnnotationExtension {
             },
             onStoreDelete: (id) => {
                 this.customCommentRef.current.delAnnotation(id)
+                this.saveData() // -----------------------------------------    custom code -- e-court auto save after modified
             },
             onAnnotationSelected: (annotation, isClick, selectorRect) => {
                 this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
-                if (isClick && this.isCommentOpen()) {
+                if ((isClick && this.isCommentOpen()) || (isClick && isNoteAnnotation(annotation))) {
                     // 如果是点击事件并且评论栏已打开，则选中批注
-                    this.customCommentRef.current.selectedAnnotation(annotation, isClick)
+                    this.customCommentRef.current.selectedAnnotation(annotation, isClick) // custom code -- e-court removing the connection line after modified
                 }
 
                 this.connectorLine?.drawConnection(annotation, selectorRect)
@@ -111,8 +138,11 @@ class PdfjsAnnotationExtension {
             },
             onAnnotationChanged: (annotation, selectorRect) => {
                 console.log('annotation changed', annotation)
-                this.connectorLine?.drawConnection(annotation, selectorRect)
+                // this.connectorLine?.drawConnection(annotation, selectorRect) // custom code -- e-court removing the connection line after modified
                 this.customerAnnotationMenuRef?.current?.open(annotation, selectorRect)
+                if (shouldSaveNow(annotation)) {
+                    this.saveData() // custom code -- e-court auto save after modified
+                }
             },
         })
         // 初始化操作
@@ -285,6 +315,7 @@ class PdfjsAnnotationExtension {
                 onChangeStyle={(currentAnnotation, style) => {
                     this.painter.updateAnnotationStyle(currentAnnotation, style)
                     this.customToolbarRef.current.updateStyle(currentAnnotation.type, style)
+                    this.saveData() // custom code - auto save for note type for e-court
                 }}
                 onDelete={(currentAnnotation) => {
                     this.painter.delete(currentAnnotation.id, true)
@@ -308,6 +339,7 @@ class PdfjsAnnotationExtension {
                 }}
                 onDelete={(id) => {
                     this.painter.delete(id)
+                    this.saveData() // custom code - auto save for note type for e-court 
                 }}
                 onUpdate={(annotation) => {
                     this.painter.update(annotation.id, {
@@ -315,6 +347,9 @@ class PdfjsAnnotationExtension {
                         contentsObj: annotation.contentsObj,
                         comments: annotation.comments
                     })
+                    if (annotation.type == 11) {
+                        this.saveData() // custom code - auto save for note type for e-court 
+                    }
                 }}
                 onScroll={() => {
                     this.connectorLine?.clearConnection()
@@ -382,6 +417,7 @@ class PdfjsAnnotationExtension {
 
         // 监听文档加载完成事件
         this.PDFJS_EventBus._on('documentloaded', async () => {
+            // alert('sssssss')
             this.painter.initWebSelection(this.$PDFJS_viewerContainer)
             const data = await this.getData()
             this.initialDataHash = hashArrayOfObjects(data)
@@ -398,6 +434,10 @@ class PdfjsAnnotationExtension {
      */
     private async getData(): Promise<any[]> {
         const getUrl = this.getOption(HASH_PARAMS_GET_URL);
+        // alert('getUrl', getUrl)
+        // console.log('--------------------------------- this.appOptions', this.appOptions)
+        // console.log('--------------------------------- defaultOptions', defaultOptions)
+        // console.log('--------------------------------- %c [ getUrl ]', 'font-size:13px; background:#d10d00; color:#ff5144;', getUrl)
         if (!getUrl) {
             return [];
         }
@@ -436,7 +476,7 @@ class PdfjsAnnotationExtension {
      */
     private async saveData(): Promise<void> {
         const dataToSave = this.painter.getData();
-        console.log('%c [ dataToSave ]', 'font-size:13px; background:#d10d00; color:#ff5144;', dataToSave)
+        // console.log('%c [ dataToSave ]', 'font-size:13px; background:#d10d00; color:#ff5144;', dataToSave)
         const postUrl = this.getOption(HASH_PARAMS_POST_URL);
         if (!postUrl) {
             message.error({
@@ -445,14 +485,14 @@ class PdfjsAnnotationExtension {
             });
             return;
         }
-        const modal = Modal.info({
-            content: <Space><SyncOutlined spin />{t('save.start')}</Space>,
-            closable: false,
-            okButtonProps: {
-                loading: true
-            },
-            okText: t('normal.ok')
-        })
+        // const modal = Modal.info({
+        //     content: <Space><SyncOutlined spin />{t('save.start')}</Space>,
+        //     closable: false,
+        //     okButtonProps: {
+        //         loading: true
+        //     },
+        //     okText: t('normal.ok')
+        // })
         try {
             const response = await fetch(postUrl, {
                 method: 'POST',
@@ -465,14 +505,23 @@ class PdfjsAnnotationExtension {
             const result = await response.json();
             // {"status": "ok", "message": "POST received!"}
             this.initialDataHash = hashArrayOfObjects(dataToSave)
-            modal.destroy()
+            // modal.destroy()
             message.success({
                 content: t('save.success'),
                 key: 'save',
             });
             console.log('Saved successfully:', result);
         } catch (error) {
-            modal.update({
+            // const modal = Modal.info({
+            //     content: <Space><SyncOutlined spin />{t('save.start')}</Space>,
+            //     closable: false,
+            //     okButtonProps: {
+            //         loading: true
+            //     },
+            //     okText: t('normal.ok')
+            // })
+            // modal.update({
+            const modal = Modal.info({
                 type: 'error',
                 content: t('save.fail', { value: error?.message }),
                 closable: true,

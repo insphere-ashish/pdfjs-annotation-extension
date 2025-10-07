@@ -182,7 +182,7 @@ const CustomAnnotationMenu = forwardRef<CustomAnnotationMenuRef, CustomAnnotatio
             {
                 !showStyle && currentAnnotation && (
                     <ul className="buttons">
-                        <li onMouseDown={() => {
+                        {/* <li onMouseDown={() => {
                             if (currentAnnotation) {
                                 props.onOpenComment(currentAnnotation)
                                 close()
@@ -191,7 +191,7 @@ const CustomAnnotationMenu = forwardRef<CustomAnnotationMenuRef, CustomAnnotatio
                             <div className="icon">
                                 <AnnoIcon />
                             </div>
-                        </li>
+                        </li> */}
 
                         {isStyleSupported && (
                             <li onMouseDown={() => {

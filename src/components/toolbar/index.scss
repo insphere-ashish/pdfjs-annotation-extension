@@ -394,3 +394,267 @@
         background-color: var(--button-hover-color); /* 使用 active 替代 */
     }
 }
+
+//  custom styles for e-court start
+:root {
+    --button-hover-color: color-mix(in srgb, currentColor 17%, transparent);
+}
+
+.CustomToolbar .buttons li {
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border: none;
+}
+
+.CustomToolbar .buttons li.selected {
+    background-color: var(--button-hover-color) !important;
+    border: none !important
+}
+
+#editorModeButtons {
+    display: none;
+}
+
+// .CustomToolbar ul.buttons:nth-child(1) li:nth-child(2),
+// .CustomToolbar ul.buttons:nth-child(1) li:nth-child(3),
+// .CustomToolbar ul.buttons:nth-child(1) li:nth-child(5),
+// .CustomToolbar ul.buttons:nth-child(1) li:nth-child(11),
+// .CustomToolbar ul.buttons:nth-child(1) li:nth-child(12),
+.CustomToolbar .buttons li .name,
+.CustomToolbar .splitToolbarButtonSeparator {
+    display: none;
+}
+
+.CustomToolbar ul.buttons li[title="Save"],
+.CustomToolbar ul.buttons li[title="Export"] {
+    display: none !important;
+}
+
+.PdfjsAnnotationExtension .toolbar {
+    position: relative;
+}
+
+.CustomToolbar .buttons.right li .icon {
+    padding: 0px;
+}
+
+.CustomToolbar .buttons.right li,
+.CustomToolbar .buttons.right li:hover {
+    border: none !important;
+    background-color: none !important;
+}
+
+.CustomToolbar .buttons.right li.selected {
+    border: none !important;
+    background-color: none !important;
+}
+
+.CustomToolbar .right {
+    top: -36px;
+    right: 100px;
+}
+
+.CustomToolbar .buttons.right li .icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    width: 30px;
+    height: 36px;
+    font-size: 0px;
+}
+
+.CustomToolbar .buttons.right li .icon:hover {
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    .CustomToolbar .buttons.right li:hover {
+        background-color: none !important;
+    }
+}
+
+
+
+.PdfjsAnnotationExtension #viewerContainer {
+    right: 0px !important;
+}
+
+
+
+
+.CustomComment {
+    top: 60px;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    z-index: 1;
+    padding-left: 15px;
+}
+
+.PdfjsAnnotationExtension #toolbarContainer {
+    height: 60px;
+}
+
+.PdfjsAnnotationExtension #viewerContainer {
+    top: 60px !important;
+}
+
+.PdfjsAnnotationExtension.PdfjsAnnotationExtension_Comment_hidden .CustomComment {
+    right: -330px
+}
+
+.CustomToolbar {
+    height: 24px;
+    justify-content: flex-start;
+    overflow: visible;
+    position: absolute;
+    left: 0;
+    top: 36px;
+
+}
+
+.CustomToolbar::after {
+    display: none;
+}
+
+@media screen and (max-width:749px) {
+    .CustomToolbar .right {
+        top: 0;
+        right: 33px;
+    }
+}
+
+.CustomToolbar ul.buttons:nth-child(1) {
+    gap: 14px;
+    width: 260px;
+    position: absolute;
+    z-index: 99;
+    height: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li:after {
+    width: 0px;
+    height: 14px;
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: 4px;
+    background-color: #fff;
+    border-left: 1px solid var(--separator-color);
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li:last-child:after {
+    display: none;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li .icon {
+    font-size: 15px;
+    color: #fff;
+}
+
+@media only screen and (min-width: 1024px) {
+    .c-boxContainer.d1 .c-boxContainer__content--leftsection .tab-content {
+        height: calc(100dvh - 190px);
+    }
+}
+
+/* .CustomToolbar ul.buttons li[title="Note"] {
+      position: absolute;
+      width: 30px;
+      height: 36px;
+      top:0;
+      right:142px;
+      border:none;
+    }
+       .CustomToolbar ul.buttons li[title="Note"]  .icon {
+      display: flex;
+      align-items: center;
+      justify-self: center;
+      width: 30px;
+      height: 36px;
+      font-size: 0px;
+      border:none;
+       } */
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon {
+    position: relative;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:before {
+    opacity: var(--toolbar-icon-opacity);
+    display: inline-block;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    content: "";
+    background-color: var(--toolbar-icon-bg-color);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon:before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:before {
+    width: 14px;
+    height: 14px;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon:is(:hover, :focus-visible):before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon:is(:hover, :focus-visible):before,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon:is(:hover, :focus-visible):before,
+CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:is(:hover, :focus-visible):before {
+    background-color: var(--toolbar-icon-hover-bg-color);
+}
+
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon,
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon {
+    font-size: 0px;
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Signature"] .icon:before {
+    -webkit-mask-image: var(--toolbarButton-editorSignature-icon);
+    mask-image: var(--toolbarButton-editorSignature-icon);
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Highlight"] .icon:before {
+    -webkit-mask-image: var(--toolbarButton-editorHighlight-icon);
+    mask-image: var(--toolbarButton-editorHighlight-icon);
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Text"] .icon:before {
+    -webkit-mask-image: var(--toolbarButton-editorFreeText-icon);
+    mask-image: var(--toolbarButton-editorFreeText-icon);
+}
+
+.CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:before {
+    -webkit-mask-image: var(--toolbarButton-editorInk-icon);
+    mask-image: var(--toolbarButton-editorInk-icon);
+}
+
+//  custom styles for e-court end

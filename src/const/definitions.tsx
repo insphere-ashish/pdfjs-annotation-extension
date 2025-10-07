@@ -189,63 +189,63 @@ export const annotationDefinitions: IAnnotationType[] = [
         draggable: false,
         icon: <SelectIcon />, // 图标
     },
-    {
-        name: 'highlight',
-        type: AnnotationType.HIGHLIGHT,
-        pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
-        pdfjsAnnotationType: PdfjsAnnotationType.HIGHLIGHT,
-        subtype: 'Highlight',
-        isOnce: false,
-        resizable: false,
-        draggable: false,
-        icon: <HighlightIcon />,
-        style: {
-            color: defaultOptions.setting.HIGHLIGHT_COLOR, // 默认高亮颜色
-        },
-        styleEditable: {
-            color: true,
-            strokeWidth: false,
-            opacity: false,
-        }, // 是否可编辑样式
-    },
-    {
-        name: 'strikeout',
-        type: AnnotationType.STRIKEOUT,
-        pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
-        pdfjsAnnotationType: PdfjsAnnotationType.STRIKEOUT,
-        subtype: 'StrikeOut',
-        isOnce: false,
-        resizable: false,
-        draggable: false,
-        icon: <StrikeoutIcon />,
-        style: {
-            color: defaultOptions.setting.STRIKEOUT_COLOR, // 默认删除线颜色
-        },
-        styleEditable: {
-            color: true,
-            opacity: false,
-            strokeWidth: false,
-        } // 是否可编辑样式
-    },
-    {
-        name: 'underline',
-        type: AnnotationType.UNDERLINE,
-        pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
-        pdfjsAnnotationType: PdfjsAnnotationType.UNDERLINE,
-        subtype: 'Underline',
-        isOnce: false,
-        resizable: false,
-        draggable: false,
-        icon: <UnderlineIcon />,
-        style: {
-            color: defaultOptions.setting.UNDERLINE_COLOR, // 默认下划线颜色
-        },
-        styleEditable: {
-            color: true,
-            opacity: false,
-            strokeWidth: false
-        } // 是否可编辑样式
-    },
+    // {
+    //     name: 'highlight',
+    //     type: AnnotationType.HIGHLIGHT,
+    //     pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
+    //     pdfjsAnnotationType: PdfjsAnnotationType.HIGHLIGHT,
+    //     subtype: 'Highlight',
+    //     isOnce: false,
+    //     resizable: false,
+    //     draggable: false,
+    //     icon: <HighlightIcon />,
+    //     style: {
+    //         color: defaultOptions.setting.HIGHLIGHT_COLOR, // 默认高亮颜色
+    //     },
+    //     styleEditable: {
+    //         color: true,
+    //         strokeWidth: false,
+    //         opacity: false,
+    //     }, // 是否可编辑样式
+    // },
+    // {
+    //     name: 'strikeout',
+    //     type: AnnotationType.STRIKEOUT,
+    //     pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
+    //     pdfjsAnnotationType: PdfjsAnnotationType.STRIKEOUT,
+    //     subtype: 'StrikeOut',
+    //     isOnce: false,
+    //     resizable: false,
+    //     draggable: false,
+    //     icon: <StrikeoutIcon />,
+    //     style: {
+    //         color: defaultOptions.setting.STRIKEOUT_COLOR, // 默认删除线颜色
+    //     },
+    //     styleEditable: {
+    //         color: true,
+    //         opacity: false,
+    //         strokeWidth: false,
+    //     } // 是否可编辑样式
+    // },
+    // {
+    //     name: 'underline',
+    //     type: AnnotationType.UNDERLINE,
+    //     pdfjsEditorType: PdfjsAnnotationEditorType.HIGHLIGHT,
+    //     pdfjsAnnotationType: PdfjsAnnotationType.UNDERLINE,
+    //     subtype: 'Underline',
+    //     isOnce: false,
+    //     resizable: false,
+    //     draggable: false,
+    //     icon: <UnderlineIcon />,
+    //     style: {
+    //         color: defaultOptions.setting.UNDERLINE_COLOR, // 默认下划线颜色
+    //     },
+    //     styleEditable: {
+    //         color: true,
+    //         opacity: false,
+    //         strokeWidth: false
+    //     } // 是否可编辑样式
+    // },
     {
         name: 'rectangle',
         type: AnnotationType.RECTANGLE,
@@ -296,7 +296,7 @@ export const annotationDefinitions: IAnnotationType[] = [
         subtype: 'Text',
         isOnce: true,
         resizable: false,
-        draggable: true,
+        draggable: false, // custom code - e-court make note draggable false
         icon: <NoteIcon />
     },
     {
@@ -320,27 +320,27 @@ export const annotationDefinitions: IAnnotationType[] = [
             strokeWidth: true
         } // 是否可编辑样式
     },
-    {
-        name: 'cloud',
-        type: AnnotationType.CLOUD,
-        pdfjsEditorType: PdfjsAnnotationEditorType.INK,
-        pdfjsAnnotationType: PdfjsAnnotationType.POLYLINE,
-        subtype: 'PolyLine',
-        isOnce: true,
-        resizable: true,
-        draggable: true,
-        icon: <CloudIcon />,
-        style: {
-            color: defaultOptions.setting.COLOR, // 默认圆形颜色
-            strokeWidth: defaultOptions.setting.STROKE_WIDTH, // 默认线条宽度
-            opacity: defaultOptions.setting.OPACITY // 默认透明度
-        },
-        styleEditable: {
-            color: true,
-            opacity: true,
-            strokeWidth: true
-        } // 是否可编辑样式
-    },
+    // {
+    //     name: 'cloud',
+    //     type: AnnotationType.CLOUD,
+    //     pdfjsEditorType: PdfjsAnnotationEditorType.INK,
+    //     pdfjsAnnotationType: PdfjsAnnotationType.POLYLINE,
+    //     subtype: 'PolyLine',
+    //     isOnce: true,
+    //     resizable: true,
+    //     draggable: true,
+    //     icon: <CloudIcon />,
+    //     style: {
+    //         color: defaultOptions.setting.COLOR, // 默认圆形颜色
+    //         strokeWidth: defaultOptions.setting.STROKE_WIDTH, // 默认线条宽度
+    //         opacity: defaultOptions.setting.OPACITY // 默认透明度
+    //     },
+    //     styleEditable: {
+    //         color: true,
+    //         opacity: true,
+    //         strokeWidth: true
+    //     } // 是否可编辑样式
+    // },
     {
         name: 'freehand',
         type: AnnotationType.FREEHAND,
@@ -413,18 +413,19 @@ export const annotationDefinitions: IAnnotationType[] = [
         resizable: true,
         draggable: true,
         icon: <SignatureIcon />
-    },
-    {
-        name: 'stamp',
-        type: AnnotationType.STAMP,
-        pdfjsEditorType: PdfjsAnnotationEditorType.STAMP,
-        pdfjsAnnotationType: PdfjsAnnotationType.STAMP,
-        subtype: 'Stamp',
-        isOnce: true,
-        resizable: true,
-        draggable: true,
-        icon: <StampIcon />
     }
+    // ,
+    // {
+    //     name: 'stamp',
+    //     type: AnnotationType.STAMP,
+    //     pdfjsEditorType: PdfjsAnnotationEditorType.STAMP,
+    //     pdfjsAnnotationType: PdfjsAnnotationType.STAMP,
+    //     subtype: 'Stamp',
+    //     isOnce: true,
+    //     resizable: true,
+    //     draggable: true,
+    //     icon: <StampIcon />
+    // }
 ]
 
 export const HASH_PARAMS_PREFIX = 'ae'

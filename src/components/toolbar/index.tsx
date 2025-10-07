@@ -166,7 +166,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                 </ColorPicker>
             </ul>
             <div className="splitToolbarButtonSeparator"></div>
-            <ul className="buttons">
+            <ul className="buttons" style={{ display: 'none' }}>
                 {defaultOptions.setting.SAVE_BUTTON && (
                     <li
                         title={t('normal.save')}

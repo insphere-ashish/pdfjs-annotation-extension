@@ -98,10 +98,10 @@ const defaultOptions = {
             '#pageRotateCcw',
             '#download'
         ],
-        HASH_PARAMS_GET_URL: '', // 默认 GET URL
-        HASH_PARAMS_POST_URL: '', // 默认 POST URL
+        HASH_PARAMS_GET_URL:'', // 默认 GET URL -- ( updated custom for e-court)
+        HASH_PARAMS_POST_URL:'', // 默认 POST URL -- ( updated custom for e-court)
         HASH_PARAMS_DEFAULT_EDITOR_ACTIVE: 'null', // 默认激活的编辑工具 select、 circle ...
-        HASH_PARAMS_DEFAULT_SIDEBAR_OPEN: 'true', // 默认侧边栏打开
+        HASH_PARAMS_DEFAULT_SIDEBAR_OPEN: 'false', // 默认侧边栏打开
     }
 }
 

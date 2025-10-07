@@ -217,8 +217,11 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     }, [annotations, selectedUsers, selectedTypes])
 
     const groupedAnnotations = useMemo(() => {
+        // console.log('----------- groupedAnnotations START-----------')
         return filteredAnnotations.reduce(
             (acc, annotation) => {
+                // console.log('acc', acc, annotation)
+                if (annotation.type !== 11) return acc // custom code -- e-court skip other annotations -- only showing comments ( note annotations )
                 if (!acc[annotation.pageNumber]) {
                     acc[annotation.pageNumber] = []
                 }
@@ -227,7 +230,10 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             },
             {} as Record<number, IAnnotationStore[]>
         )
+        // console.log('----------- groupedAnnotations END -----------')
     }, [filteredAnnotations])
+
+    // console.log('----------- groupedAnnotations -----------', groupedAnnotations)
 
     const handleUserToggle = (username: string) => {
         setSelectedUsers(prev => (prev.includes(username) ? prev.filter(u => u !== username) : [...prev, username]))
@@ -305,7 +311,14 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     }
 
     const updateComment = (annotation: IAnnotationStore, comment: string) => {
-        annotation.contentsObj.text = comment
+        const trimmed = (comment ?? '').trim();
+        
+        // NOTE e-court custom change for (type 11): require non-empty text; don't update or trigger save path if empty
+        if (annotation.type === 11 && trimmed.length === 0) {
+            return // return do nothing
+        }
+
+        annotation.contentsObj.text = trimmed
         props.onUpdate(annotation)
     }
 
@@ -393,7 +406,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                             autoFocus
                             rows={4}
                             style={{ marginBottom: '8px', marginTop: '8px' }}
-                            onBlur={() => setEditAnnotation(null)}
+                            // onBlur={() => setEditAnnotation(null)}
                             onChange={e => (comment = e.target.value)}
                             onKeyDown={e => {
                                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -402,13 +415,31 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                 }
                             }}
                         />
-                        <Button
-                            type="primary"
-                            block
+                        {/* custom cancel button e-court */}
+                        {/* if clicked edit annotation to null */}
+                        <div className="commentpostbt">
+                            <Button
+                            type="primary" 
                             onMouseDown={handleSubmit}
-                        >
-                            {t('normal.confirm')}
-                        </Button>
+                            className="btn btn-primary btn-sm"
+                            >
+                                {t('normal.save')}
+                            </Button>
+                            <Button
+                                type="default" // use "default" instead of "secondary" (see note below)
+                                className="btn btn-secondary btn-sm"
+                                onMouseDown={() => {
+                                    setEditAnnotation(null)
+                                    if (annotation.contentsObj.text.trim() === '') {
+                                        deleteAnnotation(annotation)
+                                        // closing comment sidebar 
+                                        document.body.classList.remove('PdfjsAnnotationExtension_Comment_hidden') // custom code - auto close comment sidebar for e-court
+                                    }
+                                }}
+                            >
+                                {t('normal.cancel')}
+                            </Button>
+                        </div>
                     </>
                 )
             }
@@ -496,109 +527,83 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     const comments = Object.entries(groupedAnnotations).map(([pageNumber, annotationsForPage]) => {
         // 根据 konvaClientRect.y 对 annotationsForPage 进行排序
         const sortedAnnotations = annotationsForPage.sort((a, b) => a.konvaClientRect.y - b.konvaClientRect.y)
-
+        // const open = openPage == 0 ? '' : (index == openPage -1 ? 'show' : ''); // custom code -- e-court
+        const open = pageNumber == 1 ? 'show' : ''; // custom code -- e-court
+        // updated list to accordion items for e-court
         return (
-            <div key={pageNumber} className="group">
-                <h3>
-                    {t('comment.page', { value: pageNumber })}
-                    <span>{t('comment.total', { value: annotationsForPage.length })}</span>
+            <div key={pageNumber} className="group accordion-item">
+                <h3 className="accordion-header">
+                    <button
+                        className={`accordion-button ${open ? '' : 'collapsed'}`}
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse-${pageNumber}`}
+                    >
+                        {t('comment.page', { value: pageNumber })}
+                    </button>
+                    {/* <span>{t('comment.total', { value: annotationsForPage.length })}</span> */}
                 </h3>
-                {sortedAnnotations.map(annotation => {
-                    const isSelected = annotation.id === currentAnnotation?.id
-                    const commonProps = { className: isSelected ? 'comment selected' : 'comment', id: `annotation-${annotation.id}` }
-                    return (
-                        <div
-                            {...commonProps}
-                            key={annotation.id}
-                            onClick={() => handleAnnotationClick(annotation)}
-                            ref={el => (annotationRefs.current[annotation.id] = el)}
-                        >
-                            <div className="title">
-                                <AnnotationIcon subtype={annotation.subtype} />
-                                <div className="username">{annotation.title}
-                                    <span>{formatPDFDate(annotation.date, true)}</span>
-                                </div>
-                                <span className="tool">
-                                    <Dropdown
-                                        menu={{
-                                            items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
-                                                key: statusKey,
-                                                label: t(option.labelKey),
-                                                icon: option.icon,
-                                                onClick: (e) => {
-                                                    addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
-                                                    setReplyAnnotation(null)
-                                                }
-                                            }))
-                                        }}
-                                        trigger={['click']}
-                                    >
-                                        <span className="icon">
-                                            {getLastStatusIcon(annotation)}
-                                        </span>
-                                    </Dropdown>
-                                    <Dropdown
-                                        menu={{
-                                            items: [
-                                                {
-                                                    label: t('normal.reply'),
-                                                    key: '0',
-                                                    onClick: e => {
-                                                        e.domEvent.stopPropagation()
-                                                        setReplyAnnotation(annotation)
-                                                    }
-                                                },
-                                                {
-                                                    label: t('normal.edit'),
-                                                    key: '1',
-                                                    onClick: e => {
-                                                        e.domEvent.stopPropagation()
-                                                        setEditAnnotation(annotation)
-                                                    }
-                                                },
-                                                {
-                                                    label: t('normal.delete'),
-                                                    key: '3',
-                                                    onClick: e => {
-                                                        e.domEvent.stopPropagation()
-                                                        deleteAnnotation(annotation)
-                                                    }
-                                                }
-                                            ]
-                                        }}
-                                        trigger={['click']}
-                                    >
-                                        <span className="icon">
-                                            <MoreOutlined />
-                                        </span>
-                                    </Dropdown>
-                                </span>
-                            </div>
-                            {commentInput(annotation)}
-                            {annotation.comments?.map((reply, index) => (
-                                <div className="reply" key={index}>
+                <div id={`collapse-${pageNumber}`} className={`accordion-collapse collapse ${open}`} data-bs-parent="#commentAccordionExtension">
+                    <div className="accordion-body">
+                        {sortedAnnotations.map(annotation => {
+                            const isSelected = annotation.id === currentAnnotation?.id
+                            const commonProps = { className: isSelected ? 'comment commenttextbox selected' : 'comment commenttextbox', id: `annotation-${annotation.id}` }
+                            return (
+                                <div
+                                    {...commonProps}
+                                    key={annotation.id}
+                                    onClick={() => handleAnnotationClick(annotation)}
+                                    ref={el => (annotationRefs.current[annotation.id] = el)}
+                                >
                                     <div className="title">
-                                        <div className="username"> {reply.title}
-                                            <span>{formatPDFDate(reply.date, true)}</span>
+                                        <AnnotationIcon subtype={annotation.subtype} />
+                                        <div className="username">{annotation.title}
+                                            <span>{formatPDFDate(annotation.date, true)}</span>
                                         </div>
                                         <span className="tool">
+                                            {/* <Dropdown
+                                                menu={{
+                                                    items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
+                                                        key: statusKey,
+                                                        label: t(option.labelKey),
+                                                        icon: option.icon,
+                                                        onClick: (e) => {
+                                                            addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
+                                                            setReplyAnnotation(null)
+                                                        }
+                                                    }))
+                                                }}
+                                                trigger={['click']}
+                                            >
+                                                <span className="icon">
+                                                    {getLastStatusIcon(annotation)}
+                                                </span>
+                                            </Dropdown> */}
                                             <Dropdown
                                                 menu={{
                                                     items: [
+                                                        // {
+                                                        //     label: t('normal.reply'),
+                                                        //     key: '0',
+                                                        //     onClick: e => {
+                                                        //         e.domEvent.stopPropagation()
+                                                        //         setReplyAnnotation(annotation)
+                                                        //     }
+                                                        // },
                                                         {
                                                             label: t('normal.edit'),
                                                             key: '1',
                                                             onClick: e => {
                                                                 e.domEvent.stopPropagation()
-                                                                setCurrentReply(reply)
+                                                                setEditAnnotation(annotation)
                                                             }
                                                         },
                                                         {
                                                             label: t('normal.delete'),
-                                                            key: '2',
+                                                            key: '3',
                                                             onClick: e => {
                                                                 e.domEvent.stopPropagation()
-                                                                deleteReply(annotation, reply)
+                                                                deleteAnnotation(annotation)
                                                             }
                                                         }
                                                     ]
@@ -611,35 +616,89 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                             </Dropdown>
                                         </span>
                                     </div>
-                                    {editReplyInput(annotation, reply)}
+                                    {commentInput(annotation)}
+                                    {annotation.comments?.map((reply, index) => (
+                                        <div className="reply" key={index}>
+                                            <div className="title">
+                                                <div className="username"> {reply.title}
+                                                    <span>{formatPDFDate(reply.date, true)}</span>
+                                                </div>
+                                                <span className="tool">
+                                                    <Dropdown
+                                                        menu={{
+                                                            items: [
+                                                                {
+                                                                    label: t('normal.edit'),
+                                                                    key: '1',
+                                                                    onClick: e => {
+                                                                        e.domEvent.stopPropagation()
+                                                                        setCurrentReply(reply)
+                                                                    }
+                                                                },
+                                                                {
+                                                                    label: t('normal.delete'),
+                                                                    key: '2',
+                                                                    onClick: e => {
+                                                                        e.domEvent.stopPropagation()
+                                                                        deleteReply(annotation, reply)
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }}
+                                                        trigger={['click']}
+                                                    >
+                                                        <span className="icon">
+                                                            <MoreOutlined />
+                                                        </span>
+                                                    </Dropdown>
+                                                </span>
+                                            </div>
+                                            {/* {editReplyInput(annotation, reply)} */}
+                                        </div>
+                                    ))}
+                                    {/* <div className="reply-input" style={{ display: 'none' }}>
+                                        {replyInput(annotation)}
+                                        {
+                                            !replyAnnotation &&
+                                            !currentReply &&
+                                            !editAnnotation &&
+                                            currentAnnotation?.id === annotation.id && (
+                                                <Button style={{ marginTop: '8px' }} onClick={() => setReplyAnnotation(annotation)} type="primary" block>
+                                                    {t('normal.reply')}
+                                                </Button>
+                                            )}
+                                    </div> */}
                                 </div>
-                            ))}
-                            <div className="reply-input">
-                                {replyInput(annotation)}
-                                {
-                                    !replyAnnotation &&
-                                    !currentReply &&
-                                    !editAnnotation &&
-                                    currentAnnotation?.id === annotation.id && (
-                                        <Button style={{ marginTop: '8px' }} onClick={() => setReplyAnnotation(annotation)} type="primary" block>
-                                            {t('normal.reply')}
-                                        </Button>
-                                    )}
-                            </div>
-                        </div>
-                    )
-                })}
+                            )
+                        })}
+                    </div>
+                </div>
             </div>
         )
     })
     return (
-        <div className="CustomComment" onScroll={() => {props.onScroll && props.onScroll() }}>
-            <div className="filters">
-                <Popover content={filterContent} trigger="click" placement="bottomLeft">
-                    <Button size="small" icon={<FilterOutlined />} />
-                </Popover>
+        <div>
+            <div className="CustomComment" onScroll={() => {props.onScroll && props.onScroll() }}>
+                {/* <div className="filters">
+                    <Popover content={filterContent} trigger="click" placement="bottomLeft">
+                        <Button size="small" icon={<FilterOutlined />} />
+                    </Popover>
+                </div> */}
+                <div class="commentliner">
+                    <button id="commentlinerbt" class="toolbarButton closebt" type="button" disabled="disabled" tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
+                        <span data-l10n-id="pdfjs-commentlinerbt-outline-item-button-label"></span>
+                    </button>
+                </div>
+                <div className="commentpanelviewContent">
+                    <div class="title">
+                        <span class="text">Comments</span>
+                        {/* <span class="closepanel">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-miterlimit="2" stroke-linejoin="round" fill-rule="evenodd" clip-rule="evenodd"><path fill-rule="nonzero" d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"></path></svg>
+                        </span> */}
+                    </div>
+                    <div className="list accordion" id="commentAccordionExtension">{comments}</div>
+                </div>
             </div>
-            <div className="list">{comments}</div>
         </div>
     )
 })
