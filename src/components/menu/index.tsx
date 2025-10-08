@@ -114,6 +114,7 @@ const CustomAnnotationMenu = forwardRef<CustomAnnotationMenuRef, CustomAnnotatio
         if (!currentAnnotation) return
         props.onChangeStyle(currentAnnotation, style)
     }
+    const allowedType = [11, 5] // only type to allow on comment section  // 11 = note, 5 = square box
     return (
         <div className={`CustomAnnotationMenu ${show ? 'show' : 'hide'}`} ref={containerRef}>
 
@@ -182,7 +183,7 @@ const CustomAnnotationMenu = forwardRef<CustomAnnotationMenuRef, CustomAnnotatio
             {
                 !showStyle && currentAnnotation && (
                     <ul className="buttons">
-                        {currentAnnotation.type == 11 &&
+                        {allowedType.includes(currentAnnotation.type) &&
                             (<li onMouseDown={() => {
                                 if (currentAnnotation) {
                                     props.onOpenComment(currentAnnotation)

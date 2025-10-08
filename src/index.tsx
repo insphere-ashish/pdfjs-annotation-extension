@@ -30,8 +30,9 @@ const shouldSaveNow = (a: IAnnotationStore) => {
     return true;
 };
 
+// changing it to include both note and square box annotations
 const isNoteAnnotation = (a: IAnnotationStore) => {
-    return a?.type == 11;
+    return a?.type == 11 || a?.type == 5
 };
 
 class PdfjsAnnotationExtension {
@@ -126,7 +127,7 @@ class PdfjsAnnotationExtension {
                 this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
                 if ((isClick && this.isCommentOpen()) || (isClick && isNoteAnnotation(annotation))) {
                     // 如果是点击事件并且评论栏已打开，则选中批注
-                    this.customCommentRef.current.selectedAnnotation(annotation, isClick) // custom code -- e-court removing the connection line after modified
+                    this.customCommentRef.current.selectedAnnotation(annotation, isClick) // custom code -- e-court
                 }
 
                 this.connectorLine?.drawConnection(annotation, selectorRect)

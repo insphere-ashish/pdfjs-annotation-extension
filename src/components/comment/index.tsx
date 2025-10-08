@@ -216,12 +216,14 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         return annotations.filter(a => selectedUsers.includes(a.title) && selectedTypes.includes(a.subtype))
     }, [annotations, selectedUsers, selectedTypes])
 
+    const allowedType = [11, 5] // only type to allow on comment section  // 11 = note, 5 = square box
     const groupedAnnotations = useMemo(() => {
         // console.log('----------- groupedAnnotations START-----------')
         return filteredAnnotations.reduce(
             (acc, annotation) => {
                 // console.log('acc', acc, annotation)
-                if (annotation.type !== 11) return acc // custom code -- e-court skip other annotations -- only showing comments ( note annotations )
+                if (!allowedType.includes(annotation.type)) return acc // custom code -- e-court skip other annotations -- only showing comments ( note annotations )
+                // if (annotation.type !== 11) return acc // custom code -- e-court skip other annotations -- only showing comments ( note annotations )
                 if (!acc[annotation.pageNumber]) {
                     acc[annotation.pageNumber] = []
                 }
