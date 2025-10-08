@@ -86,8 +86,8 @@ class PdfjsAnnotationExtension {
 
         // custom code for e-court
         this.appOptions[HASH_PARAMS_USERNAME] = container ? container?.dataset['userName'] : ''
-        this.appOptions[HASH_PARAMS_GET_URL] = container ? container?.dataset['annoGet'] : ''
-        this.appOptions[HASH_PARAMS_POST_URL] = container ? container?.dataset['annoPost'] : ''
+        // this.appOptions[HASH_PARAMS_GET_URL] = container ? container?.dataset['annoGet'] : ''
+        // this.appOptions[HASH_PARAMS_POST_URL] = container ? container?.dataset['annoPost'] : ''
 
         // 创建画笔实例
         this.painter = new Painter({
@@ -394,6 +394,10 @@ class PdfjsAnnotationExtension {
         this.PDFJS_PDFViewerApplication.pdfViewer.update()
     }
 
+    private clearInitialDataHash(){
+        this.initialDataHash = null
+    }
+
     /**
      * @description 绑定 PDF.js 相关事件
      */
@@ -423,9 +427,12 @@ class PdfjsAnnotationExtension {
         // 监听文档加载完成事件
         this.PDFJS_EventBus._on('documentloaded', async () => {
             // alert('sssssss')
+            this.clearInitialDataHash(); // custom code -- clear all existing annotations when a new document is loaded
+            this.painter.clearData();// custom code -- clear all existing annotations when a new document is loaded
             this.painter.initWebSelection(this.$PDFJS_viewerContainer)
             const data = await this.getData()
             this.initialDataHash = hashArrayOfObjects(data)
+            // console.log('%c [ initialDataHash - data ]', 'font-size:13px; background:#d10d00; color:#ff5144;', data) 
             await this.painter.initAnnotations(data, defaultOptions.setting.LOAD_PDF_ANNOTATION)
             if (this.loadEnd) {
                 this.updatePdfjs()
@@ -438,7 +445,8 @@ class PdfjsAnnotationExtension {
      * @returns 
      */
     private async getData(): Promise<any[]> {
-        const getUrl = this.getOption(HASH_PARAMS_GET_URL);
+        // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
+        const getUrl = document.getElementById('docViewerContainer').dataset['annoGet'];
         // alert('getUrl', getUrl)
         // console.log('--------------------------------- this.appOptions', this.appOptions)
         // console.log('--------------------------------- defaultOptions', defaultOptions)
@@ -482,7 +490,8 @@ class PdfjsAnnotationExtension {
     private async saveData(): Promise<void> {
         const dataToSave = this.painter.getData();
         // console.log('%c [ dataToSave ]', 'font-size:13px; background:#d10d00; color:#ff5144;', dataToSave)
-        const postUrl = this.getOption(HASH_PARAMS_POST_URL);
+        // const postUrl = this.getOption(HASH_PARAMS_POST_URL);
+        const postUrl = document.getElementById('docViewerContainer').dataset['annoPost'];
         if (!postUrl) {
             message.error({
                 content: t('save.noPostUrl', { value: HASH_PARAMS_POST_URL }),
