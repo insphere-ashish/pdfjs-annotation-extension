@@ -61,7 +61,7 @@ export class WebSelection {
         // 监听触摸屏操作结束事件
         document.addEventListener('touchend', () => {
             if (isSelecting) {
-                console.log('Selection completed')
+                // console.log('Selection completed')
                 isSelecting = false // 重置状态
                 const selection = window.getSelection()
                 this.onSelect(selection.getRangeAt(0))

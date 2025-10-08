@@ -81,10 +81,12 @@ class PdfjsAnnotationExtension {
         // 处理地址栏参数
         this.parseHashParams()
 
+        const container = document.getElementById('docViewerContainer');
+
         // custom code for e-court
-        this.appOptions[HASH_PARAMS_USERNAME] = document.getElementById('docViewerContainer').dataset['userName']
-        this.appOptions[HASH_PARAMS_GET_URL] = document.getElementById('docViewerContainer').dataset['annoGet']
-        this.appOptions[HASH_PARAMS_POST_URL] = document.getElementById('docViewerContainer').dataset['annoPost']
+        this.appOptions[HASH_PARAMS_USERNAME] = container ? container?.dataset['userName'] : ''
+        this.appOptions[HASH_PARAMS_GET_URL] = container ? container?.dataset['annoGet'] : ''
+        this.appOptions[HASH_PARAMS_POST_URL] = container ? container?.dataset['annoPost'] : ''
 
         // 创建画笔实例
         this.painter = new Painter({
@@ -137,7 +139,7 @@ class PdfjsAnnotationExtension {
                 this.customerAnnotationMenuRef?.current?.close()
             },
             onAnnotationChanged: (annotation, selectorRect) => {
-                console.log('annotation changed', annotation)
+                // console.log('annotation changed', annotation)
                 // this.connectorLine?.drawConnection(annotation, selectorRect) // custom code -- e-court removing the connection line after modified
                 this.customerAnnotationMenuRef?.current?.open(annotation, selectorRect)
                 if (shouldSaveNow(annotation)) {
@@ -411,6 +413,8 @@ class PdfjsAnnotationExtension {
             'pagerendered',
             async ({ source, cssTransform, pageNumber }: { source: PDFPageView; cssTransform: boolean; pageNumber: number }) => {
                 setLoadEnd()
+                // console.log('pagerendered', pageNumber)
+                // console.log('pageView source', source)
                 this.painter.initCanvas({ pageView: source, cssTransform, pageNumber })
             }
         )
@@ -510,7 +514,7 @@ class PdfjsAnnotationExtension {
                 content: t('save.success'),
                 key: 'save',
             });
-            console.log('Saved successfully:', result);
+            // console.log('Saved successfully:', result);
         } catch (error) {
             // const modal = Modal.info({
             //     content: <Space><SyncOutlined spin />{t('save.start')}</Space>,

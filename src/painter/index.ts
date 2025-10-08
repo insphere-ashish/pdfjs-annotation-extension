@@ -196,18 +196,46 @@ export class Painter {
      * @param viewport - 当前 PDF 页面视口
      * @returns Konva Stage
      */
-    private createKonvaStage(container: HTMLDivElement, viewport: PageViewport): Konva.Stage {
-        const stage = new Konva.Stage({
-            container,
-            width: viewport.width,
-            height: viewport.height,
-            scale: { x: viewport.scale, y: viewport.scale }
-        })
+    // private createKonvaStage(container: HTMLDivElement, viewport): Konva.Stage {
+    private createKonvaStage(container: HTMLDivElement, viewport: PageViewport, pageView): Konva.Stage {
+        // try {
+        //     const www = viewport.width
+        //     console.log(' - - - - - viewport width',viewport)
+        // } catch (error) {
+        //     console.log(' = = = = = = viewport error',viewport)
+        //     console.trace()
+        // }
+        // console.log('container', container, 'viewport', viewport)
 
-        const backgroundLayer = new Konva.Layer()
-        stage.add(backgroundLayer)
+        // Resolve a viewport from any of the shapes PDF.js may pass at high zoom.
+        const vp = viewport || (pageView && pageView.viewport) || (pageView && pageView.pageView && pageView.pageView.viewport);
+        // Viewport not ready yet -- maybe try again later 
+        if (!vp) {
+          console.warn('[Painter] viewport is not ready, skipping stage creation for now.');
+          return null;
+        }
 
-        return stage
+        try {
+            const stage = new Konva.Stage({
+                container,
+                // width: viewport.width,
+                // height: viewport.height,
+                width: vp.width,
+                height: vp.height,
+                // scale: { x: viewport.scale, y: viewport.scale }
+                scale: { x: vp.scale, y: vp.scale }
+            })
+            const backgroundLayer = new Konva.Layer()
+            stage.add(backgroundLayer)
+            return stage
+        } catch (error) {
+            // console.log('ERROR', error)
+            // console.log('',vp)
+        }
+        // console.log('>> >> pageView',pageView)
+        // console.log(' >>   TYPE OF pageView',typeof pageView)
+
+
     }
 
     /**
@@ -230,7 +258,7 @@ export class Painter {
     private insertCanvas(pageView: PDFPageView, pageNumber: number): void {
         this.cleanUpInvalidStore()
         const painterWrapper = this.createPainterWrapper(pageView, pageNumber)
-        const konvaStage = this.createKonvaStage(painterWrapper, pageView.viewport)
+        const konvaStage = this.createKonvaStage(painterWrapper, pageView.viewport, pageView)
 
         this.konvaCanvasStore.set(pageNumber, { pageNumber, konvaStage, wrapper: painterWrapper, isActive: false })
         this.reDrawAnnotation(pageNumber) // 重绘批注
@@ -544,6 +572,7 @@ export class Painter {
         const annotationStores = this.store.getByPage(pageNumber) // 获取指定页码的批注存储
         annotationStores.forEach(annotationStore => {
             let storeEditor = this.findEditor(pageNumber, annotationStore.type) // 查找编辑器实例
+            // console.log('reDrawAnnotation', { pageNumber, annotationStore, storeEditor })
             if (!storeEditor) {
                 // 如果编辑器不存在，启用编辑器
                 const annotationDefinition = annotationDefinitions.find(item => item.type === annotationStore.type)
@@ -585,7 +614,7 @@ export class Painter {
         this.setMode('default') // 设置默认模式
         this.clearTempDataTransfer() // 清除临时数据传输
         this.selector.clear() // 清除选择器
-        console.log('Painting mode disabled')
+        // console.log('Painting mode disabled')
     }
 
     /**
@@ -615,6 +644,8 @@ export class Painter {
         if (cssTransform) {
             this.scaleCanvas(pageView, pageNumber)
         } else {
+            // console.log('Inserting canvas for page', pageNumber, pageView)
+            // console.log('--- TYPE OF ', typeof pageView)
             this.insertCanvas(pageView, pageNumber)
         }
     }
