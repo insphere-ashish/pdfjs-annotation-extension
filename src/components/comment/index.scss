@@ -146,3 +146,57 @@
 }
 @media (hover: none) {
 }
+
+.accordion-header .accordion-page-number {
+
+    width: 100%;
+    color: var(--bs-accordion-btn-color);
+    border-style: double;
+    border-width: 1px 0px 1px 0;
+    position: relative;
+    padding: 6px 8px;
+    font-size: 14px;
+    color: var(--themeClr1);
+    height: 45px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.commenttextbox {
+    width: 96%;
+    margin-left:2%;
+}
+
+.commenttexterea {
+    outline: none;
+    border: none !important;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    font-size: var(--fontSize14) !important;
+    border-bottom: 1px rgba(0, 0, 0, .42) solid !important;
+    width: 100%;
+    position: relative;
+    padding: 0 0 6px;
+    background-color: transparent;
+    font-weight: 400;
+    width: 94% !important;
+    margin-left: 3% !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -ms-box-shadow: none !important;
+    -o-box-shadow: none !important;
+}
+.commenttexterea:focus {
+    outline: none;
+    border-bottom: 3px var(--themeColor) solid;
+}
+:where(.css-1odpy5d).ant-dropdown .ant-dropdown-menu {
+    padding:0px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -ms-border-radius: 0px;
+}
+
+

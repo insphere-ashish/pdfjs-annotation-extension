@@ -403,7 +403,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                 }
                 return (
                     <>
-                        <TextArea
+                        <TextArea className='commenttexterea'
                             defaultValue={annotation.contentsObj.text}
                             autoFocus
                             rows={4}
@@ -445,7 +445,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                     </>
                 )
             }
-            return <Paragraph style={{ margin: '8px 0 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
+            return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
         },
         [editAnnotation, currentAnnotation]
     )
@@ -530,23 +530,17 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         // 根据 konvaClientRect.y 对 annotationsForPage 进行排序
         const sortedAnnotations = annotationsForPage.sort((a, b) => a.konvaClientRect.y - b.konvaClientRect.y)
         // const open = openPage == 0 ? '' : (index == openPage -1 ? 'show' : ''); // custom code -- e-court
-        const open = pageNumber == 1 ? 'show' : ''; // custom code -- e-court
+       
         // updated list to accordion items for e-court
         return (
-            <div key={pageNumber} className="group accordion-item">
+            <div key={pageNumber} className="group">
                 <h3 className="accordion-header">
-                    <button
-                        className={`accordion-button ${open ? '' : 'collapsed'}`}
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#collapse-${pageNumber}`}
-                    >
+                    <div className='accordion-page-number'>
                         {t('comment.page', { value: pageNumber })}
-                    </button>
+                    </div>
                     {/* <span>{t('comment.total', { value: annotationsForPage.length })}</span> */}
                 </h3>
-                <div id={`collapse-${pageNumber}`} className={`accordion-collapse collapse ${open}`} data-bs-parent="#commentAccordionExtension">
-                    <div className="accordion-body">
+                
                         {sortedAnnotations.map(annotation => {
                             const isSelected = annotation.id === currentAnnotation?.id
                             const commonProps = { className: isSelected ? 'comment commenttextbox selected' : 'comment commenttextbox', id: `annotation-${annotation.id}` }
@@ -557,66 +551,68 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                     onClick={() => handleAnnotationClick(annotation)}
                                     ref={el => (annotationRefs.current[annotation.id] = el)}
                                 >
-                                    <div className="title">
-                                        <AnnotationIcon subtype={annotation.subtype} />
-                                        <div className="username">{annotation.title}
-                                            <span>{formatPDFDate(annotation.date, true)}</span>
-                                        </div>
-                                        <span className="tool">
-                                            {/* <Dropdown
-                                                menu={{
-                                                    items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
-                                                        key: statusKey,
-                                                        label: t(option.labelKey),
-                                                        icon: option.icon,
-                                                        onClick: (e) => {
-                                                            addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
-                                                            setReplyAnnotation(null)
-                                                        }
-                                                    }))
-                                                }}
-                                                trigger={['click']}
-                                            >
-                                                <span className="icon">
-                                                    {getLastStatusIcon(annotation)}
-                                                </span>
-                                            </Dropdown> */}
-                                            <Dropdown
-                                                menu={{
-                                                    items: [
-                                                        // {
-                                                        //     label: t('normal.reply'),
-                                                        //     key: '0',
-                                                        //     onClick: e => {
-                                                        //         e.domEvent.stopPropagation()
-                                                        //         setReplyAnnotation(annotation)
-                                                        //     }
-                                                        // },
-                                                        {
-                                                            label: t('normal.edit'),
-                                                            key: '1',
-                                                            onClick: e => {
-                                                                e.domEvent.stopPropagation()
-                                                                setEditAnnotation(annotation)
+                                    <div className='commentboxheader'>
+                                        
+                                            {/* <AnnotationIcon subtype={annotation.subtype} /> */}
+                                            <div className="content">{annotation.title}
+                                                <span>{formatPDFDate(annotation.date, true)}</span>
+                                            </div>
+                                            <span className="tool">
+                                                {/* <Dropdown
+                                                    menu={{
+                                                        items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
+                                                            key: statusKey,
+                                                            label: t(option.labelKey),
+                                                            icon: option.icon,
+                                                            onClick: (e) => {
+                                                                addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
+                                                                setReplyAnnotation(null)
                                                             }
-                                                        },
-                                                        {
-                                                            label: t('normal.delete'),
-                                                            key: '3',
-                                                            onClick: e => {
-                                                                e.domEvent.stopPropagation()
-                                                                deleteAnnotation(annotation)
+                                                        }))
+                                                    }}
+                                                    trigger={['click']}
+                                                >
+                                                    <span className="icon">
+                                                        {getLastStatusIcon(annotation)}
+                                                    </span>
+                                                </Dropdown> */}
+                                                <Dropdown
+                                                    menu={{
+                                                        items: [
+                                                            // {
+                                                            //     label: t('normal.reply'),
+                                                            //     key: '0',
+                                                            //     onClick: e => {
+                                                            //         e.domEvent.stopPropagation()
+                                                            //         setReplyAnnotation(annotation)
+                                                            //     }
+                                                            // },
+                                                            {
+                                                                label: t('normal.edit'),
+                                                                key: '1',
+                                                                onClick: e => {
+                                                                    e.domEvent.stopPropagation()
+                                                                    setEditAnnotation(annotation)
+                                                                }
+                                                            },
+                                                            {
+                                                                label: t('normal.delete'),
+                                                                key: '3',
+                                                                onClick: e => {
+                                                                    e.domEvent.stopPropagation()
+                                                                    deleteAnnotation(annotation)
+                                                                }
                                                             }
-                                                        }
-                                                    ]
-                                                }}
-                                                trigger={['click']}
-                                            >
-                                                <span className="icon">
-                                                    <MoreOutlined />
-                                                </span>
-                                            </Dropdown>
-                                        </span>
+                                                        ]
+                                                    }}
+                                                    trigger={['click']}
+                                                >
+                                                    <span className="icon">
+                                                        <MoreOutlined />
+                                                    </span>
+                                                </Dropdown>
+                                            </span>
+                                        
                                     </div>
                                     {commentInput(annotation)}
                                     {annotation.comments?.map((reply, index) => (
@@ -673,8 +669,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                 </div>
                             )
                         })}
-                    </div>
-                </div>
+                    
             </div>
         )
     })
@@ -686,14 +681,14 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         <Button size="small" icon={<FilterOutlined />} />
                     </Popover>
                 </div> */}
-                <div class="commentliner">
-                    <button id="commentlinerbt" class="toolbarButton closebt" type="button" disabled="disabled" tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
+                <div className="commentliner">
+                    <button id="commentlinerbt" className="toolbarButton closebt" type="button" disabled="disabled" tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
                         <span data-l10n-id="pdfjs-commentlinerbt-outline-item-button-label"></span>
                     </button>
                 </div>
                 <div className="commentpanelviewContent">
-                    <div class="title">
-                        <span class="text">Comments</span>
+                    <div className="title">
+                        <span className="text">Comments</span>
                         {/* <span class="closepanel">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-miterlimit="2" stroke-linejoin="round" fill-rule="evenodd" clip-rule="evenodd"><path fill-rule="nonzero" d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"></path></svg>
                         </span> */}
