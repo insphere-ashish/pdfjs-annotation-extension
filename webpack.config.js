@@ -59,20 +59,35 @@ module.exports = {
             }
         ]
     },
+    // optimization: {
+    //     minimizer: [
+    //         '...',
+    //         new ImageMinimizerPlugin({
+    //             minimizer: {
+    //                 implementation: ImageMinimizerPlugin.imageminMinify,
+    //                 options: {
+    //                     plugins: [
+    //                         [
+    //                             'svgo',
+    //                             {
+    //                                 plugins: [{ name: 'removeViewBox', active: false }]
+    //                             }
+    //                         ]
+    //                     ]
+    //                 }
+    //             }
+    //         })
+    //     ]
+    // },
     optimization: {
+        minimize: false,
         minimizer: [
-            '...',
             new ImageMinimizerPlugin({
                 minimizer: {
                     implementation: ImageMinimizerPlugin.imageminMinify,
                     options: {
                         plugins: [
-                            [
-                                'svgo',
-                                {
-                                    plugins: [{ name: 'removeViewBox', active: false }]
-                                }
-                            ]
+                            ['svgo', { plugins: [{ name: 'removeViewBox', active: false }] }]
                         ]
                     }
                 }

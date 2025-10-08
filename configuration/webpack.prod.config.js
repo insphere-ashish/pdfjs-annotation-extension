@@ -12,21 +12,38 @@ module.exports = merge(webpackConfiguration, {
   /* Disable source maps for production */
   devtool: false,
 
-  /* Optimization configuration */
+  // /* Optimization configuration */
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [
+  //     new TerserPlugin({
+  //       parallel: true, // Enable multi-process parallel running
+  //       terserOptions: {
+  //         format: {
+  //           comments: false, // Remove all comments from the output
+  //         },
+  //       },
+  //       extractComments: false, // Ensure no separate license files are generated
+  //     }),
+  //     new CssMinimizerPlugin(),
+  //   ],
+  // },
   optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: true, // Enable multi-process parallel running
-        terserOptions: {
-          format: {
-            comments: false, // Remove all comments from the output
-          },
-        },
-        extractComments: false, // Ensure no separate license files are generated
-      }),
-      new CssMinimizerPlugin(),
-    ],
+    minimize: false,
+    minimizer: true
+      ? []
+      : [
+          new TerserPlugin({
+            parallel: true,
+            terserOptions: {
+              format: {
+                comments: false,
+              },
+            },
+            extractComments: false,
+          }),
+          new CssMinimizerPlugin(),
+        ],
   },
 
   /* Performance thresholds configuration */
