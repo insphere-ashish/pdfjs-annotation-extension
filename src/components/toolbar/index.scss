@@ -492,6 +492,7 @@
     background-color: #fff;
     z-index: 1;
     padding-left: 15px;
+    border-left: 1px #cfd4da solid;
 }
 
 .PdfjsAnnotationExtension #toolbarContainer {
@@ -657,6 +658,17 @@ CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:is(:hover, :fo
 .CustomToolbar ul.buttons:nth-child(1) li[title="Free Hand"] .icon:before {
     -webkit-mask-image: var(--toolbarButton-editorInk-icon);
     mask-image: var(--toolbarButton-editorInk-icon);
+}
+
+button#next, button#previous{
+    z-index: 2;
+}
+#commentAccordionExtension {
+    padding-bottom: 10px;
+}
+.commentliner {
+    border-left:none;
+    border-right:none;
 }
 
 //  custom styles for e-court end

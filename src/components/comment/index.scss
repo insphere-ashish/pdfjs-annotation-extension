@@ -27,7 +27,7 @@
     // height: calc(100vh - 107px);
     height: calc(100vh - 60px);
     color: var(--main-color);
-    border-left: 1px solid var(--toolbar-border-color);
+    // border-left: 1px solid var(--toolbar-border-color);
     overflow: auto;
     font: message-box;
     font-size: 14px;
@@ -154,14 +154,15 @@
     border-style: double;
     border-width: 1px 0px 1px 0;
     position: relative;
-    padding: 6px 8px;
+    padding: 5px 8px;
     font-size: 14px;
     color: var(--themeClr1);
-    height: 45px;
     line-height: 19px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #f6f6f6;
+    border-color: #cfd4da;
 }
 .commenttextbox {
     width: 96%;
@@ -187,10 +188,11 @@
     -webkit-box-shadow: none !important;
     -ms-box-shadow: none !important;
     -o-box-shadow: none !important;
+    background: transparent !important;
 }
 .commenttexterea:focus {
     outline: none;
-    border-bottom: 3px var(--themeColor) solid;
+    border-bottom: 3px var(--themeColor) solid !important;
 }
 :where(.css-1odpy5d).ant-dropdown .ant-dropdown-menu {
     padding:0px;
@@ -202,4 +204,28 @@
     padding:6px;
 }
 
-
+.commenttextbox:hover{
+    background-color: #eee !important;
+    box-shadow: #00000026 1.95px 1.95px 2.6px !important;
+    border: 1px #e0e0e0 solid !important;
+}
+.commentpanelviewContentlist {
+    min-height: 100%;
+    border-left: 1px #cfd4da solid;
+    height: auto;
+}
+.commentpanelviewContentlist .title {
+    background-color: #eee;
+    border-style: double;
+    border-width: 0 0px 1px 0;
+    position: relative;
+    border-color: #d0d0d0;
+    padding: 10px 8px;
+    font-size: 17px;
+    color: var(--themeClr1);
+    height: 45px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
