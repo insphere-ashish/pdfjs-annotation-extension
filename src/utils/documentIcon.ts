@@ -13,21 +13,82 @@ type CreateSvgIconArgs = {
     strokeWidth?: number
 }
 
-/**
- * Create a Konva Group that renders an SVG as vector paths.
- * Returns an array so it's compatible with your existing ...spread add().
- */
+// /**
+//  * Create a Konva Group that renders an SVG as vector paths.
+//  * Returns an array so it's compatible with your existing ...spread add().
+//  */
+// export async function createSvgIcon({ x, y, svg, size = 18, fill, stroke, strokeWidth }: CreateSvgIconArgs): Promise<Konva.Node[]> {
+//     // If "svg" looks like a URL, fetch it. Otherwise treat it as raw SVG markup.
+//     const isUrl = /^https?:\/\//i.test(svg) || /\.svg(\?.*)?$/i.test(svg)
+//     const svgText = isUrl ? await fetch(svg).then(r => r.text()) : svg
+
+//     // Parse the SVG
+//     const parser = new DOMParser()
+//     const doc = parser.parseFromString(svgText, 'image/svg+xml')
+//     const svgEl = doc.documentElement
+
+//     // Figure out source dimensions
+//     const vbAttr = svgEl.getAttribute('viewBox')
+//     let vbX = 0,
+//         vbY = 0,
+//         vbW = 0,
+//         vbH = 0
+//     if (vbAttr) {
+//         const nums = vbAttr.trim().split(/\s+|,/).map(Number)
+//         ;[vbX, vbY, vbW, vbH] = nums.length === 4 ? nums : [0, 0, 0, 0]
+//     }
+//     if (!vbW || !vbH) {
+//         // fall back to width/height attributes if no viewBox
+//         vbW = Number(svgEl.getAttribute('width') || 128)
+//         vbH = Number(svgEl.getAttribute('height') || 128)
+//     }
+
+//     // Scale so the longest edge becomes `size`
+//     const scale = size / Math.max(vbW, vbH)
+
+//     const group = new Konva.Group({
+//         x,
+//         y,
+//         // align top-left like your previous icon code
+//         offsetX: vbX,
+//         offsetY: vbY,
+//         scaleX: scale,
+//         scaleY: scale
+//     })
+
+//     // Create Path nodes for each <path> in the SVG
+//     const paths = Array.from(doc.querySelectorAll('path'))
+//     for (const p of paths) {
+//         const d = p.getAttribute('d')
+//         if (!d) continue
+
+//         // Respect the SVG's own styling unless overrides are provided
+//         const pathFill = fill ?? p.getAttribute('fill') ?? undefined
+//         const pathStroke = stroke ?? p.getAttribute('stroke') ?? undefined
+//         const sw = strokeWidth ?? (p.hasAttribute('stroke-width') ? Number(p.getAttribute('stroke-width')) : undefined)
+
+//         const node = new Konva.Path({
+//             data: d,
+//             // Convert 'none' to undefined so Konva doesn't treat it as a color
+//             fill: pathFill && pathFill !== 'none' ? pathFill : undefined,
+//             stroke: pathStroke && pathStroke !== 'none' ? pathStroke : undefined,
+//             strokeWidth: sw
+//         })
+//         group.add(node)
+//     }
+
+//     return [group]
+// }
+
 export async function createSvgIcon({ x, y, svg, size = 18, fill, stroke, strokeWidth }: CreateSvgIconArgs): Promise<Konva.Node[]> {
-    // If "svg" looks like a URL, fetch it. Otherwise treat it as raw SVG markup.
     const isUrl = /^https?:\/\//i.test(svg) || /\.svg(\?.*)?$/i.test(svg)
     const svgText = isUrl ? await fetch(svg).then(r => r.text()) : svg
 
-    // Parse the SVG
     const parser = new DOMParser()
     const doc = parser.parseFromString(svgText, 'image/svg+xml')
     const svgEl = doc.documentElement
 
-    // Figure out source dimensions
+    // read viewBox or width/height (same as your code)
     const vbAttr = svgEl.getAttribute('viewBox')
     let vbX = 0,
         vbY = 0,
@@ -38,46 +99,44 @@ export async function createSvgIcon({ x, y, svg, size = 18, fill, stroke, stroke
         ;[vbX, vbY, vbW, vbH] = nums.length === 4 ? nums : [0, 0, 0, 0]
     }
     if (!vbW || !vbH) {
-        // fall back to width/height attributes if no viewBox
         vbW = Number(svgEl.getAttribute('width') || 128)
         vbH = Number(svgEl.getAttribute('height') || 128)
     }
-
-    // Scale so the longest edge becomes `size`
     const scale = size / Math.max(vbW, vbH)
 
-    const group = new Konva.Group({
-        x,
-        y,
-        // align top-left like your previous icon code
-        offsetX: vbX,
-        offsetY: vbY,
-        scaleX: scale,
-        scaleY: scale
-    })
-
-    // Create Path nodes for each <path> in the SVG
+    // create Path nodes (return array of shapes instead of a Group)
+    const nodes: Konva.Path[] = []
     const paths = Array.from(doc.querySelectorAll('path'))
     for (const p of paths) {
         const d = p.getAttribute('d')
         if (!d) continue
-
-        // Respect the SVG's own styling unless overrides are provided
         const pathFill = fill ?? p.getAttribute('fill') ?? undefined
         const pathStroke = stroke ?? p.getAttribute('stroke') ?? undefined
         const sw = strokeWidth ?? (p.hasAttribute('stroke-width') ? Number(p.getAttribute('stroke-width')) : undefined)
 
         const node = new Konva.Path({
+            x, // position relative to top-left like your old icon
+            y,
+            offsetX: vbX,
+            offsetY: vbY,
+            scaleX: scale,
+            scaleY: scale,
             data: d,
-            // Convert 'none' to undefined so Konva doesn't treat it as a color
             fill: pathFill && pathFill !== 'none' ? pathFill : undefined,
             stroke: pathStroke && pathStroke !== 'none' ? pathStroke : undefined,
-            strokeWidth: sw
+            strokeWidth: sw,
+            listening: true
         })
-        group.add(node)
+
+        // enlarge hittable area if the path is stroke-only and thin
+        if (!node.fill()) {
+            ;(node as any).hitStrokeWidth && (node as any).hitStrokeWidth(10)
+        }
+
+        nodes.push(node)
     }
 
-    return [group]
+    return nodes
 }
 
 export function createDocumentIcon({

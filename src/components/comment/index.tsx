@@ -3,7 +3,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo
 import { CommentStatus, IAnnotationComment, IAnnotationStore, PdfjsAnnotationSubtype } from '../../const/definitions'
 import { useTranslation } from 'react-i18next'
 import { formatPDFDate, formatTimestamp, generateUUID } from '../../utils/utils'
-import { Button, Checkbox, Dropdown, Input, Popover, Space, Typography } from 'antd'
+import { Button, Checkbox, Dropdown, Input, Popover, Space, Typography, message } from 'antd'
 import { CheckCircleOutlined, DislikeOutlined, FilterOutlined, LikeOutlined, MinusCircleOutlined, MinusSquareOutlined, MoreOutlined, StopOutlined } from '@ant-design/icons'
 import {
     CircleIcon,
@@ -105,6 +105,8 @@ export interface CustomCommentRef {
     updateAnnotation(annotation: IAnnotationStore): void
     selectedAnnotation(annotation: IAnnotationStore, isClick: boolean): void
 }
+
+const allowedType = [11, 5]; // only type to allow on comment section  // 11 = note, 5 = square box
 
 /**
  * @description CustomComment
@@ -216,7 +218,6 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         return annotations.filter(a => selectedUsers.includes(a.title) && selectedTypes.includes(a.subtype))
     }, [annotations, selectedUsers, selectedTypes])
 
-    const allowedType = [11, 5] // only type to allow on comment section  // 11 = note, 5 = square box
     const groupedAnnotations = useMemo(() => {
         // console.log('----------- groupedAnnotations START-----------')
         return filteredAnnotations.reduce(
@@ -313,14 +314,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     }
 
     const updateComment = (annotation: IAnnotationStore, comment: string) => {
-        const trimmed = (comment ?? '').trim();
-        
-        // NOTE e-court custom change for (type 11): require non-empty text; don't update or trigger save path if empty
-        if (annotation.type === 11 && trimmed.length === 0) {
-            return // return do nothing
-        }
-
-        annotation.contentsObj.text = trimmed
+        annotation.contentsObj.text = comment
         props.onUpdate(annotation)
     }
 
@@ -398,7 +392,18 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             let comment = ''
             if (editAnnotation && currentAnnotation?.id === annotation.id) {
                 const handleSubmit = () => {
-                    updateComment(annotation, comment)
+                    const trimmed = (comment ?? '').trim();
+
+                    // NOTE e-court custom change for (type 11): require non-empty text; don't update or trigger save path if empty
+                    if (allowedType.includes(annotation.type) && trimmed.length == 0) {
+                        message.error({
+                            content: t('comment.required'),
+                            key: 'comment',
+                        });
+                        return // return do nothing
+                    }
+
+                    updateComment(annotation, trimmed)
                     setEditAnnotation(null)
                 }
                 return (
@@ -432,7 +437,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                 className="btn btn-secondary btn-sm"
                                 onMouseDown={() => {
                                     setEditAnnotation(null)
-                                    if (annotation.contentsObj.text.trim() === '') {
+                                    if (annotation.contentsObj.text.trim() == '') {
                                         deleteAnnotation(annotation)
                                         // closing comment sidebar 
                                         document.body.classList.remove('PdfjsAnnotationExtension_Comment_hidden') // custom code - auto close comment sidebar for e-court
@@ -450,81 +455,81 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         [editAnnotation, currentAnnotation]
     )
 
-    // 回复框
-    const replyInput = useCallback(
-        (annotation: IAnnotationStore) => {
-            let comment = ''
-            if (replyAnnotation && currentAnnotation?.id === annotation.id) {
-                const handleSubmit = () => {
-                    addReply(annotation, comment)
-                    setReplyAnnotation(null)
-                }
-                return (
-                    <>
-                        <TextArea
-                            autoFocus
-                            rows={4}
-                            style={{ marginBottom: '8px', marginTop: '8px' }}
-                            onBlur={() => setReplyAnnotation(null)}
-                            onChange={e => (comment = e.target.value)}
-                            onKeyDown={e => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault()
-                                    handleSubmit()
-                                }
-                            }}
-                        />
-                        <Button
-                            type="primary"
-                            block
-                            onMouseDown={handleSubmit}
-                        >
-                            {t('normal.confirm')}
-                        </Button>
-                    </>
-                )
-            }
-            return null
-        },
-        [replyAnnotation, currentAnnotation]
-    )
+    // // 回复框
+    // const replyInput = useCallback(
+    //     (annotation: IAnnotationStore) => {
+    //         let comment = ''
+    //         if (replyAnnotation && currentAnnotation?.id === annotation.id) {
+    //             const handleSubmit = () => {
+    //                 addReply(annotation, comment)
+    //                 setReplyAnnotation(null)
+    //             }
+    //             return (
+    //                 <>
+    //                     <TextArea
+    //                         autoFocus
+    //                         rows={4}
+    //                         style={{ marginBottom: '8px', marginTop: '8px' }}
+    //                         onBlur={() => setReplyAnnotation(null)}
+    //                         onChange={e => (comment = e.target.value)}
+    //                         onKeyDown={e => {
+    //                             if (e.key === 'Enter' && !e.shiftKey) {
+    //                                 e.preventDefault()
+    //                                 handleSubmit()
+    //                             }
+    //                         }}
+    //                     />
+    //                     <Button
+    //                         type="primary"
+    //                         block
+    //                         onMouseDown={handleSubmit}
+    //                     >
+    //                         {t('normal.confirm')}
+    //                     </Button>
+    //                 </>
+    //             )
+    //         }
+    //         return null
+    //     },
+    //     [replyAnnotation, currentAnnotation]
+    // )
 
-    // 编辑回复框
-    const editReplyInput = useCallback(
-        (annotation: IAnnotationStore, reply: IAnnotationComment) => {
-            let comment = ''
-            if (currentReply && currentReply.id === reply.id) {
-                const handleSubmit = () => {
-                    updateReply(annotation, reply, comment)
-                    setCurrentReply(null)
-                }
-                return (
-                    <>
-                        <TextArea
-                            defaultValue={currentReply.content}
-                            autoFocus
-                            rows={4}
-                            style={{ marginBottom: '8px' }}
-                            onBlur={() => setCurrentReply(null)}
-                            onChange={e => (comment = e.target.value)}
-                            onKeyDown={e => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                    e.preventDefault()
-                                    handleSubmit()
-                                }
-                            }}
-                        />
-                        <Button type="primary" block onMouseDown={handleSubmit}>
-                            {t('normal.confirm')}
-                        </Button>
-                    </>
-                )
-            }
+    // // 编辑回复框
+    // const editReplyInput = useCallback(
+    //     (annotation: IAnnotationStore, reply: IAnnotationComment) => {
+    //         let comment = ''
+    //         if (currentReply && currentReply.id === reply.id) {
+    //             const handleSubmit = () => {
+    //                 updateReply(annotation, reply, comment)
+    //                 setCurrentReply(null)
+    //             }
+    //             return (
+    //                 <>
+    //                     <TextArea
+    //                         defaultValue={currentReply.content}
+    //                         autoFocus
+    //                         rows={4}
+    //                         style={{ marginBottom: '8px' }}
+    //                         onBlur={() => setCurrentReply(null)}
+    //                         onChange={e => (comment = e.target.value)}
+    //                         onKeyDown={e => {
+    //                             if (e.key === 'Enter' && !e.shiftKey) {
+    //                                 e.preventDefault()
+    //                                 handleSubmit()
+    //                             }
+    //                         }}
+    //                     />
+    //                     <Button type="primary" block onMouseDown={handleSubmit}>
+    //                         {t('normal.confirm')}
+    //                     </Button>
+    //                 </>
+    //             )
+    //         }
 
-            return <p>{reply.content}</p>
-        },
-        [replyAnnotation, currentReply]
-    )
+    //         return <p>{reply.content}</p>
+    //     },
+    //     [replyAnnotation, currentReply]
+    // )
 
     const comments = Object.entries(groupedAnnotations).map(([pageNumber, annotationsForPage]) => {
         // 根据 konvaClientRect.y 对 annotationsForPage 进行排序

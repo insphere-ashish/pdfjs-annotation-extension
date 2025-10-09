@@ -35,6 +35,10 @@ const isNoteAnnotation = (a: IAnnotationStore) => {
     return a?.type == 11 || a?.type == 5
 };
 
+const isOnlyNoteAnnotation = (a: IAnnotationStore) => {
+    return a?.type == 11
+}
+
 class PdfjsAnnotationExtension {
     PDFJS_PDFViewerApplication: PDFViewerApplication // PDF.js 的 PDFViewerApplication 对象
     PDFJS_EventBus: EventBus // PDF.js 的 EventBus 对象
@@ -124,6 +128,9 @@ class PdfjsAnnotationExtension {
                 this.saveData() // -----------------------------------------    custom code -- e-court auto save after modified
             },
             onAnnotationSelected: (annotation, isClick, selectorRect) => {
+                if (isOnlyNoteAnnotation(annotation)) {
+                    this.toggleComment(true)
+                }
                 this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
                 if ((isClick && this.isCommentOpen()) || (isClick && isNoteAnnotation(annotation))) {
                     // 如果是点击事件并且评论栏已打开，则选中批注

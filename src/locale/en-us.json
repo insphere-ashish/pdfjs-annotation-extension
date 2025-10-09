@@ -94,7 +94,8 @@
             "none": "None",
             "closed": "Closed"
         },
-        "statusText": "Set Status: {{value}}"
+        "statusText": "Set Status: {{value}}",
+        "required": "Please enter a comment"
     },
     "pdf": {
         "generationSuccess": "File has been successfully generated and downloaded"
