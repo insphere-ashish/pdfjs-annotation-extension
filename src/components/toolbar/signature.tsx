@@ -19,11 +19,12 @@ import { loadFontWithFontFace } from '../../utils/fontLoader'
 interface SignatureToolProps {
     annotation: IAnnotationType
     onAdd: (signatureDataUrl: string) => void
+    disabled?: boolean
 }
 
 const BASE_FONT_SIZE = 80
 
-const SignatureTool: React.FC<SignatureToolProps> = ({ annotation, onAdd }) => {
+const SignatureTool: React.FC<SignatureToolProps> = ({ annotation, onAdd, disabled = false }) => {
     const { t } = useTranslation()
     const containerRef = useRef<HTMLDivElement>(null)
     const konvaStageRef = useRef<Konva.Stage | null>(null)

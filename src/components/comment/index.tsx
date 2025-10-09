@@ -97,6 +97,7 @@ interface CustomCommentProps {
     onUpdate: (annotation: IAnnotationStore) => void
     onDelete: (id: string) => void
     onScroll?: () => void
+    onEditingStateChange?: (isEditing: boolean) => void // New callback to notify when editing state changes
 }
 
 export interface CustomCommentRef {
@@ -157,6 +158,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         // 👇 根据批注归属与内容决定打开评论或回复
         if (isOwn && isEmptyComment) {
             setEditAnnotation(annotation)
+            props.onEditingStateChange?.(true) // Notify that editing started
         } else {
             setReplyAnnotation(annotation)
         }
@@ -186,6 +188,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
         // 清除当前编辑的批注
         setEditAnnotation(null)
+        props.onEditingStateChange?.(false) // Notify that editing ended
     }
 
     const allUsers = useMemo(() => {
@@ -405,6 +408,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
                     updateComment(annotation, trimmed)
                     setEditAnnotation(null)
+                    props.onEditingStateChange?.(false) // Notify that editing ended
                 }
                 return (
                     <>
@@ -437,6 +441,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                 className="btn btn-secondary btn-sm"
                                 onMouseDown={() => {
                                     setEditAnnotation(null)
+                                    props.onEditingStateChange?.(false) // Notify that editing ended
                                     if (annotation.contentsObj.text.trim() == '') {
                                         deleteAnnotation(annotation)
                                         // closing comment sidebar 
@@ -598,6 +603,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                                                 onClick: e => {
                                                                     e.domEvent.stopPropagation()
                                                                     setEditAnnotation(annotation)
+                                                                    props.onEditingStateChange?.(true) // Notify that editing started
                                                                 }
                                                             },
                                                             {

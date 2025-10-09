@@ -17,6 +17,7 @@ interface CustomToolbarProps {
     onSave: () => void
     onExport: (type: 'pdf' | 'excel') => void
     onSidebarOpen: (open: boolean) => void
+    disabled?: boolean // New prop to disable annotation buttons during comment editing
 }
 
 export interface CustomToolbarRef {
@@ -90,22 +91,32 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
 
     const buttons = annotations.map((annotation, index) => {
         const isSelected = annotation.type === selectedType
+        const isDisabled = props.disabled || false
 
         const commonProps = {
-            className: isSelected ? 'selected' : ''
+            className: `${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`
         }
         switch (annotation.type) {
             case AnnotationType.STAMP:
                 return (
                     <li title={t(`annotations.${annotation.name}`)} key={index} {...commonProps}>
-                        <StampTool userName={props.userName} annotation={annotation} onAdd={signatureDataUrl => handleAdd(signatureDataUrl, annotation)} />
+                        <StampTool 
+                            userName={props.userName} 
+                            annotation={annotation} 
+                            onAdd={signatureDataUrl => !isDisabled && handleAdd(signatureDataUrl, annotation)} 
+                            disabled={isDisabled}
+                        />
                     </li>
                 )
 
             case AnnotationType.SIGNATURE:
                 return (
                     <li title={t(`annotations.${annotation.name}`)} key={index} {...commonProps}>
-                        <SignatureTool annotation={annotation} onAdd={signatureDataUrl => handleAdd(signatureDataUrl, annotation)} />
+                        <SignatureTool 
+                            annotation={annotation} 
+                            onAdd={signatureDataUrl => !isDisabled && handleAdd(signatureDataUrl, annotation)} 
+                            disabled={isDisabled}
+                        />
                     </li>
                 )
 
@@ -115,7 +126,8 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                         title={t(`annotations.${annotation.name}`)}
                         key={index}
                         {...commonProps}
-                        onClick={() => handleAnnotationClick(isSelected ? null : annotation)}
+                        onClick={() => !isDisabled && handleAnnotationClick(isSelected ? null : annotation)}
+                        style={{ pointerEvents: isDisabled ? 'none' : 'auto', opacity: isDisabled ? 0.5 : 1 }}
                     >
                         <div className="icon">{annotation.icon}</div>
                         <div className="name">{t(`annotations.${annotation.name}`)}</div>
@@ -124,7 +136,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
         }
     })
 
-    const isColorDisabled = !currentAnnotation?.styleEditable?.color
+    const isColorDisabled = !currentAnnotation?.styleEditable?.color || props.disabled
 
     useEffect(() => {
         // 调用 onChange 并传递当前的 annotation 和 dataTransfer
@@ -132,7 +144,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
     }, [currentAnnotation, dataTransfer, props])
 
     const handleColorChange = (color: string) => {
-        if (!currentAnnotation) return
+        if (!currentAnnotation || props.disabled) return
         const updatedAnnotation = { ...currentAnnotation, style: { ...currentAnnotation.style, color } }
         const updatedAnnotations = annotations.map(annotation => (annotation.type === currentAnnotation.type ? updatedAnnotation : annotation))
         setAnnotations(updatedAnnotations)

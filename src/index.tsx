@@ -56,6 +56,15 @@ class PdfjsAnnotationExtension {
     loadEnd: Boolean
     initialDataHash: number
     _connectorLine: ConnectorLine | null = null
+    isCommentEditing: boolean = false // Track if comment is being edited
+
+    /**
+     * @description Handle comment editing state change
+     */
+    private handleCommentEditingStateChange = (isEditing: boolean) => {
+        this.isCommentEditing = isEditing
+        this.updateToolbar() // Re-render toolbar with new disabled state
+    }
 
     constructor() {
         this.loadEnd = false
@@ -254,18 +263,31 @@ class PdfjsAnnotationExtension {
         return !document.body.classList.contains('PdfjsAnnotationExtension_Comment_hidden')
     }
 
+    private toolbarRoot: any = null // Store the root for re-rendering
+
     /**
      * @description 渲染自定义工具栏
      */
     private renderToolbar(): void {
         const toolbar = document.createElement('div')
         this.$PDFJS_toolbar_container.insertAdjacentElement('afterend', toolbar)
-        createRoot(toolbar).render(
+        this.toolbarRoot = createRoot(toolbar)
+        this.updateToolbar()
+    }
+
+    /**
+     * @description 更新工具栏状态
+     */
+    private updateToolbar(): void {
+        if (!this.toolbarRoot) return
+        
+        this.toolbarRoot.render(
             <CustomToolbar
                 ref={this.customToolbarRef}
                 defaultAnnotationName={this.getOption(HASH_PARAMS_DEFAULT_EDITOR_ACTIVE)}
                 defaultSidebarOpen={this.getOption(HASH_PARAMS_DEFAULT_SIDEBAR_OPEN) === 'true'}
                 userName={this.getOption(HASH_PARAMS_USERNAME)}
+                disabled={this.isCommentEditing}
                 onChange={(currentAnnotation, dataTransfer) => {
                     this.painter.activate(currentAnnotation, dataTransfer)
                 }}
@@ -364,6 +386,7 @@ class PdfjsAnnotationExtension {
                 onScroll={() => {
                     this.connectorLine?.clearConnection()
                 }}
+                onEditingStateChange={this.handleCommentEditingStateChange}
             />
         )
     }

@@ -15,6 +15,7 @@ interface SignatureToolProps {
     annotation: IAnnotationType
     userName: string
     onAdd: (signatureDataUrl: string) => void
+    disabled?: boolean
 }
 
 type FieldType = {
@@ -73,7 +74,7 @@ const DATE_FORMAT_OPTIONS = [
     }
 ]
 
-const StampTool: React.FC<SignatureToolProps> = ({ annotation, onAdd, userName }) => {
+const StampTool: React.FC<SignatureToolProps> = ({ annotation, onAdd, userName, disabled = false }) => {
     const { t } = useTranslation()
     const containerRef = useRef<HTMLDivElement>(null)
     const konvaStageRef = useRef<Konva.Stage | null>(null)
