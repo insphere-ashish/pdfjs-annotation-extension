@@ -120,6 +120,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     const [editAnnotation, setEditAnnotation] = useState<IAnnotationStore | null>(null)
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
     const [selectedTypes, setSelectedTypes] = useState<PdfjsAnnotationSubtype[]>([])
+    const [isToolbarDisabledByUs, setIsToolbarDisabledByUs] = useState<boolean>(false) // Track if we disabled toolbar
     const { t } = useTranslation()
 
     const annotationRefs = useRef<Record<string, HTMLDivElement | null>>({})
@@ -152,13 +153,17 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
         if (!isClick) return
 
-        const isOwn = annotation.title === props.userName
+        const isOwn = annotation.title === userName
         const isEmptyComment = annotation.contentsObj.text === ''
 
         // 👇 根据批注归属与内容决定打开评论或回复
         if (isOwn && isEmptyComment) {
             setEditAnnotation(annotation)
-            props.onEditingStateChange?.(true) // Notify that editing started
+            // Only disable toolbar for NEW annotations (types 5 and 11) that need comments
+            if (allowedType.includes(annotation.type)) {
+                setIsToolbarDisabledByUs(true) // Track that we disabled toolbar
+                onEditingStateChange?.(true) // Notify that editing started for new annotation
+            }
         } else {
             setReplyAnnotation(annotation)
         }
@@ -188,7 +193,6 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
         // 清除当前编辑的批注
         setEditAnnotation(null)
-        props.onEditingStateChange?.(false) // Notify that editing ended
     }
 
     const allUsers = useMemo(() => {
@@ -313,18 +317,18 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
     const handleAnnotationClick = (annotation: IAnnotationStore) => {
         setCurrentAnnotation(annotation)
-        props.onSelected(annotation)
+        onSelected(annotation)
     }
 
-    const updateComment = (annotation: IAnnotationStore, comment: string) => {
+    const updateComment = useCallback((annotation: IAnnotationStore, comment: string) => {
         annotation.contentsObj.text = comment
-        props.onUpdate(annotation)
-    }
+        onUpdate(annotation)
+    }, [onUpdate])
 
     const addReply = (annotation: IAnnotationStore, comment: string, status?: CommentStatus) => {
         const newReply = {
             id: generateUUID(),
-            title: props.userName,
+            title: userName,
             date: formatTimestamp(Date.now()),
             content: comment,
             status
@@ -338,7 +342,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         comments: [...(a.comments || []), newReply],
                         date: formatTimestamp(Date.now())
                     }
-                    props.onUpdate(updatedAnnotation)
+                    onUpdate(updatedAnnotation)
                     return updatedAnnotation
                 }
                 return a
@@ -352,11 +356,11 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     const updateReply = (annotation: IAnnotationStore, reply: IAnnotationComment, comment: string) => {
         reply.date = formatTimestamp(Date.now())
         reply.content = comment
-        reply.title = props.userName
-        props.onUpdate(annotation)
+        reply.title = userName
+        onUpdate(annotation)
     }
 
-    const deleteAnnotation = (annotation: IAnnotationStore) => {
+    const deleteAnnotation = useCallback((annotation: IAnnotationStore) => {
         setAnnotations(prevAnnotations => prevAnnotations.filter(item => item.id !== annotation.id))
         if (currentAnnotation?.id === annotation.id) {
             setCurrentAnnotation(null)
@@ -365,8 +369,8 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             setReplyAnnotation(null)
         }
         setCurrentReply(null)
-        props.onDelete(annotation.id)
-    }
+        onDelete(annotation.id)
+    }, [currentAnnotation?.id, replyAnnotation?.id, onDelete])
 
     const deleteReply = (annotation: IAnnotationStore, reply: IAnnotationComment) => {
         let updatedAnnotation: IAnnotationStore | null = null
@@ -385,11 +389,13 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             setCurrentReply(null)
         }
         if (updatedAnnotation) {
-            props.onUpdate(updatedAnnotation)
+            onUpdate(updatedAnnotation)
         }
     }
 
     // Comment 编辑框
+    const { onEditingStateChange, onUpdate, onDelete, onSelected, userName } = props
+    
     const commentInput = useCallback(
         (annotation: IAnnotationStore) => {
             let comment = ''
@@ -408,7 +414,11 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
 
                     updateComment(annotation, trimmed)
                     setEditAnnotation(null)
-                    props.onEditingStateChange?.(false) // Notify that editing ended
+                    // Only re-enable toolbar if we had disabled it
+                    if (isToolbarDisabledByUs) {
+                        setIsToolbarDisabledByUs(false)
+                        onEditingStateChange?.(false) // Notify that editing ended
+                    }
                 }
                 return (
                     <>
@@ -441,7 +451,11 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                 className="btn btn-secondary btn-sm"
                                 onMouseDown={() => {
                                     setEditAnnotation(null)
-                                    props.onEditingStateChange?.(false) // Notify that editing ended
+                                    // Only re-enable toolbar if we had disabled it
+                                    if (isToolbarDisabledByUs) {
+                                        setIsToolbarDisabledByUs(false)
+                                        onEditingStateChange?.(false) // Notify that editing ended
+                                    }
                                     if (annotation.contentsObj.text.trim() == '') {
                                         deleteAnnotation(annotation)
                                         // closing comment sidebar 
@@ -457,7 +471,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             }
             return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
         },
-        [editAnnotation, currentAnnotation]
+        [editAnnotation, currentAnnotation, isToolbarDisabledByUs, deleteAnnotation, onEditingStateChange, t, updateComment]
     )
 
     // // 回复框
@@ -603,7 +617,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                                                 onClick: e => {
                                                                     e.domEvent.stopPropagation()
                                                                     setEditAnnotation(annotation)
-                                                                    props.onEditingStateChange?.(true) // Notify that editing started
+                                                                    // Don't disable toolbar for editing existing annotations
                                                                 }
                                                             },
                                                             {
