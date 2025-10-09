@@ -728,6 +728,7 @@ export class Painter {
         if (loadPdfAnnotation) {
             // 先将 pdf 文件中的存入
             const annotationMap = await this.transform.decodePdfAnnotation()
+            // console.log(' ,.,.,.,.,.,.,. annotationMap Loaded PDF annotations:', annotationMap)
             annotationMap.forEach(annotation => {
                 this.saveToStore(annotation, true)
             })
@@ -740,6 +741,7 @@ export class Painter {
                 }
             })
         } else {
+            if (annotations.length === 0) return
             annotations.forEach(annotation => {
                 this.saveToStore(annotation, true)
             })
@@ -806,6 +808,13 @@ export class Painter {
 
     public getData() {
         return this.store.annotations
+    }
+
+    // custom method to clear all data -- otherwise the annotations were showing as before from the older file
+    public clearData(this: Painter) {
+        this.store = new Store({ pdfViewerApplication : this.pdfViewerApplication })
+        this.selector.clear()
+        this.cleanUpInvalidStore()
     }
 
     /**
