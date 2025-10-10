@@ -444,6 +444,20 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         onEditingStateChange?.(false) // Notify that editing ended
                     }
                 }
+
+                // const autoGrow = (e) => {
+                //     alert('ssss')
+                //     const el = e.target;
+                //     console.log('e - target ',e)
+                //     console.log('el',el)
+                //     if (el) {
+                //         el.style.height = 'auto'; // reset
+                //         el.style.height = `${el.scrollHeight}px`; // grow
+                //         console.log('el.style.height',el.style.height)
+                //         console.log('el.scrollHeight',el.scrollHeight)
+                //     }
+                // };
+
                 // useEffect(() => {
                 //     // on "init" — set default value
                 //     setComment(annotation.contentsObj.text ?? '')
@@ -453,10 +467,14 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         <TextArea className='commenttexterea'
                             defaultValue={annotation.contentsObj.text}
                             autoFocus
-                            rows={4}
+                            // rows={4}
+                            autoSize={{ minRows: 4, maxRows: 16 }}
                             style={{ marginBottom: '5px', marginTop: '5px' }}
-                            // onBlur={() => setEditAnnotation(null)}
-                            onChange={e => (comment = e.target.value)}
+                            // onBlur={() => setEditAnnotation(null)} // custom code -- commented to prevent accidental close even if focus is lost as comment is still not saved
+                            onChange={e => {
+                                comment = e.target.value
+                                // autoGrow(e); // resize on change
+                            }}
                             onKeyDown={e => {
                                 if (e.key === 'Enter' && !e.shiftKey) {
                                     e.preventDefault()
