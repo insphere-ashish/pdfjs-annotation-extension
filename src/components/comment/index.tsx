@@ -417,7 +417,10 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     
     const commentInput = useCallback(
         (annotation: IAnnotationStore) => {
-            let comment = ''
+            let comment = annotation.contentsObj.text ?? ''
+            let previousValue = comment
+            // console.log(previousValue);
+            // const [comment, setComment] = useState('')
             if (editAnnotation && currentAnnotation?.id === annotation.id) {
                 const handleSubmit = () => {
                     const trimmed = (comment ?? '').trim();
@@ -431,7 +434,9 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         return // return do nothing
                     }
 
-                    updateComment(annotation, trimmed)
+                    if(comment != previousValue) {
+                        updateComment(annotation, trimmed)
+                    }
                     setEditAnnotation(null)
                     // Only re-enable toolbar if we had disabled it
                     if (isToolbarDisabledByUs) {
@@ -439,6 +444,10 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         onEditingStateChange?.(false) // Notify that editing ended
                     }
                 }
+                // useEffect(() => {
+                //     // on "init" — set default value
+                //     setComment(annotation.contentsObj.text ?? '')
+                // }, [annotation.contentsObj.text]) // can also be []
                 return (
                     <>
                         <TextArea className='commenttexterea'
