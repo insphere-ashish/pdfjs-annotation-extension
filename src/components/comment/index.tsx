@@ -444,7 +444,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                         <TextArea className='commenttexterea'
                             defaultValue={annotation.contentsObj.text}
                             autoFocus
-                            rows={2}
+                            rows={4}
                             style={{ marginBottom: '5px', marginTop: '5px' }}
                             // onBlur={() => setEditAnnotation(null)}
                             onChange={e => (comment = e.target.value)}
@@ -665,7 +665,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                                 <div className="username"> {reply.title}
                                                     <span>{formatPDFDate(reply.date, true)}</span>
                                                 </div>
-                                                <span className="tool">
+                                                <span className="tool commenteditbox">
                                                     <Dropdown
                                                         menu={{
                                                             items: [

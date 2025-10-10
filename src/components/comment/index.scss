@@ -54,6 +54,8 @@
             line-height: 150%;
             .ant-typography{
                 color: var(--main-color) !important;
+                font-family: var(--fontFamilyMedium) !important;
+                white-space: pre-line;
             }
             p {
                 white-space: pre-wrap;
@@ -189,6 +191,7 @@
     -ms-box-shadow: none !important;
     -o-box-shadow: none !important;
     background: transparent !important;
+    font-family: var(--fontFamilyMedium) !important;
 }
 .commenttexterea:focus {
     outline: none;
@@ -228,4 +231,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.commentpanelviewContentlist .closepanel {
+    border:none;
+    outline: none;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+}
+.commentpanelviewContentlist .closepanel svg {
+    fill: red;
+    width: 24px;
+    height: 24px;
+}
+.commentboxheader .tool {
+    cursor: pointer;
+}
+
+.ant-dropdown-menu{
+   min-width: 100px
 }
