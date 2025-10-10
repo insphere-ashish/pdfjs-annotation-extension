@@ -178,6 +178,19 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                 </ColorPicker>
             </ul>
             <div className="splitToolbarButtonSeparator"></div>
+            <ul className="buttons export-pdf">
+                <Button
+                    block
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => {
+                        props.onExport('pdf')
+                    }}
+                    icon={<FilePdfOutlined />}
+                >
+                    Export With Annotations
+                </Button>
+            </ul>
             <ul className="buttons" style={{ display: 'none' }}>
                 {defaultOptions.setting.SAVE_BUTTON && (
                     <li
