@@ -23,7 +23,7 @@ interface AppOptions {
 }
 
 const shouldSaveNow = (a: IAnnotationStore) => {
-    if (a?.type === 11) {
+    if ( a?.type == 11 || a?.type == 5) {
         const txt = a?.contentsObj?.text ?? '';
         return txt.trim().length > 0;
     }
@@ -137,11 +137,12 @@ class PdfjsAnnotationExtension {
                 this.saveData() // -----------------------------------------    custom code -- e-court auto save after modified
             },
             onAnnotationSelected: (annotation, isClick, selectorRect) => {
-                if (isOnlyNoteAnnotation(annotation)) {
+                if (isNoteAnnotation(annotation)) {
                     this.toggleComment(true)
+                    this.jsAnnoComment(true)
                 }
                 this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
-                if ((isClick && this.isCommentOpen()) || (isClick && isNoteAnnotation(annotation))) {
+                if (isClick && (this.isCommentOpen() || isNoteAnnotation(annotation))) {
                     // 如果是点击事件并且评论栏已打开，则选中批注
                     this.customCommentRef.current.selectedAnnotation(annotation, isClick) // custom code -- e-court
                 }
@@ -252,6 +253,14 @@ class PdfjsAnnotationExtension {
             document.body.classList.remove('PdfjsAnnotationExtension_Comment_hidden')
         } else {
             document.body.classList.add('PdfjsAnnotationExtension_Comment_hidden')
+        }
+    }
+
+    private jsAnnoComment(open: boolean): void {
+        if (open) {
+            this.customToolbarRef.current.toggleSidebarBtn(true)
+        } else {
+            this.customToolbarRef.current.toggleSidebarBtn(false)
         }
     }
 
@@ -379,7 +388,7 @@ class PdfjsAnnotationExtension {
                         contentsObj: annotation.contentsObj,
                         comments: annotation.comments
                     })
-                    if (annotation.type == 11) {
+                    if ([11,5].includes(annotation.type)) {
                         this.saveData() // custom code - auto save for note type for e-court 
                     }
                 }}
@@ -457,6 +466,7 @@ class PdfjsAnnotationExtension {
         // 监听文档加载完成事件
         this.PDFJS_EventBus._on('documentloaded', async () => {
             // alert('sssssss')
+            this.customCommentRef.current?.clear?.(); // custom code -- clear all existing annotations when a new document is loaded
             this.clearInitialDataHash(); // custom code -- clear all existing annotations when a new document is loaded
             this.painter.clearData();// custom code -- clear all existing annotations when a new document is loaded
             this.painter.initWebSelection(this.$PDFJS_viewerContainer)

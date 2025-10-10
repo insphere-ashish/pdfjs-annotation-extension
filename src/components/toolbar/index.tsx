@@ -238,7 +238,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                 )}
             </ul>
             <ul className="buttons right">
-                <li onClick={() => handleSidebarOpen(sidebarOpen)} className={`${sidebarOpen ? 'selected' : ''}`}>
+                <li onClick={() => handleSidebarOpen(sidebarOpen)} className={`${sidebarOpen ? 'selected js-anno-comment' : 'js-anno-comment'}`}>
                     <div className="icon">
                         <AnnoIcon />
                     </div>

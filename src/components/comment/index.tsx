@@ -129,11 +129,30 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
         addAnnotation,
         delAnnotation,
         selectedAnnotation,
-        updateAnnotation
+        updateAnnotation,
+        clear() {
+            setAnnotations([]);
+            setCurrentAnnotation(null);
+            setReplyAnnotation(null);
+            setEditAnnotation(null);
+            setCurrentReply(null);
+        }
     }))
 
+    // original
+    // const addAnnotation = (annotation: IAnnotationStore) => {
+    //     setAnnotations(prevAnnotations => [...prevAnnotations, annotation])
+    //     setCurrentAnnotation(null)
+    // }
+    // custom code - e-court
     const addAnnotation = (annotation: IAnnotationStore) => {
-        setAnnotations(prevAnnotations => [...prevAnnotations, annotation])
+        setAnnotations(prevAnnotations => {
+            // dedupe by id (safe guard)
+            if (prevAnnotations.some(a => a.id === annotation.id)) {
+                return prevAnnotations
+            }
+            return [...prevAnnotations, annotation]
+        })
         setCurrentAnnotation(null)
     }
 
