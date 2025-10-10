@@ -606,8 +606,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                     <div className='commentboxheader'>
                                         
                                             {/* <AnnotationIcon subtype={annotation.subtype} /> */}
-                                            <div className="content">{annotation.title}
-                                                <span>{formatPDFDate(annotation.date, true)}</span>
+                                            <div className="content"><strong>{annotation.title}</strong> - <span>{formatPDFDate(annotation.date, true)}</span>
                                             </div>
                                             <span className="tool">
                                                 {/* <Dropdown
