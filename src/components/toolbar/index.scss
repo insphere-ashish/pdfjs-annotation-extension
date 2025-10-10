@@ -509,7 +509,7 @@
 
 .CustomToolbar {
     height: 24px;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: visible;
     position: absolute;
     left: 0;
@@ -523,19 +523,15 @@
 
 @media screen and (max-width:749px) {
     .CustomToolbar .right {
-        top: 0;
-        right: 33px;
+        top: -36px;
+        right: 38px;
     }
 }
 
 .CustomToolbar ul.buttons:nth-child(1) {
     gap: 14px;
-    width: 260px;
-    position: absolute;
     z-index: 99;
     height: 24px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -562,9 +558,7 @@
     border-left: 1px solid var(--separator-color);
 }
 
-.CustomToolbar ul.buttons:nth-child(1) li:last-child:after {
-    display: none;
-}
+
 
 .CustomToolbar ul.buttons:nth-child(1) li .icon {
     font-size: 15px;
@@ -669,6 +663,33 @@ button#next, button#previous{
 .commentliner {
     border-left:none;
     border-right:none;
+}
+
+.buttons.export-pdf {
+    margin-left:15px;
+}
+.buttons.export-pdf  .export-button {
+    width: 24px;
+    height: 24px;
+}
+
+.buttons.export-pdf  .export-button button {
+    width: 24px;
+    height: 24px;
+    border: 0px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -ms-box-shadow: none !important;
+    -o-box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    outline: none;
+
+}
+.buttons.export-pdf  .export-button button  .anticon svg {
+    fill:white
 }
 
 //  custom styles for e-court end
