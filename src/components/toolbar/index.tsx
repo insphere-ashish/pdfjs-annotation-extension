@@ -55,6 +55,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
 
     const toggleSidebarBtn = (open: boolean) => {
         setSidebarOpen(open)
+        // props.onSidebarOpen(open);   // custom code - added this line to notify parent component of sidebar state change
     }
 
     const updateStyle = (annotationType: AnnotationType, style: IAnnotationStyle) => {
