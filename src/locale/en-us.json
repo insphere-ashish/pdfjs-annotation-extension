@@ -75,6 +75,7 @@
         "type": "Type",
         "selectAll": "Select All",
         "more": "More",
+        "less": "Less",
         "draw": "Draw",
         "enter": "Enter",
         "upload": "Upload",

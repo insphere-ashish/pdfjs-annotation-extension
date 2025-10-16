@@ -22,8 +22,9 @@ import {
     CloudIcon
 } from '../../const/icon'
 import Paragraph from 'antd/es/typography/Paragraph'
+import ExpandableParagraph from '../paragraph/index';  // custom paragraph component to enable show less option on the comment section text
 
-import type { CustomToolbarRef } from '../toolbar/index'; // adjust path 
+import type { CustomToolbarRef } from '../toolbar/index';
 
 interface StatusOption {
     labelKey: string; // i18n key
@@ -518,7 +519,8 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                     </>
                 )
             }
-            return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
+            // return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
+            return <ExpandableParagraph text={annotation.contentsObj.text} moreLabel={t('normal.more')} lessLabel={t('normal.less')} />
         },
         [editAnnotation, currentAnnotation, isToolbarDisabledByUs, deleteAnnotation, onEditingStateChange, t, updateComment]
     )

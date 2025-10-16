@@ -179,7 +179,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                 </ColorPicker>
             </ul>
             
-            <ul className="buttons export-pdf">
+            <ul className="buttons export-pdf" style={{ display: 'none' }}>
                 <li title='Export With Annotations' className='export-button'><Button
                     block
                     color="primary"
