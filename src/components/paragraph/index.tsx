@@ -42,7 +42,7 @@ const ExpandableParagraph: React.FC<ExpandableParagraphProps> = ({ text, rows = 
     const toggleExpanded = () => setExpanded(prev => !prev)
 
     return (
-        <div style={{ margin: '8px 15px' }} className="ant-typography ant-typography-ellipsis">
+        <div style={{ margin: '8px 15px' }} className="commentcontentarea ant-typography ant-typography-ellipsis">
             <div
                 ref={textRef}
                 style={{

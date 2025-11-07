@@ -39,7 +39,9 @@ export class TextDecoder extends Decoder {
             },
             comments: this.getComments(annotation, allAnnotations),
             draggable: true,
-            resizable: false
+            resizable: false,
+            sharedByUser: false,
+            sharedToUser: true
         }
 
         ghostGroup.destroy()

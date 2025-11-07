@@ -173,7 +173,9 @@ export interface IAnnotationStore {
     contentsObj?: IAnnotationContentsObj | null; // 可选的内容对象
     comments: IAnnotationComment[]; // 与批注相关的评论数组
     resizable: boolean // 是否可调整大小
-    draggable: boolean // 是否可拖动位置
+    draggable: boolean // 是否可拖动位置,
+    sharedByUser: boolean // custom code - e-court indicates if the annotation is shared by user ( for comments )
+    sharedToUser: boolean // custom code - e-court indicates if the annotation is shared to the user ( for comments )
 }
 
 // 批注类型定义数组

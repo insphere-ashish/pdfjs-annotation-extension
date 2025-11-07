@@ -72,7 +72,7 @@ const defaultOptions = {
     connectorLine : {
             ENABLED: true, // 是否启用连线功能
             COLOR: '#1677ff', // 连线颜色
-            WIDTH: 2, // 连线宽度
+            WIDTH: 4, // 连线宽度  // custom code - e-court - increased from 2 to 4 for better visibility
             OPACITY: 0.7, // 连线透明度
     },
     setting: {

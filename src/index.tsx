@@ -186,6 +186,7 @@ class PdfjsAnnotationExtension {
         this.renderPopBar()
         this.renderAnnotationMenu()
         this.renderComment()
+        this.setupShareModal()
     }
 
     /**
@@ -395,6 +396,9 @@ class PdfjsAnnotationExtension {
                 }}
                 onScroll={() => {
                     this.connectorLine?.clearConnection()
+                }}
+                onShareClick={(annotation) => {
+                    this.getShareModal(annotation)
                 }}
                 onEditingStateChange={this.handleCommentEditingStateChange}
             />
@@ -628,6 +632,509 @@ class PdfjsAnnotationExtension {
     public hasUnsavedChanges(): boolean {
         return hashArrayOfObjects(this.painter.getData()) !== this.initialDataHash
     }
+
+    /** START - share model setup  */
+    private shareModalInstance: any = null;
+    private currentShareAnnotation: IAnnotationStore | null = null;
+
+    private setupShareModal(): void {
+        var container = document.getElementById('docViewerContainer');
+        if (!container) return;
+
+        var modalEl = container.querySelector('#shareCommentModal') as HTMLElement | null;
+        if (!modalEl) return;
+
+        // Bootstrap modal instance (don’t show yet)
+        // @ts-ignore
+        this.shareModalInstance = bootstrap.Modal.getOrCreateInstance(modalEl, { backdrop: 'static', keyboard: false });
+
+        // ADD user button
+        var addBtn = document.getElementById('add-share-user-btn');
+        if (addBtn) {
+            addBtn.addEventListener('click', this.handleAddShareUser);
+        }
+
+        // SAVE button
+        var saveBtn = document.getElementById('save-shared-comment-btn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', this.handleShareSave);
+        }
+
+        // Delegate remove + per-row frequency change on the list container
+        var listContainer = document.getElementById('shared-users-list');
+        if (listContainer) {
+            listContainer.addEventListener('click', this.handleListClicks);
+            listContainer.addEventListener('change', this.handleListChange);
+        }
+    }
+
+    // Build one "shared user" row using your exact HTML (with tiny IDs/classes adjustments)
+    private renderSharedUserRow(user: { id: string|number; email: string; roleCode?: string; }, frequencyValue: string): string {
+        var roleTag = (user.roleCode || '').toUpperCase().slice(0, 3) || '';
+        // Selected option markup
+        var sel = function (v: string) { return v === frequencyValue ? ' selected' : '' };
+
+        return (
+            `<div class="userlist c-form u-fieldHeight48" ` +
+            `data-user-id="` + String(user.id) + `" ` +
+            `data-email="` + (user.email || ``) + `" ` +
+            `data-role="` + (user.roleCode || ``) + `">` +
+            `  <div class="username"><strong>` + roleTag + `</strong> ` + (user.email || ``) + `</div>` +
+            `  <div class="action set-frequencylist">` +
+            `    <div class="cop-form--container set-frequencydropdown ">` +
+            `      <div class="dropdowns-customized chosen fs14__regular u-fieldHeight38">` +
+            `        <select class="frequency-select-row form-select" aria-label="Set Frequency" title="Set Frequency">` +
+            // `          <option value="">Set Frequency</option>` +
+            `          <option value="0"` + sel(`0`) + `>Permanently</option>` +
+            `          <option value="1"` + sel(`1`) + `>1 Week</option>` +
+            `          <option value="2"` + sel(`2`) + `>15 Days</option>` +
+            `          <option value="3"` + sel(`3`) + `>1 Month</option>` +
+            `        </select>` +
+            `      </div>` +
+            `    </div>` +
+            `    <a href="javascript:;" class="remove-shared-user" aria-label="Remove User">` +
+            `      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">` +
+            `        <path d="M16.8887 8.88892C16.8887 13.3072 13.307 16.8889 8.88867 16.8889C4.4704 16.8889 0.888672 13.3072 0.888672 8.88892C0.888672 4.47064 4.4704 0.888916 8.88867 0.888916C13.307 0.888916 16.8887 4.47064 16.8887 8.88892Z" stroke="#FF0000" stroke-width="1.77778"/>` +
+            `        <path d="M6.22266 8.88892H11.556" stroke="#FF0000" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"/>` +
+            `      </svg>` +
+            `    </a>` +
+            `  </div>` +
+            `</div>`
+        );
+    }
+
+    private clearSharedList(): void {
+        var list = document.getElementById('shared-users-list');
+        if (list) list.innerHTML = 'Comment is not shared with any user.';
+    }
+
+    private renderSharedUsersList(sharedUsers: Array<{ id: string|number; email: string; roleCode?: string; frequency?: string }>): void {
+        var list = document.getElementById('shared-users-list');
+        if (!list) return;
+
+        if (!sharedUsers || !sharedUsers.length) {
+            list.innerHTML = 'Comment is not shared with any user.';
+            return;
+        }
+
+        var html = '';
+        for (var i = 0; i < sharedUsers.length; i++) {
+            var su = sharedUsers[i];
+            html += this.renderSharedUserRow(
+            { id: su.id, email: su.email, roleCode: su.roleCode },
+            (su.frequency == null ? '' : String(su.frequency))
+            );
+        }
+        list.innerHTML = html;
+    }
+    
+    // populate a new user row
+    private populateUserSelect(allUsers: Array<{ id: string|number; email: string; roleCode?: string }>): void {
+        var select = document.getElementById('user-select') as HTMLSelectElement | null;
+        if (!select) return;
+
+        select.innerHTML = ''; // reset
+
+        for (var i = 0; i < (allUsers || []).length; i++) {
+            var u = allUsers[i];
+            var opt = document.createElement('option');
+            opt.value = String(u.id);
+            opt.textContent = (u.email || '');
+            opt.setAttribute('data-strong-text', (u.roleCode || '').toUpperCase());
+            select.appendChild(opt);
+        }
+
+        // Initialize/refresh SumoSelect (if you use it)
+        // @ts-ignore
+        if (window.$ && (window as any).jQuery) {
+            // @ts-ignore
+            var $sel = (window as any).jQuery(select);
+            // @ts-ignore
+            if (!$sel[0]?.sumo) {
+            // @ts-ignore
+            $sel.SumoSelect({ okCancelInMulti: true, selectAll: true, search: true });
+            } else {
+            // @ts-ignore
+            $sel[0].sumo.reload();
+            }
+        }
+    }
+
+    private setDocumentHeader(docName: string, pageNumber: string | number, commentText: string): void {
+        var modelContainer = document.getElementById('shareCommentModal');
+        var docEl = modelContainer.querySelector('#documentName');
+        var pageEl = modelContainer.querySelector('#pageNumber');
+        var commentEl = modelContainer.querySelector('#share-comment-text');
+        if (docEl) docEl.textContent = docName || '';
+        if (pageEl) pageEl.textContent = String(pageNumber || '');
+        if (commentEl) commentEl.textContent = commentText || '';
+    }
+
+    // Handle Add User button click
+    private handleAddShareUser = (ev: Event) => {
+        ev.preventDefault();
+        var modelContainer = document.getElementById('shareCommentModal');
+        var userSelect = modelContainer.querySelector('#user-select') as HTMLSelectElement | null;
+        var freqSelect = modelContainer.querySelector('#frequency-select') as HTMLSelectElement | null;
+        var list = modelContainer.querySelector('#shared-users-list');
+        if (!userSelect || !freqSelect || !list) return;
+
+        var frequencyValue = freqSelect.value || '';
+        if (!frequencyValue) {
+            // You can toast here if frequency is required before adding
+            // message.warning('Please choose frequency');
+        }
+
+        // Build a set of existing IDs to prevent duplicates
+        var existingIds: Record<string, boolean> = {};
+        list.querySelectorAll('.userlist[data-user-id]').forEach(function (el) {
+            var id = (el as HTMLElement).getAttribute('data-user-id') || '';
+            if (id) existingIds[id] = true;
+        });
+
+        // If list currently contains the “empty” message, clear it
+        if (list.textContent && list.textContent.trim().startsWith('Comment is not shared')) {
+            list.innerHTML = '';
+        }
+
+        // Add selected users
+        var added = 0;
+        Array.from(userSelect.selectedOptions).forEach((opt) => {
+            var id = opt.value;
+            var email = opt.textContent || '';
+            var roleCode = opt.getAttribute('data-strong-text') || '';
+            if (existingIds[id]) return;
+
+            var rowHtml = this.renderSharedUserRow({ 
+                id: id, 
+                email: email, 
+                roleCode: roleCode 
+            }, frequencyValue);
+            // list.insertAdjacentHTML('beforeend', rowHtml); // append at end
+            list.insertAdjacentHTML('afterbegin', rowHtml); // append at start
+            existingIds[id] = true;
+            added++;
+        });
+
+        // Optional: clear selection after adding
+        // for (var i = 0; i < userSelect.options.length; i++) userSelect.options[i].selected = false;
+    };
+
+    // handeler for remove and per -row frequency change
+    private handleListClicks = (ev: Event) => {
+        var target = ev.target as HTMLElement;
+        if (!target) return;
+        var modelContainer = document.getElementById('shareCommentModal');
+
+        // Clicks on the red delete icon (anchor or its children)
+        var removeAnchor = target.closest && target.closest('.remove-shared-user');
+        if (removeAnchor) {
+            ev.preventDefault();
+            var row = (removeAnchor as HTMLElement).closest('.userlist') as HTMLElement | null;
+            if (!row) return;
+
+            row.remove();
+
+            // If no rows left, restore the “empty” message
+            var list = modelContainer.querySelector('#shared-users-list');
+            if (list && !list.querySelector('.userlist')) {
+                list.innerHTML = 'Comment is not shared with any user.';
+            }
+        }
+    };
+
+    private handleListChange = (ev: Event) => {
+        var target = ev.target as HTMLSelectElement;
+        if (!target) return;
+
+        if (target.classList.contains('frequency-select-row')) {
+            // You can validate / normalize here if needed
+            // var newVal = target.value;
+        }
+    };
+
+    private getShareModal(annotation: IAnnotationStore): void {
+        var container = document.getElementById('docViewerContainer');
+        if (!container) return;
+        var modelContainer = document.getElementById('shareCommentModal');
+
+        var url = container.dataset['shareUrl'];             // /comment/share
+        var caseGuid = container.dataset['caseGuid'];
+        var fileuuid = container.dataset['currentFileuuid'];
+
+        if (!url || !caseGuid || !fileuuid) {
+            console.warn('Required dataset missing.');
+            return;
+        }
+
+        this.currentShareAnnotation = annotation;
+
+        var postData = {
+            action: 'fetch',
+            caseGuid: caseGuid,
+            fileuuid: fileuuid,
+            pageNumber: annotation.pageNumber,
+            commentId: annotation.id 
+        };
+
+        var saveBtn = modelContainer.querySelector('#save-shared-comment-btn') as HTMLButtonElement | null;
+        if (saveBtn) saveBtn.disabled = true;
+
+        message.open({
+            type: 'loading',
+            content: t('normal.processing'),
+            duration: 0,
+        });
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postData)
+        })
+        .then(function (response) { return response.json(); })
+        .then((resp) => {
+            if (!resp || resp.result !== 'success') {
+                throw new Error(resp?.error || 'Failed to load share data.');
+            }
+
+            // 1) Header fields
+            this.setDocumentHeader(resp.doc_name || '', resp.pageNumber || '', resp.comment_text || '');
+
+            // 2) Populate #user-select
+            // resp.users should be an array of { id, email, roleCode? }
+            var allUsers = (resp.users || []).map(function (u: any) {
+                return { 
+                    id: u.id,
+                    email: u.email || '',
+                    roleCode: u.roleCode || '' 
+                };
+            });
+            this.populateUserSelect(allUsers);
+
+            // 3) Pre-populate already shared users (if backend sends them later, we’ll use resp.shared_users)
+            this.renderSharedUsersList(resp.shared_users || []); // if None, it shows the default empty text
+
+            if (saveBtn) saveBtn.disabled = false;
+
+            // -----------------------------------------------------------------------------------------
+            var modalContainer = document.getElementById('docViewerContainer').querySelector('#shareCommentModal');
+            var showModelEvent = function (event) {
+                // modalContainer.querySelectorAll('.testSelAll').forEach((elem) => $(elem).SumoSelect({okCancelInMulti:true, selectAll:true,  search: true }));
+                modalContainer.querySelectorAll('.testSelAll').forEach((elem) => {
+                    if (!elem.classList.contains('sumoInitialized')) {
+                        $(elem).SumoSelect({ okCancelInMulti: true, selectAll: true, search: true });
+                        elem.classList.add('sumoInitialized');
+                    }
+                });
+                modalContainer.querySelectorAll('.bootstrap-select').forEach((elem) => {
+                    if (!$(elem).data('selectpicker')) {
+                        $(elem).selectpicker();
+                    } else {
+                        $(elem).selectpicker('render');
+                    }
+                });
+            }
+
+            $(modalContainer).off('show.bs.modal').on('show.bs.modal', showModelEvent);     
+            // -----------------------------------------------------------------------------------------
+
+            // show modal only after populate
+            this.shareModalInstance && this.shareModalInstance.show();
+        })
+        .catch(function (error) {
+            Modal.error({
+                content: 'Error: ' + (error?.message || 'Unknown'),
+                closable: true
+            });
+        })
+        .finally(function () {
+            message.destroy();
+        });
+    }
+
+    // handle share save 
+    private handleShareSave = (ev?: Event) => {
+        if (ev) ev.preventDefault();
+
+        var container = document.getElementById('docViewerContainer');
+        if (!container || !this.currentShareAnnotation) return;
+
+        var url = container.dataset['shareUrl']; // same endpoint
+        var caseGuid = container.dataset['caseGuid'];
+        var fileuuid = container.dataset['currentFileuuid'];
+
+        if (!url || !caseGuid || !fileuuid) return;
+
+        // Gather rows
+        var list = document.getElementById('shared-users-list');
+        if (!list) return;
+
+        var rows = Array.from(list.querySelectorAll('.userlist[data-user-id]'));
+        var items: Array<{ userId: string; frequency: string }> = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i] as HTMLElement;
+            var userId = row.getAttribute('data-user-id') || '';
+            var freqSel = row.querySelector('.frequency-select-row') as HTMLSelectElement | null;
+            var frequency = (freqSel && freqSel.value) ? freqSel.value : '';
+            if (userId) {
+                items.push({ userId: userId, frequency: frequency });
+            }
+        }
+
+        var payload = {
+            action: 'save',
+            caseGuid: caseGuid,
+            fileuuid: fileuuid,
+            pageNumber: this.currentShareAnnotation.pageNumber,
+            commentId: this.currentShareAnnotation.id, // IMPORTANT: backend expects commentId
+            items: items
+        };
+
+        var saveBtn = document.getElementById('save-shared-comment-btn') as HTMLButtonElement | null;
+        if (saveBtn) saveBtn.disabled = true;
+        message.open({ type: 'loading', content: t('normal.processing'), duration: 0 });
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function (response) { return response.json(); })
+        .then((resp) => {
+            if (!resp || resp.result !== 'success') {
+                throw new Error(resp?.error || 'Save failed.');
+            }
+            message.success(t('save.success'));
+            this.shareModalInstance && this.shareModalInstance.hide();
+        })
+        .catch(function (error) {
+            Modal.error({
+                content: 'Save error: ' + (error?.message || 'Unknown'),
+                closable: true
+            });
+        })
+        .finally(function () {
+            if (saveBtn) saveBtn.disabled = false;
+            message.destroy();
+        });
+    };
+
+    
+
+
+
+    // private async getShareModal(annotation: IAnnotationStore): Promise<any[]> {
+    //     // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
+    //     const getUrl = document.getElementById('docViewerContainer').dataset['shareUrl'];
+    //     const caseGuid = document.getElementById('docViewerContainer').dataset['caseGuid'];
+    //     const currentFileuuid = document.getElementById('docViewerContainer').dataset['currentFileuuid'];
+    //     // alert('getUrl', getUrl)
+    //     // console.log('--------------------------------- this.appOptions', this.appOptions)
+    //     // console.log('--------------------------------- defaultOptions', defaultOptions)
+    //     // console.log('--------------------------------- %c [ getUrl ]', 'font-size:13px; background:#d10d00; color:#ff5144;', getUrl)
+    //     if (!getUrl || !caseGuid || !currentFileuuid) {
+    //         console.warn('Some required data is undefined');
+    //         return [];
+    //     }
+    //     try {
+    //         message.open({
+    //             type: 'loading',
+    //             content: t('normal.processing'),
+    //             duration: 0,
+    //         });
+
+    //         const postData = {
+    //             caseGuid: caseGuid,
+    //             fileuuid: currentFileuuid,
+    //             pageNumber: annotation.pageNumber,
+    //             internalId: annotation.id,
+    //             comment: annotation.contentsObj?.text || ''
+    //         };
+
+    //         // fetch(actionUrl, requestOptions)
+    //         // .then( response => { return response.json()})
+    //         // .then( resp => {
+    //         // if(resp.result == 'error'){
+    //         //     let redirectTimeout = 0;
+    //         //     if(resp.message){
+    //         //     CustomMessage.error(resp.message);
+    //         //     redirectTimeout = 600
+    //         //     }
+    //         //     if(resp.redirect){
+    //         //     setTimeout(() => {
+    //         //         window.location.href = resp.redirect;
+    //         //     }, redirectTimeout);
+    //         //     }
+    //         // }
+            
+    //         fetch(getUrl, { 
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify(postData)
+    //         })
+    //         .then(response => {return response.json()})
+    //         .then(response => {
+    //             if(!response || response == ''){
+    //                 return;
+    //             }
+    //             if(resp.result == 'error'){
+    //                 return;
+    //             }
+    //             if(resp.result == 'success'){
+    //                 // shareCommentModal
+    //                 // share-comment-modal-body
+    //                 // document.getElementById('docViewerContainer').querySelector('#share-comment-modal-body').innerHTML = html;
+    
+    //                 var modalContainer = document.getElementById('docViewerContainer').querySelector('#shareCommentModal');
+    //                 const shareModal = new bootstrap.Modal(modalContainer, {});
+    
+    //                 var showModelEvent = function (event) {
+    //                     // modalContainer.querySelectorAll('.testSelAll').forEach((elem) => $(elem).SumoSelect({okCancelInMulti:true, selectAll:true,  search: true }));
+    //                     modalContainer.querySelectorAll('.testSelAll').forEach((elem) => {
+    //                         if (!elem.classList.contains('sumoInitialized')) {
+    //                             $(elem).SumoSelect({ okCancelInMulti: true, selectAll: true, search: true });
+    //                             elem.classList.add('sumoInitialized');
+    //                         }
+    //                     });
+    //                     modalContainer.querySelectorAll('.bootstrap-select').forEach((elem) => {
+    //                         if (!$(elem).data('selectpicker')) {
+    //                             $(elem).selectpicker();
+    //                         } else {
+    //                             $(elem).selectpicker('render');
+    //                         }
+    //                     });
+    //                 }
+      
+    //                 $(modalContainer).off('show.bs.modal').on('show.bs.modal', showModelEvent);              
+    //                 shareModal.show();
+
+    //             }
+    //         })
+
+    //         // if (!response.ok) {
+    //         //     const errorMessage = `HTTP Error ${response.status}: ${response.statusText || 'Unknown Status'}`;
+    //         //     throw new Error(errorMessage);
+    //         // }
+    //         // dataJson = response.json();
+    //         // if
+    //         // this.container.querySelector('#view-judgement-modal-body').innerHTML = html;
+    //         // const viewJudgementModal = new bootstrap.Modal(this.container.querySelector('#judgementViewModal'), {});
+    //     } catch (error) {
+    //         Modal.error({
+    //             content: t('load.fail', { value: error?.message }),
+    //             closable: false,
+    //             okButtonProps: {
+    //                 loading: false
+    //             },
+    //             okText: t('normal.ok')
+    //         })
+    //         // console.error('Fetch error:', error);
+    //         return [];
+    //     } finally {
+    //         message.destroy();
+    //     }
+    // }
+    /** END  - share model setup  */
 
 }
 
