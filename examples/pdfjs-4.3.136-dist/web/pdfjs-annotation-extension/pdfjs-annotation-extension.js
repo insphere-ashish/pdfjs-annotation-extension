@@ -15425,7 +15425,7 @@ module.exports = domAPI;
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.PdfjsAnnotationExtension_Comment_hidden .CustomComment{display:none}.CustomComment_filterContent ul,.CustomComment_filterContent li{list-style:none}.CustomComment_filterContent li{padding:3px}.CustomComment_filterContent li:hover{background-color:#ddd}.CustomComment_filterContent li>label{width:100%}.CustomComment{width:330px;position:absolute;top:60px;right:0;height:calc(100% - 60px);color:var(--main-color);overflow:auto;font:message-box;font-size:14px}.CustomComment .filters{padding:5px}.CustomComment .list h3{font-weight:normal;font-size:14px}.CustomComment .list h3 span{float:right}.CustomComment .list .comment{background-color:var(--toolbar-bg-color);line-height:150%}.CustomComment .list .comment .ant-typography{color:var(--main-color) !important;font-family:var(--fontFamilyMedium) !important;white-space:pre-line}.CustomComment .list .comment p{white-space:pre-wrap;line-height:150%;padding:0;margin-top:5px}.CustomComment .list .comment .title{display:flex;align-items:center;cursor:default}.CustomComment .list .comment .title .username{min-width:30px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.CustomComment .list .comment .title .username span{display:block;font-size:12px;line-height:120%;opacity:.5}.CustomComment .list .comment .title .annotation-icon{margin-right:5px;align-self:flex-start}.CustomComment .list .comment .title .tool{margin-left:auto;display:flex;align-items:center}.CustomComment .list .comment .title .tool .icon{margin-left:5px;border-radius:8px;display:inline-block;padding:0 3px !important}.CustomComment .list .comment .title .tool .icon:hover{background-color:var(--dropdown-btn-bg-color)}.CustomComment .list .comment .reply{background-color:var(--dropdown-btn-bg-color);border-radius:5px;padding:5px 10px;margin-top:8px;margin-left:15px}.CustomComment .list .comment .reply .icon:hover{background-color:var(--toggled-btn-bg-color) !important}.CustomComment .list .comment:hover{background-color:var(--doorhanger-hover-bg-color)}.CustomComment .list .selected{border-color:rgba(22,119,255,.4470588235);background-color:var(--doorhanger-hover-bg-color)}.CustomComment .list h3,.CustomComment .list .comment{margin-bottom:8px}@media all and (max-width: 780px){.CustomComment{width:250px}.PdfjsAnnotationExtension #viewerContainer{right:250px}}@media all and (max-width: 690px){.CustomComment{width:150px}.PdfjsAnnotationExtension #viewerContainer{right:150px}}.accordion-header .accordion-page-number{width:100%;color:var(--bs-accordion-btn-color);border-style:double;border-width:1px 0px 1px 0;position:relative;padding:5px 8px;font-size:14px;color:var(--themeClr1);line-height:19px;display:flex;align-items:center;justify-content:space-between;background:#f6f6f6;border-color:#cfd4da}.commenttextbox{width:96%;margin-left:2%}.commenttexterea{outline:none;border:none !important;border-radius:0px !important;-webkit-border-radius:0px !important;-ms-border-radius:0px !important;font-size:var(--fontSize14) !important;border-bottom:1px rgba(0,0,0,.42) solid !important;width:100%;position:relative;padding:0 0 6px;background-color:rgba(0,0,0,0);font-weight:400;width:94% !important;margin-left:3% !important;box-shadow:none !important;-webkit-box-shadow:none !important;-ms-box-shadow:none !important;-o-box-shadow:none !important;background:rgba(0,0,0,0) !important;font-family:var(--fontFamilyMedium) !important}.commenttexterea:focus{outline:none;border-bottom:3px var(--themeColor) solid !important}:where(.css-1odpy5d).ant-dropdown .ant-dropdown-menu{padding:0px;border-radius:0px;-webkit-border-radius:0px;-ms-border-radius:0px}.commentboxheader{padding:6px}.commenttextbox:hover{background-color:#eee !important;box-shadow:rgba(0,0,0,.1490196078) 1.95px 1.95px 2.6px !important;border:1px #e0e0e0 solid !important}.commentpanelviewContentlist{min-height:100%;border-left:1px #cfd4da solid;height:auto}.commentpanelviewContentlist .title{background-color:#eee;border-style:double;border-width:0 0px 1px 0;position:relative;border-color:#d0d0d0;padding:10px 8px;font-size:17px;color:var(--themeClr1);height:45px;line-height:19px;display:flex;align-items:center;justify-content:space-between}.commentpanelviewContentlist .closepanel{border:none;outline:none;width:24px;height:24px;background:rgba(0,0,0,0)}.commentpanelviewContentlist .closepanel svg{fill:red;width:24px;height:24px}.commentboxheader .tool{cursor:pointer}.ant-dropdown-menu{min-width:100px}.commentboxheader{position:relative}.commentboxheader .sharebt{position:absolute;width:13px;height:10px;top:0;right:25px}.commentboxheader .sharebt .u-img{width:100%;height:auto}.commenttextbox .shared .commentcontentarea{background:rgba(232,91,17,.15) !important;box-shadow:rgba(0,0,0,0.1490196078) 1.95px 1.95px 2.6px !important;border:1px #e85b11 solid !important}.commenttextbox .shared .commentboxheader .sharebt,.commenttextbox .shared .commentboxheader .tool{display:none}.commenttextbox .shared .headertop{width:100%;border-bottom:1px #e0e0e0 solid;padding:3px 12px;font-family:var(--fontFamilyRegular);color:var(--grey16);background-color:var(--toolbar-bg-color) !important}.commenttextbox .shared .commentboxheader .content strong{color:#e85b11}.commenttextbox .shared .commentboxheader .content:before{background:#e85b11}`, ""]);
+___CSS_LOADER_EXPORT___.push([module.id, `.PdfjsAnnotationExtension_Comment_hidden .CustomComment{display:none}.CustomComment_filterContent ul,.CustomComment_filterContent li{list-style:none}.CustomComment_filterContent li{padding:3px}.CustomComment_filterContent li:hover{background-color:#ddd}.CustomComment_filterContent li>label{width:100%}.CustomComment{width:330px;position:absolute;top:60px;right:0;height:calc(100% - 60px);color:var(--main-color);overflow:auto;font:message-box;font-size:14px}.CustomComment .filters{padding:5px}.CustomComment .list h3{font-weight:normal;font-size:14px}.CustomComment .list h3 span{float:right}.CustomComment .list .comment{background-color:var(--toolbar-bg-color);line-height:150%}.CustomComment .list .comment .ant-typography{color:var(--main-color) !important;font-family:var(--fontFamilyMedium) !important;white-space:pre-line}.CustomComment .list .comment p{white-space:pre-wrap;line-height:150%;padding:0;margin-top:5px}.CustomComment .list .comment .title{display:flex;align-items:center;cursor:default}.CustomComment .list .comment .title .username{min-width:30px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.CustomComment .list .comment .title .username span{display:block;font-size:12px;line-height:120%;opacity:.5}.CustomComment .list .comment .title .annotation-icon{margin-right:5px;align-self:flex-start}.CustomComment .list .comment .title .tool{margin-left:auto;display:flex;align-items:center}.CustomComment .list .comment .title .tool .icon{margin-left:5px;border-radius:8px;display:inline-block;padding:0 3px !important}.CustomComment .list .comment .title .tool .icon:hover{background-color:var(--dropdown-btn-bg-color)}.CustomComment .list .comment .reply{background-color:var(--dropdown-btn-bg-color);border-radius:5px;padding:5px 10px;margin-top:8px;margin-left:15px}.CustomComment .list .comment .reply .icon:hover{background-color:var(--toggled-btn-bg-color) !important}.CustomComment .list .comment:hover{background-color:var(--doorhanger-hover-bg-color)}.CustomComment .list .selected{border-color:rgba(22,119,255,.4470588235);background-color:var(--doorhanger-hover-bg-color)}.CustomComment .list h3,.CustomComment .list .comment{margin-bottom:8px}@media all and (max-width: 780px){.CustomComment{width:250px}.PdfjsAnnotationExtension #viewerContainer{right:250px}}@media all and (max-width: 690px){.CustomComment{width:150px}.PdfjsAnnotationExtension #viewerContainer{right:150px}}.accordion-header .accordion-page-number{width:100%;color:var(--bs-accordion-btn-color);border-style:double;border-width:1px 0px 1px 0;position:relative;padding:5px 8px;font-size:14px;color:var(--themeClr1);line-height:19px;display:flex;align-items:center;justify-content:space-between;background:#f6f6f6;border-color:#cfd4da}.commenttextbox{width:96%;margin-left:2%}.commenttexterea{outline:none;border:none !important;border-radius:0px !important;-webkit-border-radius:0px !important;-ms-border-radius:0px !important;font-size:var(--fontSize14) !important;border-bottom:1px rgba(0,0,0,.42) solid !important;width:100%;position:relative;padding:0 0 6px;background-color:rgba(0,0,0,0);font-weight:400;width:94% !important;margin-left:3% !important;box-shadow:none !important;-webkit-box-shadow:none !important;-ms-box-shadow:none !important;-o-box-shadow:none !important;background:rgba(0,0,0,0) !important;font-family:var(--fontFamilyMedium) !important}.commenttexterea:focus{outline:none;border-bottom:3px var(--themeColor) solid !important}:where(.css-1odpy5d).ant-dropdown .ant-dropdown-menu{padding:0px;border-radius:0px;-webkit-border-radius:0px;-ms-border-radius:0px}.commentboxheader{padding:6px}.commenttextbox:hover{background-color:#eee !important;box-shadow:rgba(0,0,0,.1490196078) 1.95px 1.95px 2.6px !important;border:1px #e0e0e0 solid !important}.commentpanelviewContentlist{min-height:100%;border-left:1px #cfd4da solid;height:auto}.commentpanelviewContentlist .title{background-color:#eee;border-style:double;border-width:0 0px 1px 0;position:relative;border-color:#d0d0d0;padding:10px 8px;font-size:17px;color:var(--themeClr1);height:45px;line-height:19px;display:flex;align-items:center;justify-content:space-between}.commentpanelviewContentlist .closepanel{border:none;outline:none;width:24px;height:24px;background:rgba(0,0,0,0)}.commentpanelviewContentlist .closepanel svg{fill:red;width:24px;height:24px}.commentboxheader .tool{cursor:pointer}.ant-dropdown-menu{min-width:100px}.commentboxheader{position:relative}.commentboxheader .sharebt{position:absolute;width:13px;height:10px;top:0;right:25px}.commentboxheader .sharebt .u-img{width:100%;height:auto}.commenttextbox.shared{background:rgba(232,91,17,.15) !important;box-shadow:rgba(0,0,0,0.1490196078) 1.95px 1.95px 2.6px !important;border:1px #e85b11 solid !important}.commenttextbox.shared .commentboxheader .sharebt,.commenttextbox .shared .commentboxheader .tool{display:none}.commenttextbox.shared .headertop{width:100%;border-bottom:1px #e0e0e0 solid;padding:3px 12px;font-family:var(--fontFamilyRegular);color:var(--grey16);background-color:var(--toolbar-bg-color) !important}.commenttextbox.shared .commentboxheader .content strong{color:#e85b11}.commenttextbox.shared .commentboxheader .content:before{background:#e85b11}.commenttextbox.shared:hover{background:rgba(173,67,9,.45) !important;box-shadow:rgba(0,0,0,0.1490196078) 1.95px 1.95px 2.6px !important;border:1px #e85b11 solid !important}`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -101267,7 +101267,9 @@ var Editor = /*#__PURE__*/function () {
         contentsObj: contentsObj,
         comments: [],
         resizable: annotation.resizable,
-        draggable: annotation.draggable
+        draggable: annotation.draggable,
+        sharedToUser: (annotation === null || annotation === void 0 ? void 0 : annotation.sharedToUser) || false,
+        sharedByUser: (annotation === null || annotation === void 0 ? void 0 : annotation.sharedByUser) || false
       };
       this.onAdd(annotationStore); // 调用 onAdd 回调函数
     }
@@ -114368,16 +114370,16 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
         var _annotation$comments;
         var isSelected = annotation.id === (currentAnnotation === null || currentAnnotation === void 0 ? void 0 : currentAnnotation.id);
         var isSharedComment = (annotation === null || annotation === void 0 ? void 0 : annotation.sharedToUser) || false;
-        var commonProps = {
-          className: isSelected ? "comment commenttextbox selected " : "comment commenttextbox ",
-          id: "annotation-".concat(annotation.id)
-        };
         // const commonProps = { 
-        //     className: isSelected ? `comment commenttextbox selected ${isSharedComment ? "shared" : ""}` : `comment commenttextbox ${isSharedComment ? "shared" : ""}`, 
+        //     className: isSelected ? `comment commenttextbox selected ` : `comment commenttextbox `, 
         //     id: `annotation-${annotation.id}` 
         // }
-        return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-          children: [ false && /*#__PURE__*/0, /*#__PURE__*/(0,react.createElement)("div", comment_objectSpread(comment_objectSpread({}, commonProps), {}, {
+        var commonProps = {
+          className: isSelected ? "comment commenttextbox selected ".concat(isSharedComment ? " shared " : "") : "comment commenttextbox ".concat(isSharedComment ? " shared " : ""),
+          id: "annotation-".concat(annotation.id)
+        };
+        return /*#__PURE__*/(0,jsx_runtime.jsx)(jsx_runtime.Fragment, {
+          children: /*#__PURE__*/(0,react.createElement)("div", comment_objectSpread(comment_objectSpread({}, commonProps), {}, {
             key: annotation.id,
             onClick: function onClick() {
               return handleAnnotationClick(annotation);
@@ -114385,64 +114387,61 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
             ref: function ref(el) {
               return annotationRefs.current[annotation.id] = el;
             }
+          }), isSharedComment && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+            "class": "headertop",
+            children: "Shared Comment"
           }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-            className: "".concat(isSharedComment ? "shared" : ""),
-            children: [isSharedComment && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-              "class": "headertop",
-              children: "Shared Comment"
-            }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-              className: "commentboxheader",
-              children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-                className: "content",
-                children: [/*#__PURE__*/(0,jsx_runtime.jsx)("strong", {
-                  children: annotation.title
-                }), " - ", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-                  children: formatPDFDate(annotation.date, true)
-                })]
-              }), !isSharedComment && /*#__PURE__*/(0,jsx_runtime.jsxs)("span", {
-                className: "tool",
-                children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-                  onClick: function onClick(e) {
-                    handleShareCommentClick(e, annotation);
-                  },
-                  children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
-                    src: share_bt_namespaceObject,
-                    alt: "Share Comment Button"
-                  })
-                }), /*#__PURE__*/(0,jsx_runtime.jsx)(es_dropdown, {
-                  menu: {
-                    items: [
-                    // {
-                    //     label: t('normal.reply'),
-                    //     key: '0',
-                    //     onClick: e => {
-                    //         e.domEvent.stopPropagation()
-                    //         setReplyAnnotation(annotation)
-                    //     }
-                    // },
-                    {
-                      label: t('normal.edit'),
-                      key: '1',
-                      onClick: function onClick(e) {
-                        e.domEvent.stopPropagation();
-                        setEditAnnotation(annotation);
-                        // Don't disable toolbar for editing existing annotations
-                      }
-                    }, {
-                      label: t('normal.delete'),
-                      key: '3',
-                      onClick: function onClick(e) {
-                        e.domEvent.stopPropagation();
-                        deleteAnnotation(annotation);
-                      }
-                    }]
-                  },
-                  trigger: ['click'],
-                  children: /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-                    className: "icon",
-                    children: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_MoreOutlined, {})
-                  })
-                })]
+            className: "commentboxheader",
+            children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+              className: "content",
+              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("strong", {
+                children: annotation.title
+              }), " - ", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                children: formatPDFDate(annotation.date, true)
+              })]
+            }), !isSharedComment && /*#__PURE__*/(0,jsx_runtime.jsxs)("span", {
+              className: "tool",
+              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+                onClick: function onClick(e) {
+                  handleShareCommentClick(e, annotation);
+                },
+                children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
+                  src: share_bt_namespaceObject,
+                  alt: "Share Comment Button"
+                })
+              }), /*#__PURE__*/(0,jsx_runtime.jsx)(es_dropdown, {
+                menu: {
+                  items: [
+                  // {
+                  //     label: t('normal.reply'),
+                  //     key: '0',
+                  //     onClick: e => {
+                  //         e.domEvent.stopPropagation()
+                  //         setReplyAnnotation(annotation)
+                  //     }
+                  // },
+                  {
+                    label: t('normal.edit'),
+                    key: '1',
+                    onClick: function onClick(e) {
+                      e.domEvent.stopPropagation();
+                      setEditAnnotation(annotation);
+                      // Don't disable toolbar for editing existing annotations
+                    }
+                  }, {
+                    label: t('normal.delete'),
+                    key: '3',
+                    onClick: function onClick(e) {
+                      e.domEvent.stopPropagation();
+                      deleteAnnotation(annotation);
+                    }
+                  }]
+                },
+                trigger: ['click'],
+                children: /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                  className: "icon",
+                  children: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_MoreOutlined, {})
+                })
               })]
             })]
           }), commentInput(annotation), (_annotation$comments = annotation.comments) === null || _annotation$comments === void 0 ? void 0 : _annotation$comments.map(function (reply, index) {
@@ -114484,7 +114483,7 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
                 })]
               })
             }, index);
-          }))]
+          }))
         });
       })]
     }, pageNumber);
@@ -116838,6 +116837,50 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     /** START - share model setup  */
     src_defineProperty(this, "shareModalInstance", null);
     src_defineProperty(this, "currentShareAnnotation", null);
+    src_defineProperty(this, "setupShareModal", function () {
+      var container = document.getElementById('docViewerContainer');
+      if (!container) return;
+      var modalEl = container.querySelector('#shareCommentModal');
+      if (!modalEl) return;
+
+      // Bootstrap modal instance (don’t show yet)
+      // @ts-ignore
+      _this.shareModalInstance = bootstrap.Modal.getOrCreateInstance(modalEl, {
+        backdrop: 'static',
+        keyboard: false
+      });
+
+      // ADD user button
+      var addBtn = document.getElementById('add-share-user-btn');
+      if (addBtn) {
+        addBtn.addEventListener('click', _this.handleAddShareUser);
+      }
+
+      // SAVE button
+      var saveBtn = document.getElementById('save-shared-comment-btn');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', _this.handleShareSave);
+      }
+
+      // Delegate remove + per-row frequency change on the list container
+      var listContainer = document.getElementById('shared-users-list');
+      if (listContainer) {
+        listContainer.addEventListener('click', _this.handleListClicks);
+        listContainer.addEventListener('change', _this.handleListChange);
+      }
+    });
+    src_defineProperty(this, "chosenRefresh", function (modelContainer) {
+      modelContainer.querySelectorAll('.chzn-select').forEach(function (elem) {
+        var $elem = $(elem);
+        if ($elem.data('chosen')) {
+          $elem.trigger('chosen:updated');
+        } else {
+          $elem.chosen({
+            disable_search: true
+          });
+        }
+      });
+    });
     // Handle Add User button click
     src_defineProperty(this, "handleAddShareUser", function (ev) {
       ev.preventDefault();
@@ -116884,6 +116927,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
 
       // Optional: clear selection after adding
       // for (var i = 0; i < userSelect.options.length; i++) userSelect.options[i].selected = false;
+      if (added > 0) {
+        _this.chosenRefresh(modelContainer);
+      }
     });
     // handeler for remove and per -row frequency change
     src_defineProperty(this, "handleListClicks", function (ev) {
@@ -116913,6 +116959,108 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         // You can validate / normalize here if needed
         // var newVal = target.value;
       }
+    });
+    src_defineProperty(this, "getShareModal", function (annotation) {
+      var container = document.getElementById('docViewerContainer');
+      if (!container) return;
+      var modelContainer = document.getElementById('shareCommentModal');
+      var url = container.dataset['shareUrl']; // /comment/share
+      var caseGuid = container.dataset['caseGuid'];
+      var fileuuid = container.dataset['currentFileuuid'];
+      if (!url || !caseGuid || !fileuuid) {
+        console.warn('Required dataset missing.');
+        return;
+      }
+      _this.currentShareAnnotation = annotation;
+      var postData = {
+        action: 'fetch',
+        caseGuid: caseGuid,
+        fileuuid: fileuuid,
+        pageNumber: annotation.pageNumber,
+        commentId: annotation.id
+      };
+      var saveBtn = modelContainer.querySelector('#save-shared-comment-btn');
+      if (saveBtn) saveBtn.disabled = true;
+      es_message.open({
+        type: 'loading',
+        content: t('normal.processing'),
+        duration: 0
+      });
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      }).then(function (response) {
+        return response.json();
+      }).then(function (resp) {
+        if (!resp || resp.result !== 'success') {
+          throw new Error((resp === null || resp === void 0 ? void 0 : resp.error) || 'Failed to load share data.');
+        }
+
+        // 1) Header fields
+        _this.setDocumentHeader(resp.doc_name || '', resp.pageNumber || '', resp.comment_text || '');
+
+        // 2) Populate #user-select
+        // resp.users should be an array of { id, email, roleCode? }
+        var allUsers = (resp.users || []).map(function (u) {
+          return {
+            id: u.id,
+            email: u.email || '',
+            roleCode: u.roleCode || ''
+          };
+        });
+        _this.populateUserSelect(allUsers);
+
+        // 3) Pre-populate already shared users (if backend sends them later, we’ll use resp.shared_users)
+        _this.renderSharedUsersList(resp.shared_users || []); // if None, it shows the default empty text
+
+        if (saveBtn) saveBtn.disabled = false;
+
+        // -----------------------------------------------------------------------------------------
+        var modalContainer = document.getElementById('docViewerContainer').querySelector('#shareCommentModal');
+        var showModelEvent = function showModelEvent(event) {
+          // modalContainer.querySelectorAll('.testSelAll').forEach((elem) => $(elem).SumoSelect({okCancelInMulti:true, selectAll:true,  search: true }));
+          modalContainer.querySelectorAll('.testSelAll').forEach(function (elem) {
+            if (!elem.classList.contains('sumoInitialized')) {
+              $(elem).SumoSelect({
+                okCancelInMulti: true,
+                selectAll: true,
+                search: true
+              });
+              elem.classList.add('sumoInitialized');
+            }
+
+            // to add strong text in options for role code 
+            $(elem).find('option').each(function (index) {
+              var strongText = $(this).attr('data-strong-text');
+              if (strongText) {
+                var li = $('.testSelAll')[0].sumo.ul.find('li').eq(index);
+                var label = li.find('label');
+                if (label.length && !label.hasClass('roleCodeAdded')) {
+                  var originalText = label.text();
+                  label.html('<strong>' + strongText + '</strong> ' + originalText);
+                  label.addClass('roleCodeAdded');
+                }
+              }
+            });
+          });
+          _this.chosenRefresh(modalContainer);
+        };
+        $(modalContainer).off('show.bs.modal').on('show.bs.modal', showModelEvent);
+        // -----------------------------------------------------------------------------------------
+
+        // show modal only after populate
+        _this.shareModalInstance && _this.shareModalInstance.show();
+      })["catch"](function (error) {
+        es_modal.error({
+          content: 'Error: ' + ((error === null || error === void 0 ? void 0 : error.message) || 'Unknown'),
+          closable: true
+        });
+      })["finally"](function () {
+        es_message.destroy();
+      });
     });
     // handle share save 
     src_defineProperty(this, "handleShareSave", function (ev) {
@@ -116969,7 +117117,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         if (!resp || resp.result !== 'success') {
           throw new Error((resp === null || resp === void 0 ? void 0 : resp.error) || 'Save failed.');
         }
-        es_message.success(t('save.success'));
+        es_message.success(t('save.success'), {
+          duration: 5
+        });
         _this.shareModalInstance && _this.shareModalInstance.hide();
       })["catch"](function (error) {
         es_modal.error({
@@ -117726,50 +117876,16 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       return hashArrayOfObjects(this.painter.getData()) !== this.initialDataHash;
     }
   }, {
-    key: "setupShareModal",
-    value: function setupShareModal() {
-      var container = document.getElementById('docViewerContainer');
-      if (!container) return;
-      var modalEl = container.querySelector('#shareCommentModal');
-      if (!modalEl) return;
-
-      // Bootstrap modal instance (don’t show yet)
-      // @ts-ignore
-      this.shareModalInstance = bootstrap.Modal.getOrCreateInstance(modalEl, {
-        backdrop: 'static',
-        keyboard: false
-      });
-
-      // ADD user button
-      var addBtn = document.getElementById('add-share-user-btn');
-      if (addBtn) {
-        addBtn.addEventListener('click', this.handleAddShareUser);
-      }
-
-      // SAVE button
-      var saveBtn = document.getElementById('save-shared-comment-btn');
-      if (saveBtn) {
-        saveBtn.addEventListener('click', this.handleShareSave);
-      }
-
-      // Delegate remove + per-row frequency change on the list container
-      var listContainer = document.getElementById('shared-users-list');
-      if (listContainer) {
-        listContainer.addEventListener('click', this.handleListClicks);
-        listContainer.addEventListener('change', this.handleListChange);
-      }
-    }
-
-    // Build one "shared user" row using your exact HTML (with tiny IDs/classes adjustments)
-  }, {
     key: "renderSharedUserRow",
-    value: function renderSharedUserRow(user, frequencyValue) {
+    value:
+    // Build one "shared user" row using your exact HTML (with tiny IDs/classes adjustments)
+    function renderSharedUserRow(user, frequencyValue) {
       var roleTag = (user.roleCode || '').toUpperCase().slice(0, 3) || '';
       // Selected option markup
       var sel = function sel(v) {
         return v === frequencyValue ? ' selected' : '';
       };
-      return "<div class=\"userlist c-form u-fieldHeight48\" " + "data-user-id=\"" + String(user.id) + "\" " + "data-email=\"" + (user.email || "") + "\" " + "data-role=\"" + (user.roleCode || "") + "\">" + "  <div class=\"username\"><strong>" + roleTag + "</strong> " + (user.email || "") + "</div>" + "  <div class=\"action set-frequencylist\">" + "    <div class=\"cop-form--container set-frequencydropdown \">" + "      <div class=\"dropdowns-customized chosen fs14__regular u-fieldHeight38\">" + "        <select class=\"frequency-select-row form-select\" aria-label=\"Set Frequency\" title=\"Set Frequency\">" + // `          <option value="">Set Frequency</option>` +
+      return "<div class=\"userlist c-form u-fieldHeight48\" " + "data-user-id=\"" + String(user.id) + "\" " + "data-email=\"" + (user.email || "") + "\" " + "data-role=\"" + (user.roleCode || "") + "\">" + "  <div class=\"username\"><strong>" + roleTag + "</strong> " + (user.email || "") + "</div>" + "  <div class=\"action set-frequencylist\">" + "    <div class=\"cop-form--container set-frequencydropdown \">" + "      <div class=\"dropdowns-customized chosen fs14__regular u-fieldHeight38\">" + "        <select class=\"frequency-select-row chzn-select\" aria-label=\"Set Frequency\" title=\"Set Frequency\">" + // `          <option value="">Set Frequency</option>` +
       "          <option value=\"0\"" + sel("0") + ">Permanently</option>" + "          <option value=\"1\"" + sel("1") + ">1 Week</option>" + "          <option value=\"2\"" + sel("2") + ">15 Days</option>" + "          <option value=\"3\"" + sel("3") + ">1 Month</option>" + "        </select>" + "      </div>" + "    </div>" + "    <a href=\"javascript:;\" class=\"remove-shared-user\" aria-label=\"Remove User\">" + "      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" fill=\"none\">" + "        <path d=\"M16.8887 8.88892C16.8887 13.3072 13.307 16.8889 8.88867 16.8889C4.4704 16.8889 0.888672 13.3072 0.888672 8.88892C0.888672 4.47064 4.4704 0.888916 8.88867 0.888916C13.307 0.888916 16.8887 4.47064 16.8887 8.88892Z\" stroke=\"#FF0000\" stroke-width=\"1.77778\"/>" + "        <path d=\"M6.22266 8.88892H11.556\" stroke=\"#FF0000\" stroke-width=\"1.77778\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>" + "      </svg>" + "    </a>" + "  </div>" + "</div>";
     }
   }, {
@@ -117846,103 +117962,6 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       if (docEl) docEl.textContent = docName || '';
       if (pageEl) pageEl.textContent = String(pageNumber || '');
       if (commentEl) commentEl.textContent = commentText || '';
-    }
-  }, {
-    key: "getShareModal",
-    value: function getShareModal(annotation) {
-      var _this7 = this;
-      var container = document.getElementById('docViewerContainer');
-      if (!container) return;
-      var modelContainer = document.getElementById('shareCommentModal');
-      var url = container.dataset['shareUrl']; // /comment/share
-      var caseGuid = container.dataset['caseGuid'];
-      var fileuuid = container.dataset['currentFileuuid'];
-      if (!url || !caseGuid || !fileuuid) {
-        console.warn('Required dataset missing.');
-        return;
-      }
-      this.currentShareAnnotation = annotation;
-      var postData = {
-        action: 'fetch',
-        caseGuid: caseGuid,
-        fileuuid: fileuuid,
-        pageNumber: annotation.pageNumber,
-        commentId: annotation.id
-      };
-      var saveBtn = modelContainer.querySelector('#save-shared-comment-btn');
-      if (saveBtn) saveBtn.disabled = true;
-      es_message.open({
-        type: 'loading',
-        content: t('normal.processing'),
-        duration: 0
-      });
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-      }).then(function (response) {
-        return response.json();
-      }).then(function (resp) {
-        if (!resp || resp.result !== 'success') {
-          throw new Error((resp === null || resp === void 0 ? void 0 : resp.error) || 'Failed to load share data.');
-        }
-
-        // 1) Header fields
-        _this7.setDocumentHeader(resp.doc_name || '', resp.pageNumber || '', resp.comment_text || '');
-
-        // 2) Populate #user-select
-        // resp.users should be an array of { id, email, roleCode? }
-        var allUsers = (resp.users || []).map(function (u) {
-          return {
-            id: u.id,
-            email: u.email || '',
-            roleCode: u.roleCode || ''
-          };
-        });
-        _this7.populateUserSelect(allUsers);
-
-        // 3) Pre-populate already shared users (if backend sends them later, we’ll use resp.shared_users)
-        _this7.renderSharedUsersList(resp.shared_users || []); // if None, it shows the default empty text
-
-        if (saveBtn) saveBtn.disabled = false;
-
-        // -----------------------------------------------------------------------------------------
-        var modalContainer = document.getElementById('docViewerContainer').querySelector('#shareCommentModal');
-        var showModelEvent = function showModelEvent(event) {
-          // modalContainer.querySelectorAll('.testSelAll').forEach((elem) => $(elem).SumoSelect({okCancelInMulti:true, selectAll:true,  search: true }));
-          modalContainer.querySelectorAll('.testSelAll').forEach(function (elem) {
-            if (!elem.classList.contains('sumoInitialized')) {
-              $(elem).SumoSelect({
-                okCancelInMulti: true,
-                selectAll: true,
-                search: true
-              });
-              elem.classList.add('sumoInitialized');
-            }
-          });
-          modalContainer.querySelectorAll('.bootstrap-select').forEach(function (elem) {
-            if (!$(elem).data('selectpicker')) {
-              $(elem).selectpicker();
-            } else {
-              $(elem).selectpicker('render');
-            }
-          });
-        };
-        $(modalContainer).off('show.bs.modal').on('show.bs.modal', showModelEvent);
-        // -----------------------------------------------------------------------------------------
-
-        // show modal only after populate
-        _this7.shareModalInstance && _this7.shareModalInstance.show();
-      })["catch"](function (error) {
-        es_modal.error({
-          content: 'Error: ' + ((error === null || error === void 0 ? void 0 : error.message) || 'Unknown'),
-          closable: true
-        });
-      })["finally"](function () {
-        es_message.destroy();
-      });
     } // private async getShareModal(annotation: IAnnotationStore): Promise<any[]> {
     //     // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
     //     const getUrl = document.getElementById('docViewerContainer').dataset['shareUrl'];

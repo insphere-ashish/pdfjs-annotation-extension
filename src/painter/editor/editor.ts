@@ -108,7 +108,9 @@ export abstract class Editor {
             contentsObj,
             comments: [],
             resizable: annotation.resizable,
-            draggable: annotation.draggable
+            draggable: annotation.draggable,
+            sharedToUser: annotation?.sharedToUser || false,
+            sharedByUser: annotation?.sharedByUser || false
         }
         this.onAdd(annotationStore) // 调用 onAdd 回调函数
     }

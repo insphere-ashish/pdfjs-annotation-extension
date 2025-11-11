@@ -26,6 +26,8 @@ import ExpandableParagraph from '../paragraph/index';  // custom paragraph compo
 
 import type { CustomToolbarRef } from '../toolbar/index';
 
+import ShareButtonIcon from '../../svg/share-bt.svg';
+
 interface StatusOption {
     labelKey: string; // i18n key
     icon: React.ReactNode;
@@ -102,6 +104,7 @@ interface CustomCommentProps {
     onScroll?: () => void
     onEditingStateChange?: (isEditing: boolean) => void // New callback to notify when editing state changes
     // customToolbarRef: React.RefObject<CustomToolbarRef>
+    onShareClick?: (annotation: IAnnotationStore) => void // custom code - e-court share comment click handler - for modal opening 
 }
 
 export interface CustomCommentRef {
@@ -417,15 +420,16 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     }
 
     // Comment 编辑框
-    const { onEditingStateChange, onUpdate, onDelete, onSelected, userName } = props
+    const { onEditingStateChange, onUpdate, onDelete, onSelected, userName, onShareClick } = props
     
     const commentInput = useCallback(
         (annotation: IAnnotationStore) => {
             let comment = annotation.contentsObj.text ?? ''
             let previousValue = comment
+            let isShared = annotation?.sharedToUser || false 
             // console.log(previousValue);
             // const [comment, setComment] = useState('')
-            if (editAnnotation && currentAnnotation?.id === annotation.id) {
+            if (!isShared && editAnnotation && currentAnnotation?.id === annotation.id) {
                 const handleSubmit = () => {
                     const trimmed = (comment ?? '').trim();
 
@@ -601,6 +605,18 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     //     [replyAnnotation, currentReply]
     // )
 
+    const handleShareCommentClick = (e,annotation) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onShareClick(annotation);
+        // console.log("SVG link clicked!");
+    };
+
+    // const updateComment = useCallback((annotation: IAnnotationStore, comment: string) => {
+    //     annotation.contentsObj.text = comment
+    //     onUpdate(annotation)
+    // }, [onUpdate])
+
     const comments = Object.entries(groupedAnnotations).map(([pageNumber, annotationsForPage]) => {
         // 根据 konvaClientRect.y 对 annotationsForPage 进行排序
         const sortedAnnotations = annotationsForPage.sort((a, b) => a.konvaClientRect.y - b.konvaClientRect.y)
@@ -618,77 +634,94 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                 
                         {sortedAnnotations.map(annotation => {
                             const isSelected = annotation.id === currentAnnotation?.id
-                            const commonProps = { className: isSelected ? 'comment commenttextbox selected' : 'comment commenttextbox', id: `annotation-${annotation.id}` }
+                            const isSharedComment = annotation?.sharedToUser || false ;
+                            // const commonProps = { 
+                            //     className: isSelected ? `comment commenttextbox selected ` : `comment commenttextbox `, 
+                            //     id: `annotation-${annotation.id}` 
+                            // }
+                            const commonProps = { 
+                                className: isSelected ? `comment commenttextbox selected ${isSharedComment ? " shared " : ""}` : `comment commenttextbox ${isSharedComment ? " shared " : ""}`, 
+                                id: `annotation-${annotation.id}` 
+                            }
                             return (
+                                <>
+                                {/* {false && isSharedComment && (<div style={{borderBottom: "1px solid #0000002b", width: "auto"}}><span style={{fontSize: "smaller", paddingLeft:"1px"}}>Shared Comment</span></div>)} */}
                                 <div
                                     {...commonProps}
                                     key={annotation.id}
                                     onClick={() => handleAnnotationClick(annotation)}
                                     ref={el => (annotationRefs.current[annotation.id] = el)}
                                 >
-                                    <div className='commentboxheader'>
-                                        
-                                            {/* <AnnotationIcon subtype={annotation.subtype} /> */}
-                                            <div className="content"><strong>{annotation.title}</strong> - <span>{formatPDFDate(annotation.date, true)}</span>
-                                            </div>
-                                            <span className="tool">
-                                                {/* <Dropdown
-                                                    menu={{
-                                                        items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
-                                                            key: statusKey,
-                                                            label: t(option.labelKey),
-                                                            icon: option.icon,
-                                                            onClick: (e) => {
-                                                                addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
-                                                                setReplyAnnotation(null)
-                                                            }
-                                                        }))
-                                                    }}
-                                                    trigger={['click']}
-                                                >
-                                                    <span className="icon">
-                                                        {getLastStatusIcon(annotation)}
-                                                    </span>
-                                                </Dropdown> */}
-                                                <Dropdown
-                                                    menu={{
-                                                        items: [
-                                                            // {
-                                                            //     label: t('normal.reply'),
-                                                            //     key: '0',
-                                                            //     onClick: e => {
-                                                            //         e.domEvent.stopPropagation()
-                                                            //         setReplyAnnotation(annotation)
-                                                            //     }
-                                                            // },
-                                                            {
-                                                                label: t('normal.edit'),
-                                                                key: '1',
-                                                                onClick: e => {
-                                                                    e.domEvent.stopPropagation()
-                                                                    setEditAnnotation(annotation)
-                                                                    // Don't disable toolbar for editing existing annotations
+                                    {/* <div className={`${isSharedComment ? "shared" : ""}`}> */}
+                                        {isSharedComment && (<div class="headertop" >Shared Comment</div>)}
+                                        <div className="commentboxheader">
+                                            
+                                                {/* <AnnotationIcon subtype={annotation.subtype} /> */}
+                                                <div className="content"><strong>{annotation.title}</strong> - <span>{formatPDFDate(annotation.date, true)}</span>
+                                                </div>
+                                                { !isSharedComment && (
+                                                <span className="tool">
+                                                    {/* <Dropdown
+                                                        menu={{
+                                                            items: Object.entries(commentStatusOptions).map(([statusKey, option]) => ({
+                                                                key: statusKey,
+                                                                label: t(option.labelKey),
+                                                                icon: option.icon,
+                                                                onClick: (e) => {
+                                                                    addReply(annotation, t('comment.statusText', { value: t(option.labelKey) }), e.key as CommentStatus)
+                                                                    setReplyAnnotation(null)
                                                                 }
-                                                            },
-                                                            {
-                                                                label: t('normal.delete'),
-                                                                key: '3',
-                                                                onClick: e => {
-                                                                    e.domEvent.stopPropagation()
-                                                                    deleteAnnotation(annotation)
+                                                            }))
+                                                        }}
+                                                        trigger={['click']}
+                                                    >
+                                                        <span className="icon">
+                                                            {getLastStatusIcon(annotation)}
+                                                        </span>
+                                                    </Dropdown> */}
+                                                    <a onClick={(e) => {handleShareCommentClick(e, annotation)}}>
+                                                        <img src={ShareButtonIcon} alt="Share Comment Button" />
+                                                    </a>
+                                                    <Dropdown
+                                                        menu={{
+                                                            items: [
+                                                                // {
+                                                                //     label: t('normal.reply'),
+                                                                //     key: '0',
+                                                                //     onClick: e => {
+                                                                //         e.domEvent.stopPropagation()
+                                                                //         setReplyAnnotation(annotation)
+                                                                //     }
+                                                                // },
+                                                                {
+                                                                    label: t('normal.edit'),
+                                                                    key: '1',
+                                                                    onClick: e => {
+                                                                        e.domEvent.stopPropagation()
+                                                                        setEditAnnotation(annotation)
+                                                                        // Don't disable toolbar for editing existing annotations
+                                                                    }
+                                                                },
+                                                                {
+                                                                    label: t('normal.delete'),
+                                                                    key: '3',
+                                                                    onClick: e => {
+                                                                        e.domEvent.stopPropagation()
+                                                                        deleteAnnotation(annotation)
+                                                                    }
                                                                 }
-                                                            }
-                                                        ]
-                                                    }}
-                                                    trigger={['click']}
-                                                >
-                                                    <span className="icon">
-                                                        <MoreOutlined />
-                                                    </span>
-                                                </Dropdown>
-                                            </span>
-                                        
-                                    </div>
+                                                            ]
+                                                        }}
+                                                        trigger={['click']}
+                                                    >
+                                                        <span className="icon">
+                                                            <MoreOutlined />
+                                                        </span>
+                                                    </Dropdown>
+                                                </span>)}
+                                            
+                                        </div>
+                                    {/* </div> */}
                                     {commentInput(annotation)}
                                     {annotation.comments?.map((reply, index) => (
                                         <div className="reply" key={index}>
@@ -742,6 +775,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                                             )}
                                     </div> */}
                                 </div>
+                                </>
                             )
                         })}
                     

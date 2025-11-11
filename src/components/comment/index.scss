@@ -251,3 +251,101 @@
 .ant-dropdown-menu{
    min-width: 100px
 }
+
+/* START - custom css for e-court doc-viewer start */
+.commentboxheader {
+    position: relative;
+} 
+.commentboxheader .sharebt {
+    position:absolute;
+    width: 13px;
+    height: 10px;
+    top:0;
+    right:25px;
+}
+.commentboxheader .sharebt .u-img {
+    width: 100%;
+    height: auto;
+}
+.commenttextbox.shared  {   
+    background: rgba(232, 91, 17, 0.15) !important;
+    box-shadow: rgba(0, 0, 0, .1490196078) 1.95px 1.95px 2.6px !important;
+    border: 1px rgba(232, 91, 17, 1) solid !important;
+ 
+}
+.commenttextbox.shared .commentboxheader .sharebt, .commenttextbox .shared .commentboxheader .tool  {
+    display: none;
+}
+
+.commenttextbox.shared .headertop {
+    width: 100%;
+    border-bottom: 1px #e0e0e0 solid;
+    padding: 3px 12px;
+    font-family: var(--fontFamilyRegular);
+    color: var(--grey16);
+    background-color: var(--toolbar-bg-color) !important;
+
+}
+ 
+.commenttextbox.shared .commentboxheader .content strong {
+    color:#E85B11;
+}
+ 
+.commenttextbox.shared .commentboxheader .content:before {
+    background: #E85B11;
+}
+
+.commenttextbox.shared:hover {
+    background: rgba(173, 67, 9, 0.45) !important;
+    box-shadow: rgba(0, 0, 0, .1490196078) 1.95px 1.95px 2.6px !important;
+    border: 1px rgba(232, 91, 17, 1) solid !important;
+}
+ 
+
+// .commentboxheader {
+//     position: relative;
+// }
+ 
+// .commentboxheader .sharebt {
+//     position:absolute;
+//     width: 13px;
+//     height: 10px;
+//     top:0;
+//     right:25px;
+// }
+ 
+// .commentboxheader .sharebt .u-img {
+//     width: 100%;
+//     height: auto;
+// }
+
+// .commenttextbox.aftershare {
+   
+//     background: rgba(232, 91, 17, 0.15) !important;
+//     box-shadow: rgba(0, 0, 0, .1490196078) 1.95px 1.95px 2.6px !important;
+//     border: 1px rgba(232, 91, 17, 1) solid !important;
+ 
+// }
+ 
+// .commenttextbox.aftershare .commentboxheader .sharebt, .commenttextbox.aftershare .commentboxheader .tool  {
+//     display: none;
+// }
+ 
+
+// .commenttextbox.shared .headertop {
+//     width: 100%;
+//     border-bottom: 1px #e0e0e0 solid;
+//     padding: 3px 12px;
+//     font-family: var(--fontFamilyRegular);
+//     color: var(--grey16);
+// }
+ 
+// .commenttextbox.shared .commentboxheader .content strong {
+//     color:#E85B11;
+// }
+ 
+// .commenttextbox.shared .commentboxheader .content:before {
+//     background: #E85B11;
+// }
+
+/* END - custom css for e-court doc-viewer start */

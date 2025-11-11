@@ -637,7 +637,7 @@ class PdfjsAnnotationExtension {
     private shareModalInstance: any = null;
     private currentShareAnnotation: IAnnotationStore | null = null;
 
-    private setupShareModal(): void {
+    private setupShareModal = (): void => {
         var container = document.getElementById('docViewerContainer');
         if (!container) return;
 
@@ -668,6 +668,17 @@ class PdfjsAnnotationExtension {
         }
     }
 
+    private chosenRefresh = (modelContainer): void => {
+        modelContainer.querySelectorAll('.chzn-select').forEach((elem) => {
+            const $elem = $(elem);
+            if ($elem.data('chosen')) {
+                $elem.trigger('chosen:updated');
+            } else {
+                $elem.chosen({disable_search: true});
+            }
+        });
+    }
+
     // Build one "shared user" row using your exact HTML (with tiny IDs/classes adjustments)
     private renderSharedUserRow(user: { id: string|number; email: string; roleCode?: string; }, frequencyValue: string): string {
         var roleTag = (user.roleCode || '').toUpperCase().slice(0, 3) || '';
@@ -683,7 +694,7 @@ class PdfjsAnnotationExtension {
             `  <div class="action set-frequencylist">` +
             `    <div class="cop-form--container set-frequencydropdown ">` +
             `      <div class="dropdowns-customized chosen fs14__regular u-fieldHeight38">` +
-            `        <select class="frequency-select-row form-select" aria-label="Set Frequency" title="Set Frequency">` +
+            `        <select class="frequency-select-row chzn-select" aria-label="Set Frequency" title="Set Frequency">` +
             // `          <option value="">Set Frequency</option>` +
             `          <option value="0"` + sel(`0`) + `>Permanently</option>` +
             `          <option value="1"` + sel(`1`) + `>1 Week</option>` +
@@ -818,6 +829,9 @@ class PdfjsAnnotationExtension {
 
         // Optional: clear selection after adding
         // for (var i = 0; i < userSelect.options.length; i++) userSelect.options[i].selected = false;
+        if(added > 0){
+            this.chosenRefresh(modelContainer);
+        }
     };
 
     // handeler for remove and per -row frequency change
@@ -853,7 +867,7 @@ class PdfjsAnnotationExtension {
         }
     };
 
-    private getShareModal(annotation: IAnnotationStore): void {
+    private getShareModal = (annotation: IAnnotationStore): void => {
         var container = document.getElementById('docViewerContainer');
         if (!container) return;
         var modelContainer = document.getElementById('shareCommentModal');
@@ -918,21 +932,29 @@ class PdfjsAnnotationExtension {
 
             // -----------------------------------------------------------------------------------------
             var modalContainer = document.getElementById('docViewerContainer').querySelector('#shareCommentModal');
-            var showModelEvent = function (event) {
+            var showModelEvent = (event) => {
                 // modalContainer.querySelectorAll('.testSelAll').forEach((elem) => $(elem).SumoSelect({okCancelInMulti:true, selectAll:true,  search: true }));
                 modalContainer.querySelectorAll('.testSelAll').forEach((elem) => {
                     if (!elem.classList.contains('sumoInitialized')) {
                         $(elem).SumoSelect({ okCancelInMulti: true, selectAll: true, search: true });
                         elem.classList.add('sumoInitialized');
                     }
+
+                    // to add strong text in options for role code 
+                    $(elem).find('option').each(function(index) {
+                        const strongText = $(this).attr('data-strong-text');
+                        if (strongText) {
+                            const li = $('.testSelAll')[0].sumo.ul.find('li').eq(index);
+                            const label = li.find('label');
+                            if(label.length && !label.hasClass('roleCodeAdded')){
+                                const originalText = label.text();
+                                label.html('<strong>' + strongText + '</strong> ' + originalText);
+                                label.addClass('roleCodeAdded');
+                            }
+                        }
+                    });
                 });
-                modalContainer.querySelectorAll('.bootstrap-select').forEach((elem) => {
-                    if (!$(elem).data('selectpicker')) {
-                        $(elem).selectpicker();
-                    } else {
-                        $(elem).selectpicker('render');
-                    }
-                });
+                this.chosenRefresh(modalContainer);
             }
 
             $(modalContainer).off('show.bs.modal').on('show.bs.modal', showModelEvent);     
@@ -1004,7 +1026,7 @@ class PdfjsAnnotationExtension {
             if (!resp || resp.result !== 'success') {
                 throw new Error(resp?.error || 'Save failed.');
             }
-            message.success(t('save.success'));
+            message.success(t('save.success'),{duration: 5});
             this.shareModalInstance && this.shareModalInstance.hide();
         })
         .catch(function (error) {
