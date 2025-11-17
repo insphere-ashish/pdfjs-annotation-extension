@@ -996,11 +996,17 @@ class PdfjsAnnotationExtension {
         for (var i = 0; i < rows.length; i++) {
             var row = rows[i] as HTMLElement;
             var userId = row.getAttribute('data-user-id') || '';
+            if (!userId) continue;
             var freqSel = row.querySelector('.frequency-select-row') as HTMLSelectElement | null;
             var frequency = (freqSel && freqSel.value) ? freqSel.value : '';
             if (userId) {
                 items.push({ userId: userId, frequency: frequency });
             }
+        }
+
+        if(items.length == 0){
+            message.warning(t('comment.share.noUsers'));
+            return;
         }
 
         var payload = {
