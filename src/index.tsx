@@ -740,7 +740,7 @@ class PdfjsAnnotationExtension {
     }
     
     // populate a new user row
-    private populateUserSelect(allUsers: Array<{ id: string|number; email: string; roleCode?: string }>): void {
+    private populateUserSelect(allUsers: Array<{ id: string|number; email: string; roleCode?: string }>, excludeIds?: Set<string>): void {
         var select = document.getElementById('user-select') as HTMLSelectElement | null;
         if (!select) return;
 
@@ -748,8 +748,15 @@ class PdfjsAnnotationExtension {
 
         for (var i = 0; i < (allUsers || []).length; i++) {
             var u = allUsers[i];
+            var userId = String(u.id);
+            
+            // Skip users that are already shared (in excludeIds)
+            if (excludeIds && excludeIds.has(userId)) {
+                continue;
+            }
+            
             var opt = document.createElement('option');
-            opt.value = String(u.id);
+            opt.value = userId;
             opt.textContent = (u.email || '');
             opt.setAttribute('data-strong-text', (u.roleCode || '').toUpperCase());
             select.appendChild(opt);
@@ -774,11 +781,85 @@ class PdfjsAnnotationExtension {
     private setDocumentHeader(docName: string, pageNumber: string | number, commentText: string): void {
         var modelContainer = document.getElementById('shareCommentModal');
         var docEl = modelContainer.querySelector('#documentName');
-        var pageEl = modelContainer.querySelector('#pageNumber');
+        var pageEl = modelContainer.querySelector('#pageNumberLabel');
         var commentEl = modelContainer.querySelector('#share-comment-text');
         if (docEl) docEl.textContent = docName || '';
         if (pageEl) pageEl.textContent = String(pageNumber || '');
         if (commentEl) commentEl.textContent = commentText || '';
+    }
+
+    // Helper to get currently shared user IDs from the list
+    private getSharedUserIds(): Set<string> {
+        var list = document.getElementById('shared-users-list');
+        var sharedIds = new Set<string>();
+        if (!list) return sharedIds;
+
+        list.querySelectorAll('.userlist[data-user-id]').forEach((el) => {
+            var id = (el as HTMLElement).getAttribute('data-user-id') || '';
+            if (id) sharedIds.add(id);
+        });
+        return sharedIds;
+    }
+
+    // Refresh the user dropdown to exclude already shared users
+    private refreshUserDropdown(): void {
+        var modelContainer = document.getElementById('shareCommentModal');
+        if (!modelContainer) return;
+
+        var userSelect = modelContainer.querySelector('#user-select') as HTMLSelectElement | null;
+        if (!userSelect) return;
+
+        // Store original data attributes for all options
+        if (!userSelect.hasAttribute('data-all-users')) {
+            var allUsersData: Array<{ id: string; email: string; roleCode: string }> = [];
+            Array.from(userSelect.options).forEach((opt) => {
+                allUsersData.push({
+                    id: opt.value,
+                    email: opt.textContent || '',
+                    roleCode: opt.getAttribute('data-strong-text') || ''
+                });
+            });
+            userSelect.setAttribute('data-all-users', JSON.stringify(allUsersData));
+        }
+
+        // Get all users and currently shared IDs
+        var allUsersJson = userSelect.getAttribute('data-all-users') || '[]';
+        var allUsers = JSON.parse(allUsersJson);
+        var sharedIds = this.getSharedUserIds();
+
+        // Re-populate with filtering
+        this.populateUserSelect(allUsers, sharedIds);
+
+        // Re-initialize SumoSelect strong text display
+        this.initializeSumoSelectWithRoles(modelContainer);
+    }
+
+    // Initialize SumoSelect with role code display
+    private initializeSumoSelectWithRoles(modelContainer: HTMLElement): void {
+        modelContainer.querySelectorAll('.testSelAll').forEach((elem) => {
+            if (!elem.classList.contains('sumoInitialized')) {
+                // @ts-ignore
+                $(elem).SumoSelect({ okCancelInMulti: true, selectAll: true, search: true });
+                elem.classList.add('sumoInitialized');
+            }
+
+            // Add strong text in options for role code
+            // @ts-ignore
+            $(elem).find('option').each(function(index) {
+                // @ts-ignore
+                const strongText = $(this).attr('data-strong-text');
+                if (strongText) {
+                    // @ts-ignore
+                    const li = $('.testSelAll')[0].sumo.ul.find('li').eq(index);
+                    const label = li.find('label');
+                    if(label.length && !label.hasClass('roleCodeAdded')){
+                        const originalText = label.text();
+                        label.html('<strong>' + strongText + '</strong> ' + originalText);
+                        label.addClass('roleCodeAdded');
+                    }
+                }
+            });
+        });
     }
 
     // Handle Add User button click
@@ -831,6 +912,8 @@ class PdfjsAnnotationExtension {
         // for (var i = 0; i < userSelect.options.length; i++) userSelect.options[i].selected = false;
         if(added > 0){
             this.chosenRefresh(modelContainer);
+            // Refresh dropdown to hide newly added users
+            this.refreshUserDropdown();
         }
     };
 
@@ -854,6 +937,9 @@ class PdfjsAnnotationExtension {
             if (list && !list.querySelector('.userlist')) {
                 list.innerHTML = 'Comment is not shared with any user.';
             }
+
+            // Refresh dropdown to show the removed user again
+            this.refreshUserDropdown();
         }
     };
 
@@ -923,10 +1009,16 @@ class PdfjsAnnotationExtension {
                     roleCode: u.roleCode || '' 
                 };
             });
-            this.populateUserSelect(allUsers);
 
             // 3) Pre-populate already shared users (if backend sends them later, we’ll use resp.shared_users)
             this.renderSharedUsersList(resp.shared_users || []); // if None, it shows the default empty text
+
+            // 4) Populate user dropdown with filtering (store all users and filter out shared ones)
+            var userSelect = modelContainer.querySelector('#user-select') as HTMLSelectElement | null;
+            if (userSelect) {
+                userSelect.setAttribute('data-all-users', JSON.stringify(allUsers));
+            }
+            this.refreshUserDropdown();
 
             if (saveBtn) saveBtn.disabled = false;
 
