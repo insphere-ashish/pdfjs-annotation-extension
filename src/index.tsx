@@ -1055,12 +1055,12 @@ class PdfjsAnnotationExtension {
             // show modal only after populate
             this.shareModalInstance && this.shareModalInstance.show();
         })
-        .catch(function (error) {
-            Modal.error({
-                content: 'Error: ' + (error?.message || 'Unknown'),
-                closable: true
-            });
-        })
+        // .catch(function (error) {
+        //     Modal.error({
+        //         content: 'Error: ' + (error?.message || 'Unknown'),
+        //         closable: true
+        //     });
+        // })
         .finally(function () {
             message.destroy();
         });
@@ -1127,12 +1127,12 @@ class PdfjsAnnotationExtension {
             message.success(t('save.success'),{duration: 5});
             this.shareModalInstance && this.shareModalInstance.hide();
         })
-        .catch(function (error) {
-            Modal.error({
-                content: 'Save error: ' + (error?.message || 'Unknown'),
-                closable: true
-            });
-        })
+        // .catch(function (error) {
+        //     Modal.error({
+        //         content: 'Save error: ' + (error?.message || 'Unknown'),
+        //         closable: true
+        //     });
+        // })
         .finally(function () {
             if (saveBtn) saveBtn.disabled = false;
             message.destroy();

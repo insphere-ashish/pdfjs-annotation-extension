@@ -117063,12 +117063,14 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
 
         // show modal only after populate
         _this.shareModalInstance && _this.shareModalInstance.show();
-      })["catch"](function (error) {
-        es_modal.error({
-          content: 'Error: ' + ((error === null || error === void 0 ? void 0 : error.message) || 'Unknown'),
-          closable: true
-        });
-      })["finally"](function () {
+      })
+      // .catch(function (error) {
+      //     Modal.error({
+      //         content: 'Error: ' + (error?.message || 'Unknown'),
+      //         closable: true
+      //     });
+      // })
+      ["finally"](function () {
         es_message.destroy();
       });
     });
@@ -117136,12 +117138,14 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
           duration: 5
         });
         _this.shareModalInstance && _this.shareModalInstance.hide();
-      })["catch"](function (error) {
-        es_modal.error({
-          content: 'Save error: ' + ((error === null || error === void 0 ? void 0 : error.message) || 'Unknown'),
-          closable: true
-        });
-      })["finally"](function () {
+      })
+      // .catch(function (error) {
+      //     Modal.error({
+      //         content: 'Save error: ' + (error?.message || 'Unknown'),
+      //         closable: true
+      //     });
+      // })
+      ["finally"](function () {
         if (saveBtn) saveBtn.disabled = false;
         es_message.destroy();
       });
