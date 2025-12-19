@@ -87,6 +87,7 @@ const defaultOptions = {
         MAX_UPLOAD_IMAGE_SIZE: 800, // 上传图片最大宽度/高度, 大于这个会被等比压缩
         SAVE_BUTTON: true, // 保存按钮
         EXPORT_PDF: true, // 导出pdf
+        PRINT_PDF: true, // 打印pdf
         EXPORT_EXCEL: true, // 导出excel
         LOAD_PDF_ANNOTATION: true, // 是否加载 pdf 原有批注
         DB_CLICK_DELETE: false, // 双击删除批注

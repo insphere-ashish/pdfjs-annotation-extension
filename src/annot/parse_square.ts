@@ -19,7 +19,8 @@ export class SquareParser extends AnnotationParser {
             Contents: stringToPDFHexString(annotation.contentsObj?.text || ''), // 说明文字
             M: PDFString.of(annotation.date || ''),
             NM: PDFString.of(annotation.id), // 唯一标识
-            Border: [0, 0, 1] // 可选：设置边框样式为实线宽度1
+            Border: [0, 0, 1], // 可选：设置边框样式为实线宽度1
+            F: 4 // Print flag (2 = Hidden, 4 = Print, 6 = Hidden+Print)
         })
         const mainAnnRef = context.register(mainAnn)
         this.addAnnotationToPage(page, mainAnnRef)

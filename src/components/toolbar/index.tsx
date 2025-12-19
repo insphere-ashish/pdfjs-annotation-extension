@@ -15,7 +15,7 @@ interface CustomToolbarProps {
     userName: string
     onChange: (annotation: IAnnotationType | null, dataTransfer: string | null) => void
     onSave: () => void
-    onExport: (type: 'pdf' | 'excel') => void
+    onExport: (type: 'pdf' | 'print' | 'excel') => void
     onSidebarOpen: (open: boolean) => void
     disabled?: boolean // New prop to disable annotation buttons during comment editing
 }
@@ -192,6 +192,19 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                     
                 </Button></li>
             </ul>
+            <ul className="buttons print-anno-pdf" style={{ display: 'block' }}>
+                <li title='Print With Annotations' className='print-button'><Button
+                    block
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => {
+                        props.onExport('print')
+                    }}
+                    icon={<FilePdfOutlined />}
+                >
+                    
+                </Button></li>
+            </ul>
             <ul className="buttons" style={{ display: 'none' }}>
                 {defaultOptions.setting.SAVE_BUTTON && (
                     <li
@@ -206,7 +219,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                         <div className="name">{t('normal.save')}</div>
                     </li>
                 )}
-                {(defaultOptions.setting.EXPORT_PDF || defaultOptions.setting.EXPORT_EXCEL) && (
+                {(defaultOptions.setting.EXPORT_PDF || defaultOptions.setting.PRINT_PDF || defaultOptions.setting.EXPORT_EXCEL) && (
                     <li title={t('normal.export')}>
                         <Popover
                             content={
@@ -222,6 +235,19 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                                             icon={<FilePdfOutlined />}
                                         >
                                             PDF
+                                        </Button>
+                                    )}
+                                    {defaultOptions.setting.PRINT_PDF && (
+                                        <Button
+                                            block
+                                            color="primary"
+                                            variant="outlined"
+                                            onClick={() => {
+                                                props.onExport('print')
+                                            }}
+                                            icon={<FilePdfOutlined />}
+                                        >
+                                            Print
                                         </Button>
                                     )}
                                     {defaultOptions.setting.EXPORT_EXCEL && (

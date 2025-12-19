@@ -13,7 +13,7 @@ import { Painter } from './painter'
 import { CustomComment, CustomCommentRef } from './components/comment'
 import { once, parseQueryString, hashArrayOfObjects } from './utils/utils'
 import { defaultOptions } from './const/default_options'
-import { exportAnnotationsToExcel, exportAnnotationsToPdf } from './annot'
+import { exportAnnotationsToExcel, exportAnnotationsToPdf, printAnnotationsToPdf } from './annot'
 import { Modal, Space, message } from 'antd'
 import { CustomAnnotationMenu, CustomAnnotationMenuRef } from './components/menu'
 import { ConnectorLine } from './painter/connectorLine'
@@ -311,6 +311,10 @@ class PdfjsAnnotationExtension {
                     }
                     if (type === 'pdf') {
                         await this.exportPdf()
+                        return
+                    }
+                    if (type === 'print') {
+                        await this.printPdf()
                         return
                     }
                 }}
@@ -613,6 +617,21 @@ class PdfjsAnnotationExtension {
                 loading: false
             },
         })
+    }
+
+    private async printPdf() {
+        const dataToSave = this.painter.getData();
+        const modal = Modal.info({
+            title: t('normal.print'),
+            content: <Space><SyncOutlined spin />{t('normal.processing')}</Space>,
+            closable: false,
+            okButtonProps: {
+                loading: true
+            },
+            okText: t('normal.ok')
+        })
+        await printAnnotationsToPdf(this.PDFJS_PDFViewerApplication, dataToSave)
+        modal.destroy()
     }
 
     private async exportExcel() {
