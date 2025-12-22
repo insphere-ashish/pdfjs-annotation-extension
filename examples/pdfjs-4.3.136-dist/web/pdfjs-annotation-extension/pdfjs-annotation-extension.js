@@ -109234,6 +109234,8 @@ function store_toPropertyKey(t) { var i = store_toPrimitive(t, "string"); return
 function store_toPrimitive(t, r) { if ("object" != store_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != store_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 var Store = /*#__PURE__*/function () {
+  // 已加载注释的页面
+
   function Store(_ref) {
     var PDFViewerApplication = _ref.PDFViewerApplication;
     store_classCallCheck(this, Store);
@@ -109241,6 +109243,15 @@ var Store = /*#__PURE__*/function () {
     store_defineProperty(this, "annotationStore", new Map());
     // 原有注释
     store_defineProperty(this, "originalAnnotationStore", new Map());
+    // 变更跟踪
+    store_defineProperty(this, "createdAnnotations", new Set());
+    // 新创建的注释
+    store_defineProperty(this, "modifiedAnnotations", new Set());
+    // 修改的注释
+    store_defineProperty(this, "deletedAnnotations", new Set());
+    // 删除的注释
+    // 页面加载跟踪
+    store_defineProperty(this, "loadedPages", new Set());
     this.pdfViewerApplication = PDFViewerApplication;
   }
 
@@ -109274,6 +109285,9 @@ var Store = /*#__PURE__*/function () {
       this.annotationStore.set(store.id, store);
       if (isOriginal) {
         this.originalAnnotationStore.set(store.id, store);
+      } else {
+        // 新创建的注释
+        this.createdAnnotations.add(store.id);
       }
       return store;
     }
@@ -109293,6 +109307,10 @@ var Store = /*#__PURE__*/function () {
             date: formatTimestamp(Date.now())
           });
           this.annotationStore.set(id, updatedAnnotation);
+          // 如果不是新创建的注释，标记为已修改
+          if (!this.createdAnnotations.has(id)) {
+            this.modifiedAnnotations.add(id);
+          }
           return updatedAnnotation;
         }
       } else {
@@ -109315,6 +109333,61 @@ var Store = /*#__PURE__*/function () {
     }
 
     /**
+     * 检查页面是否已加载注释
+     * @param pageNumber - 页码
+     * @returns 是否已加载
+     */
+  }, {
+    key: "isPageLoaded",
+    value: function isPageLoaded(pageNumber) {
+      return this.loadedPages.has(pageNumber);
+    }
+
+    /**
+     * 标记页面为已加载
+     * @param pageNumber - 页码
+     */
+  }, {
+    key: "markPageAsLoaded",
+    value: function markPageAsLoaded(pageNumber) {
+      this.loadedPages.add(pageNumber);
+    }
+
+    /**
+     * 加载或更新页面的注释
+     * @param pageNumber - 页码
+     * @param annotations - 注释数组
+     * @param isOriginal - 是否是原始注释
+     */
+  }, {
+    key: "loadPageAnnotations",
+    value: function loadPageAnnotations(pageNumber, annotations) {
+      var _this2 = this;
+      var isOriginal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      // 如果页面已加载，先移除该页面的原有注释（不包括新创建的）
+      if (this.loadedPages.has(pageNumber) && isOriginal) {
+        var existingAnnotations = this.getByPage(pageNumber);
+        existingAnnotations.forEach(function (annotation) {
+          // 只移除原始注释，不移除新创建的
+          if (_this2.originalAnnotationStore.has(annotation.id)) {
+            _this2.annotationStore["delete"](annotation.id);
+            _this2.originalAnnotationStore["delete"](annotation.id);
+          }
+        });
+      }
+
+      // 加载新注释
+      annotations.forEach(function (annotation) {
+        if (annotation.pageNumber === pageNumber) {
+          _this2.save(annotation, isOriginal);
+        }
+      });
+
+      // 标记页面为已加载
+      this.loadedPages.add(pageNumber);
+    }
+
+    /**
      * 删除指定 ID 的注释
      * @param id - 要删除的注释的 ID
      */
@@ -109322,10 +109395,115 @@ var Store = /*#__PURE__*/function () {
     key: "delete",
     value: function _delete(id) {
       if (this.annotationStore.has(id)) {
+        // 如果是原始注释，需要跟踪删除
+        if (this.originalAnnotationStore.has(id)) {
+          this.deletedAnnotations.add(id);
+          console.log('[Store] Tracking deletion of original annotation:', id);
+        } else {
+          // 如果是新创建的注释，从创建列表中移除
+          this.createdAnnotations["delete"](id);
+          console.log('[Store] Removing newly created annotation (not yet saved):', id);
+        }
+        // 从修改列表中移除（如果存在）
+        this.modifiedAnnotations["delete"](id);
         this.annotationStore["delete"](id);
       } else {
         console.warn("Annotation with id ".concat(id, " not found."));
       }
+    }
+
+    /**
+     * 获取所有变更的注释（创建、修改、删除）
+     * @returns 包含变更注释的数组
+     */
+  }, {
+    key: "getChangedAnnotations",
+    value: function getChangedAnnotations() {
+      var _this3 = this;
+      var changes = [];
+
+      // 新创建的注释
+      this.createdAnnotations.forEach(function (id) {
+        var annotation = _this3.annotationStore.get(id);
+        if (annotation) {
+          changes.push(store_objectSpread(store_objectSpread({}, annotation), {}, {
+            _changeType: 'created'
+          }));
+        }
+      });
+
+      // 修改的注释
+      this.modifiedAnnotations.forEach(function (id) {
+        var annotation = _this3.annotationStore.get(id);
+        if (annotation) {
+          changes.push(store_objectSpread(store_objectSpread({}, annotation), {}, {
+            _changeType: 'modified'
+          }));
+        }
+      });
+
+      // 删除的注释
+      this.deletedAnnotations.forEach(function (id) {
+        var originalAnnotation = _this3.originalAnnotationStore.get(id);
+        if (originalAnnotation) {
+          changes.push({
+            id: originalAnnotation.id,
+            pageNumber: originalAnnotation.pageNumber,
+            is_deleted: true,
+            _changeType: 'deleted'
+          });
+          console.log('[Store] Including deleted annotation in changes:', {
+            id: originalAnnotation.id,
+            pageNumber: originalAnnotation.pageNumber,
+            is_deleted: true
+          });
+        }
+      });
+      console.log('[Store] Total changes:', {
+        created: this.createdAnnotations.size,
+        modified: this.modifiedAnnotations.size,
+        deleted: this.deletedAnnotations.size,
+        total: changes.length
+      });
+      return changes;
+    }
+
+    /**
+     * 清除所有变更跟踪
+     */
+  }, {
+    key: "clearChangeTracking",
+    value: function clearChangeTracking() {
+      var _this4 = this;
+      // 将已保存的创建注释移到原始存储，以便将来可以跟踪删除
+      this.createdAnnotations.forEach(function (id) {
+        var annotation = _this4.annotationStore.get(id);
+        if (annotation) {
+          _this4.originalAnnotationStore.set(id, annotation);
+          console.log('[Store] Moving saved created annotation to original store:', id);
+        }
+      });
+      this.createdAnnotations.clear();
+      this.modifiedAnnotations.clear();
+      this.deletedAnnotations.clear();
+    }
+
+    /**
+     * 检查是否有未保存的变更
+     */
+  }, {
+    key: "hasChanges",
+    value: function hasChanges() {
+      return this.createdAnnotations.size > 0 || this.modifiedAnnotations.size > 0 || this.deletedAnnotations.size > 0;
+    }
+
+    /**
+     * 清除所有页面加载跟踪
+     */
+  }, {
+    key: "clearLoadedPages",
+    value: function clearLoadedPages() {
+      this.loadedPages.clear();
     }
   }]);
 }();
@@ -111876,7 +112054,65 @@ var Painter = /*#__PURE__*/function () {
       return this.store.annotations;
     }
 
-    // custom method to clear all data -- otherwise the annotations were showing as before from the older file
+    /**
+     * @description 获取所有变更的注释（创建、修改、删除）
+     * @returns 变更的注释数组
+     */
+  }, {
+    key: "getChangedAnnotations",
+    value: function getChangedAnnotations() {
+      return this.store.getChangedAnnotations();
+    }
+
+    /**
+     * @description 清除变更跟踪
+     */
+  }, {
+    key: "clearChangeTracking",
+    value: function clearChangeTracking() {
+      this.store.clearChangeTracking();
+    }
+
+    /**
+     * @description 检查是否有未保存的变更
+     */
+  }, {
+    key: "hasChanges",
+    value: function hasChanges() {
+      return this.store.hasChanges();
+    }
+
+    /**
+     * @description 检查页面是否已加载注释
+     */
+  }, {
+    key: "isPageLoaded",
+    value: function isPageLoaded(pageNumber) {
+      return this.store.isPageLoaded(pageNumber);
+    }
+
+    /**
+     * @description 加载或更新页面的注释
+     */
+  }, {
+    key: "loadPageAnnotations",
+    value: (function () {
+      var _loadPageAnnotations = painter_asyncToGenerator(/*#__PURE__*/painter_regenerator().m(function _callee4(pageNumber, annotations) {
+        return painter_regenerator().w(function (_context4) {
+          while (1) switch (_context4.n) {
+            case 0:
+              this.store.loadPageAnnotations(pageNumber, annotations, true);
+            case 1:
+              return _context4.a(2);
+          }
+        }, _callee4, this);
+      }));
+      function loadPageAnnotations(_x9, _x0) {
+        return _loadPageAnnotations.apply(this, arguments);
+      }
+      return loadPageAnnotations;
+    }() // custom method to clear all data -- otherwise the annotations were showing as before from the older file
+    )
   }, {
     key: "clearData",
     value: function clearData() {
@@ -118260,6 +118496,12 @@ var ConnectorLine = /*#__PURE__*/function () {
 }();
 ;// ./src/index.tsx
 function src_typeof(o) { "@babel/helpers - typeof"; return src_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, src_typeof(o); }
+function src_toConsumableArray(r) { return src_arrayWithoutHoles(r) || src_iterableToArray(r) || src_unsupportedIterableToArray(r) || src_nonIterableSpread(); }
+function src_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function src_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return src_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? src_arrayLikeToArray(r, a) : void 0; } }
+function src_iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function src_arrayWithoutHoles(r) { if (Array.isArray(r)) return src_arrayLikeToArray(r); }
+function src_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function src_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return src_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (src_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, src_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, src_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), src_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", src_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), src_regeneratorDefine2(u), src_regeneratorDefine2(u, o, "Generator"), src_regeneratorDefine2(u, n, function () { return this; }), src_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (src_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function src_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } src_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { src_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, src_regeneratorDefine2(e, r, n, t); }
 function src_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -118627,9 +118869,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         if (!resp || resp.result !== 'success') {
           throw new Error((resp === null || resp === void 0 ? void 0 : resp.error) || 'Save failed.');
         }
-        es_message.success(t('save.success'), {
-          duration: 5
-        });
+        // message.success(t('save.success'),{duration: 2});
+        window.CustomMessage.success(t('save.success'), 2);
         _this.shareModalInstance && _this.shareModalInstance.hide();
       })
       // .catch(function (error) {
@@ -119074,6 +119315,64 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     }
 
     /**
+     * @description Show session expired popup
+     * @param message - The message to display
+     */
+  }, {
+    key: "showSessionExpiredPopup",
+    value: function showSessionExpiredPopup(message) {
+      if (typeof window.showSessionExpiredPopup === 'function') {
+        window.showSessionExpiredPopup(message);
+      } else {
+        es_modal.error({
+          content: message,
+          closable: false,
+          okButtonProps: {
+            loading: false
+          },
+          okText: t('normal.ok'),
+          onOk: function onOk() {
+            // Optionally reload or redirect to login
+            window.location.reload();
+          }
+        });
+      }
+    }
+
+    /**
+     * @description 获取当前可见的页码
+     * @returns 页码数组
+     */
+  }, {
+    key: "getVisiblePages",
+    value: function getVisiblePages() {
+      var visiblePages = [];
+      var pdfViewer = this.PDFJS_PDFViewerApplication.pdfViewer;
+      if (!pdfViewer || !pdfViewer._pages) {
+        return visiblePages;
+      }
+
+      // 获取所有页面
+      for (var i = 0; i < pdfViewer._pages.length; i++) {
+        var pageView = pdfViewer._pages[i];
+        if (pageView && pageView.div) {
+          // 检查页面是否在视口中
+          var rect = pageView.div.getBoundingClientRect();
+          var isVisible = rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
+          if (isVisible) {
+            visiblePages.push(pageView.id);
+          }
+        }
+      }
+
+      // 如果没有找到可见页面，至少返回当前页
+      if (visiblePages.length === 0 && pdfViewer.currentPageNumber) {
+        visiblePages.push(pdfViewer.currentPageNumber);
+      }
+      return visiblePages;
+    }
+
+    /**
      * @description 绑定 PDF.js 相关事件
      */
   }, {
@@ -119095,7 +119394,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       // 监听页面渲染完成事件
       this.PDFJS_EventBus._on('pagerendered', /*#__PURE__*/function () {
         var _ref4 = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee3(_ref3) {
-          var source, cssTransform, pageNumber;
+          var source, cssTransform, pageNumber, pageAnnotations;
           return src_regenerator().w(function (_context3) {
             while (1) switch (_context3.n) {
               case 0:
@@ -119108,7 +119407,29 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                   cssTransform: cssTransform,
                   pageNumber: pageNumber
                 });
+
+                // 延迟加载该页面的注释
+                if (!(_this6.loadEnd && !_this6.painter.isPageLoaded(pageNumber))) {
+                  _context3.n = 3;
+                  break;
+                }
+                _context3.n = 1;
+                return _this6.getPageAnnotations(pageNumber);
               case 1:
+                pageAnnotations = _context3.v;
+                if (!(pageAnnotations.length > 0)) {
+                  _context3.n = 3;
+                  break;
+                }
+                _context3.n = 2;
+                return _this6.painter.loadPageAnnotations(pageNumber, pageAnnotations);
+              case 2:
+                // 通知评论组件更新
+                pageAnnotations.forEach(function (annotation) {
+                  var _this6$customCommentR;
+                  (_this6$customCommentR = _this6.customCommentRef.current) === null || _this6$customCommentR === void 0 || _this6$customCommentR.addAnnotation(annotation);
+                });
+              case 3:
                 return _context3.a(2);
             }
           }, _callee3);
@@ -119120,29 +119441,47 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
 
       // 监听文档加载完成事件
       this.PDFJS_EventBus._on('documentloaded', /*#__PURE__*/src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee4() {
-        var _this6$customCommentR, _this6$customCommentR2;
-        var data;
+        var _this6$customCommentR2, _this6$customCommentR3;
+        var commentAnnotations, data;
         return src_regenerator().w(function (_context4) {
           while (1) switch (_context4.n) {
             case 0:
               // alert('sssssss')
-              (_this6$customCommentR = _this6.customCommentRef.current) === null || _this6$customCommentR === void 0 || (_this6$customCommentR2 = _this6$customCommentR.clear) === null || _this6$customCommentR2 === void 0 || _this6$customCommentR2.call(_this6$customCommentR); // custom code -- clear all existing annotations when a new document is loaded
+              (_this6$customCommentR2 = _this6.customCommentRef.current) === null || _this6$customCommentR2 === void 0 || (_this6$customCommentR3 = _this6$customCommentR2.clear) === null || _this6$customCommentR3 === void 0 || _this6$customCommentR3.call(_this6$customCommentR2); // custom code -- clear all existing annotations when a new document is loaded
               _this6.clearInitialDataHash(); // custom code -- clear all existing annotations when a new document is loaded
               _this6.painter.clearData(); // custom code -- clear all existing annotations when a new document is loaded
               _this6.painter.initWebSelection(_this6.$PDFJS_viewerContainer);
+
+              // 首先加载评论类型的批注（类型 5 和 11）
               _context4.n = 1;
-              return _this6.getData();
+              return _this6.getCommentAnnotations();
             case 1:
-              data = _context4.v;
-              _this6.initialDataHash = hashArrayOfObjects(data);
-              // console.log('%c [ initialDataHash - data ]', 'font-size:13px; background:#d10d00; color:#ff5144;', data) 
+              commentAnnotations = _context4.v;
+              if (!(commentAnnotations.length > 0)) {
+                _context4.n = 3;
+                break;
+              }
               _context4.n = 2;
-              return _this6.painter.initAnnotations(data, default_options_defaultOptions.setting.LOAD_PDF_ANNOTATION);
+              return _this6.painter.initAnnotations(commentAnnotations, false);
             case 2:
+              commentAnnotations.forEach(function (annotation) {
+                var _this6$customCommentR4;
+                (_this6$customCommentR4 = _this6.customCommentRef.current) === null || _this6$customCommentR4 === void 0 || _this6$customCommentR4.addAnnotation(annotation);
+              });
+            case 3:
+              _context4.n = 4;
+              return _this6.getData();
+            case 4:
+              data = _context4.v;
+              _this6.initialDataHash = hashArrayOfObjects([].concat(src_toConsumableArray(commentAnnotations), src_toConsumableArray(data)));
+              // console.log('%c [ initialDataHash - data ]', 'font-size:13px; background:#d10d00; color:#ff5144;', data) 
+              _context4.n = 5;
+              return _this6.painter.initAnnotations(data, default_options_defaultOptions.setting.LOAD_PDF_ANNOTATION);
+            case 5:
               if (_this6.loadEnd) {
                 _this6.updatePdfjs();
               }
-            case 3:
+            case 6:
               return _context4.a(2);
           }
         }, _callee4);
@@ -119150,22 +119489,19 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     }
 
     /**
-     * @description 获取外部批注数据
+     * @description 获取评论类型的批注数据（类型 5 和 11）
      * @returns 
      */
   }, {
-    key: "getData",
+    key: "getCommentAnnotations",
     value: (function () {
-      var _getData = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee5() {
-        var getUrl, response, errorMessage, _t;
+      var _getCommentAnnotations = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee5() {
+        var _document$getElementB;
+        var getUrl, separator, fetchUrl, response, errorMessage, _t;
         return src_regenerator().w(function (_context5) {
           while (1) switch (_context5.p = _context5.n) {
             case 0:
-              // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
-              getUrl = document.getElementById('docViewerContainer').dataset['annoGet']; // alert('getUrl', getUrl)
-              // console.log('--------------------------------- this.appOptions', this.appOptions)
-              // console.log('--------------------------------- defaultOptions', defaultOptions)
-              // console.log('--------------------------------- %c [ getUrl ]', 'font-size:13px; background:#d10d00; color:#ff5144;', getUrl)
+              getUrl = (_document$getElementB = document.getElementById('docViewerContainer')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.dataset['annoGet'];
               if (getUrl) {
                 _context5.n = 1;
                 break;
@@ -119173,34 +119509,180 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
               return _context5.a(2, []);
             case 1:
               _context5.p = 1;
+              separator = getUrl.includes('?') ? '&' : '?';
+              fetchUrl = "".concat(getUrl).concat(separator, "type=comments");
+              _context5.n = 2;
+              return fetch(fetchUrl, {
+                method: 'GET'
+              });
+            case 2:
+              response = _context5.v;
+              if (!(response.status === 401)) {
+                _context5.n = 3;
+                break;
+              }
+              this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+              return _context5.a(2, []);
+            case 3:
+              if (response.ok) {
+                _context5.n = 4;
+                break;
+              }
+              errorMessage = "HTTP Error ".concat(response.status, ": ").concat(response.statusText || 'Unknown Status');
+              throw new Error(errorMessage);
+            case 4:
+              _context5.n = 5;
+              return response.json();
+            case 5:
+              return _context5.a(2, _context5.v);
+            case 6:
+              _context5.p = 6;
+              _t = _context5.v;
+              console.error('Fetch error for comment annotations:', _t);
+              return _context5.a(2, []);
+          }
+        }, _callee5, this, [[1, 6]]);
+      }));
+      function getCommentAnnotations() {
+        return _getCommentAnnotations.apply(this, arguments);
+      }
+      return getCommentAnnotations;
+    }()
+    /**
+     * @description 获取指定页面的批注数据
+     * @param pageNumber - 页码
+     * @returns 
+     */
+    )
+  }, {
+    key: "getPageAnnotations",
+    value: (function () {
+      var _getPageAnnotations = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee6(pageNumber) {
+        var _document$getElementB2;
+        var getUrl, separator, fetchUrl, response, errorMessage, _t2;
+        return src_regenerator().w(function (_context6) {
+          while (1) switch (_context6.p = _context6.n) {
+            case 0:
+              getUrl = (_document$getElementB2 = document.getElementById('docViewerContainer')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.dataset['annoGet'];
+              if (getUrl) {
+                _context6.n = 1;
+                break;
+              }
+              return _context6.a(2, []);
+            case 1:
+              _context6.p = 1;
+              separator = getUrl.includes('?') ? '&' : '?';
+              fetchUrl = "".concat(getUrl).concat(separator, "pages=").concat(pageNumber);
+              _context6.n = 2;
+              return fetch(fetchUrl, {
+                method: 'GET'
+              });
+            case 2:
+              response = _context6.v;
+              if (!(response.status === 401)) {
+                _context6.n = 3;
+                break;
+              }
+              this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+              return _context6.a(2, []);
+            case 3:
+              if (response.ok) {
+                _context6.n = 4;
+                break;
+              }
+              errorMessage = "HTTP Error ".concat(response.status, ": ").concat(response.statusText || 'Unknown Status');
+              throw new Error(errorMessage);
+            case 4:
+              _context6.n = 5;
+              return response.json();
+            case 5:
+              return _context6.a(2, _context6.v);
+            case 6:
+              _context6.p = 6;
+              _t2 = _context6.v;
+              console.error('Fetch error for page', pageNumber, ':', _t2);
+              return _context6.a(2, []);
+          }
+        }, _callee6, this, [[1, 6]]);
+      }));
+      function getPageAnnotations(_x4) {
+        return _getPageAnnotations.apply(this, arguments);
+      }
+      return getPageAnnotations;
+    }()
+    /**
+     * @description 获取外部批注数据
+     * @returns 
+     */
+    )
+  }, {
+    key: "getData",
+    value: (function () {
+      var _getData = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee7() {
+        var getUrl, visiblePages, fetchUrl, separator, response, errorMessage, _t3;
+        return src_regenerator().w(function (_context7) {
+          while (1) switch (_context7.p = _context7.n) {
+            case 0:
+              // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
+              getUrl = document.getElementById('docViewerContainer').dataset['annoGet']; // alert('getUrl', getUrl)
+              // console.log('--------------------------------- this.appOptions', this.appOptions)
+              // console.log('--------------------------------- defaultOptions', defaultOptions)
+              // console.log('--------------------------------- %c [ getUrl ]', 'font-size:13px; background:#d10d00; color:#ff5144;', getUrl)
+              if (getUrl) {
+                _context7.n = 1;
+                break;
+              }
+              return _context7.a(2, []);
+            case 1:
+              _context7.p = 1;
               es_message.open({
                 type: 'loading',
                 content: t('normal.processing'),
                 duration: 0
               });
-              _context5.n = 2;
-              return fetch(getUrl, {
-                method: 'GET'
+
+              // 获取可见页面
+              visiblePages = this.getVisiblePages(); // 构建带页码参数的URL
+              fetchUrl = getUrl;
+              if (visiblePages.length > 0) {
+                separator = getUrl.includes('?') ? '&' : '?';
+                fetchUrl = "".concat(getUrl).concat(separator, "pages=").concat(visiblePages.join(','));
+              }
+              _context7.n = 2;
+              return fetch(fetchUrl, {
+                method: 'GET',
+                headers: {
+                  'X-Requested-With': 'XMLHttpRequest',
+                  'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
               });
             case 2:
-              response = _context5.v;
+              response = _context7.v;
+              if (!(response.status === 401)) {
+                _context7.n = 3;
+                break;
+              }
+              this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+              return _context7.a(2, []);
+            case 3:
               if (response.ok) {
-                _context5.n = 3;
+                _context7.n = 4;
                 break;
               }
               errorMessage = "HTTP Error ".concat(response.status, ": ").concat(response.statusText || 'Unknown Status');
               throw new Error(errorMessage);
-            case 3:
-              _context5.n = 4;
-              return response.json();
             case 4:
-              return _context5.a(2, _context5.v);
+              _context7.n = 5;
+              return response.json();
             case 5:
-              _context5.p = 5;
-              _t = _context5.v;
+              return _context7.a(2, _context7.v);
+            case 6:
+              _context7.p = 6;
+              _t3 = _context7.v;
               es_modal.error({
                 content: t('load.fail', {
-                  value: _t === null || _t === void 0 ? void 0 : _t.message
+                  value: _t3 === null || _t3 === void 0 ? void 0 : _t3.message
                 }),
                 closable: false,
                 okButtonProps: {
@@ -119208,16 +119690,16 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 },
                 okText: t('normal.ok')
               });
-              console.error('Fetch error:', _t);
-              return _context5.a(2, []);
-            case 6:
-              _context5.p = 6;
-              es_message.destroy();
-              return _context5.f(6);
+              console.error('Fetch error:', _t3);
+              return _context7.a(2, []);
             case 7:
-              return _context5.a(2);
+              _context7.p = 7;
+              es_message.destroy();
+              return _context7.f(7);
+            case 8:
+              return _context7.a(2);
           }
-        }, _callee5, null, [[1, 5, 6, 7]]);
+        }, _callee7, this, [[1, 6, 7, 8]]);
       }));
       function getData() {
         return _getData.apply(this, arguments);
@@ -119232,16 +119714,28 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
   }, {
     key: "saveData",
     value: (function () {
-      var _saveData = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee6() {
-        var dataToSave, postUrl, response, result, modal, _t2;
-        return src_regenerator().w(function (_context6) {
-          while (1) switch (_context6.p = _context6.n) {
+      var _saveData = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee8() {
+        var changedAnnotations, postUrl, response, result, hasDeleted, successMessage, modal, _t4;
+        return src_regenerator().w(function (_context8) {
+          while (1) switch (_context8.p = _context8.n) {
             case 0:
-              dataToSave = this.painter.getData(); // console.log('%c [ dataToSave ]', 'font-size:13px; background:#d10d00; color:#ff5144;', dataToSave)
+              // 获取变更的注释而不是所有注释
+              changedAnnotations = this.painter.getChangedAnnotations();
+              console.log('[saveData] Changed annotations to save:', changedAnnotations);
+
+              // 如果没有变更，不需要保存
+              if (!(changedAnnotations.length === 0)) {
+                _context8.n = 1;
+                break;
+              }
+              console.log('[saveData] No changes to save');
+              return _context8.a(2);
+            case 1:
+              // console.log('%c [ changedAnnotations ]', 'font-size:13px; background:#d10d00; color:#ff5144;', changedAnnotations)
               // const postUrl = this.getOption(HASH_PARAMS_POST_URL);
               postUrl = document.getElementById('docViewerContainer').dataset['annoPost'];
               if (postUrl) {
-                _context6.n = 1;
+                _context8.n = 2;
                 break;
               }
               es_message.error({
@@ -119250,42 +119744,61 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 }),
                 key: 'save'
               });
-              return _context6.a(2);
-            case 1:
-              _context6.p = 1;
-              _context6.n = 2;
+              return _context8.a(2);
+            case 2:
+              _context8.p = 2;
+              _context8.n = 3;
               return fetch(postUrl, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'X-Requested-With': 'XMLHttpRequest',
+                  'Accept': 'application/json'
                 },
-                body: JSON.stringify(dataToSave)
+                credentials: 'same-origin',
+                body: JSON.stringify(changedAnnotations)
               });
-            case 2:
-              response = _context6.v;
+            case 3:
+              response = _context8.v;
+              if (!(response.status === 401)) {
+                _context8.n = 4;
+                break;
+              }
+              this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+              return _context8.a(2);
+            case 4:
               if (response.ok) {
-                _context6.n = 3;
+                _context8.n = 5;
                 break;
               }
               throw new Error("Failed to save PDF. Status: ".concat(response.status, " ").concat(response.statusText));
-            case 3:
-              _context6.n = 4;
-              return response.json();
-            case 4:
-              result = _context6.v;
-              // {"status": "ok", "message": "POST received!"}
-              this.initialDataHash = hashArrayOfObjects(dataToSave);
-              // modal.destroy()
-              es_message.success({
-                content: t('save.success'),
-                key: 'save'
-              });
-              // console.log('Saved successfully:', result);
-              _context6.n = 6;
-              break;
             case 5:
-              _context6.p = 5;
-              _t2 = _context6.v;
+              _context8.n = 6;
+              return response.json();
+            case 6:
+              result = _context8.v;
+              // {"status": "ok", "message": "POST received!"}
+
+              // 保存成功后清除变更跟踪
+              this.painter.clearChangeTracking();
+              this.initialDataHash = hashArrayOfObjects(this.painter.getData());
+
+              // modal.destroy()
+              // Check if the operation was a deletion
+              hasDeleted = changedAnnotations.some(function (ann) {
+                return ann._changeType === 'deleted';
+              });
+              successMessage = hasDeleted ? 'Deleted successfully' : t('save.success'); // message.success({
+              //     content: t('save.success'),
+              //     key: 'save',
+              // });
+              window.CustomMessage.success(successMessage, 2);
+              // console.log('Saved successfully:', result);
+              _context8.n = 8;
+              break;
+            case 7:
+              _context8.p = 7;
+              _t4 = _context8.v;
               // const modal = Modal.info({
               //     content: <Space><SyncOutlined spin />{t('save.start')}</Space>,
               //     closable: false,
@@ -119298,18 +119811,18 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
               modal = es_modal.info({
                 type: 'error',
                 content: t('save.fail', {
-                  value: _t2 === null || _t2 === void 0 ? void 0 : _t2.message
+                  value: _t4 === null || _t4 === void 0 ? void 0 : _t4.message
                 }),
                 closable: true,
                 okButtonProps: {
                   loading: false
                 }
               });
-              console.error('Error while saving data:', _t2);
-            case 6:
-              return _context6.a(2);
+              console.error('Error while saving data:', _t4);
+            case 8:
+              return _context8.a(2);
           }
-        }, _callee6, this, [[1, 5]]);
+        }, _callee8, this, [[2, 7]]);
       }));
       function saveData() {
         return _saveData.apply(this, arguments);
@@ -119319,10 +119832,10 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
   }, {
     key: "exportPdf",
     value: function () {
-      var _exportPdf = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee7() {
+      var _exportPdf = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee9() {
         var dataToSave, modal;
-        return src_regenerator().w(function (_context7) {
-          while (1) switch (_context7.n) {
+        return src_regenerator().w(function (_context9) {
+          while (1) switch (_context9.n) {
             case 0:
               dataToSave = this.painter.getData();
               modal = es_modal.info({
@@ -119338,7 +119851,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 },
                 okText: t('normal.ok')
               });
-              _context7.n = 1;
+              _context9.n = 1;
               return exportAnnotationsToPdf(this.PDFJS_PDFViewerApplication, dataToSave);
             case 1:
               modal.update({
@@ -119351,9 +119864,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 }
               });
             case 2:
-              return _context7.a(2);
+              return _context9.a(2);
           }
-        }, _callee7, this);
+        }, _callee9, this);
       }));
       function exportPdf() {
         return _exportPdf.apply(this, arguments);
@@ -119363,10 +119876,10 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
   }, {
     key: "printPdf",
     value: function () {
-      var _printPdf = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee8() {
+      var _printPdf = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee0() {
         var dataToSave, modal;
-        return src_regenerator().w(function (_context8) {
-          while (1) switch (_context8.n) {
+        return src_regenerator().w(function (_context0) {
+          while (1) switch (_context0.n) {
             case 0:
               dataToSave = this.painter.getData();
               modal = es_modal.info({
@@ -119382,14 +119895,14 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 },
                 okText: t('normal.ok')
               });
-              _context8.n = 1;
+              _context0.n = 1;
               return printAnnotationsToPdf(this.PDFJS_PDFViewerApplication, dataToSave);
             case 1:
               modal.destroy();
             case 2:
-              return _context8.a(2);
+              return _context0.a(2);
           }
-        }, _callee8, this);
+        }, _callee0, this);
       }));
       function printPdf() {
         return _printPdf.apply(this, arguments);
@@ -119399,13 +119912,13 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
   }, {
     key: "exportExcel",
     value: function () {
-      var _exportExcel = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee9() {
+      var _exportExcel = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee1() {
         var annotations;
-        return src_regenerator().w(function (_context9) {
-          while (1) switch (_context9.n) {
+        return src_regenerator().w(function (_context1) {
+          while (1) switch (_context1.n) {
             case 0:
               annotations = this.painter.getData();
-              _context9.n = 1;
+              _context1.n = 1;
               return exportAnnotationsToExcel(this.PDFJS_PDFViewerApplication, annotations);
             case 1:
               es_modal.info({
@@ -119418,9 +119931,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 }
               });
             case 2:
-              return _context9.a(2);
+              return _context1.a(2);
           }
-        }, _callee9, this);
+        }, _callee1, this);
       }));
       function exportExcel() {
         return _exportExcel.apply(this, arguments);
