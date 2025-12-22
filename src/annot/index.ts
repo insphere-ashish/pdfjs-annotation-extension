@@ -56,7 +56,7 @@ const parserMap: {
 const flattenParserMap: {
     [key: number]: new (pdfDoc: PDFDocument, page: PDFPage, ann: IAnnotationStore) => AnnotationParser
 } = {
-    [PdfjsAnnotationType.TEXT]: TextFlattenParser,
+    // [PdfjsAnnotationType.TEXT]: TextFlattenParser, // Comment annotations not shown in print
     [PdfjsAnnotationType.HIGHLIGHT]: HighlightFlattenParser,
     [PdfjsAnnotationType.UNDERLINE]: UnderlineFlattenParser,
     [PdfjsAnnotationType.STRIKEOUT]: StrikeOutFlattenParser,
@@ -80,6 +80,11 @@ const flattenParserMap: {
 async function parseAnnotationToPdf(annotation: IAnnotationStore, page: PDFPage, pdfDoc: PDFDocument, useFlattenMode: boolean = false): Promise<void> {
     const parserMapToUse = useFlattenMode ? flattenParserMap : parserMap
     const ParserClass = parserMapToUse[annotation.pdfjsType]
+    
+    if (useFlattenMode) {
+        console.log(`[parseAnnotationToPdf] Processing ${annotation.pdfjsType} annotation in flatten mode`)
+    }
+    
     if (ParserClass) {
         const parser = new ParserClass(pdfDoc, page, annotation)
         await parser.parse()

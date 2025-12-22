@@ -17,10 +17,12 @@ export class InkFlattenParser extends AnnotationParser {
         const groupY = konvaGroup.attrs.y || 0
         const scaleX = konvaGroup.attrs.scaleX || 1
         const scaleY = konvaGroup.attrs.scaleY || 1
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 1
         
         const firstLine = lines[0]?.attrs || {}
-        const strokeWidth = firstLine.strokeWidth ?? 2
+        const strokeWidth = (firstLine.strokeWidth ?? 2) * Math.max(scaleX, scaleY)
         const color = firstLine.stroke ?? annotation.color ?? 'rgb(255, 0, 0)'
+        const opacity = firstLine.opacity !== undefined ? firstLine.opacity : groupOpacity
         
         // Parse color
         const { r, g, b } = parseColor(color)
@@ -28,6 +30,7 @@ export class InkFlattenParser extends AnnotationParser {
         // Draw each line using multiple drawLine calls with round caps for smooth appearance
         for (const line of lines) {
             const points = line.attrs.points as number[]
+            const lineOpacity = line.attrs.opacity !== undefined ? line.attrs.opacity : opacity
             
             // Draw lines between consecutive points with round caps for smoothness
             for (let i = 0; i < points.length - 2; i += 2) {
@@ -41,7 +44,7 @@ export class InkFlattenParser extends AnnotationParser {
                     end: { x: x2, y: pageHeight - y2 },
                     thickness: strokeWidth,
                     color: rgb(r, g, b),
-                    opacity: 0.8,
+                    opacity: lineOpacity,
                     lineCap: 2 // Round cap for smooth connections
                 })
             }

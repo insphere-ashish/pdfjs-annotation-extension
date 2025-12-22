@@ -810,6 +810,42 @@ export class Painter {
         return this.store.annotations
     }
 
+    /**
+     * @description 获取所有变更的注释（创建、修改、删除）
+     * @returns 变更的注释数组
+     */
+    public getChangedAnnotations() {
+        return this.store.getChangedAnnotations()
+    }
+
+    /**
+     * @description 清除变更跟踪
+     */
+    public clearChangeTracking() {
+        this.store.clearChangeTracking()
+    }
+
+    /**
+     * @description 检查是否有未保存的变更
+     */
+    public hasChanges() {
+        return this.store.hasChanges()
+    }
+
+    /**
+     * @description 检查页面是否已加载注释
+     */
+    public isPageLoaded(pageNumber: number): boolean {
+        return this.store.isPageLoaded(pageNumber)
+    }
+
+    /**
+     * @description 加载或更新页面的注释
+     */
+    public async loadPageAnnotations(pageNumber: number, annotations: IAnnotationStore[]): Promise<void> {
+        this.store.loadPageAnnotations(pageNumber, annotations, true)
+    }
+
     // custom method to clear all data -- otherwise the annotations were showing as before from the older file
     public clearData(this: Painter) {
         this.store = new Store({ pdfViewerApplication : this.pdfViewerApplication })

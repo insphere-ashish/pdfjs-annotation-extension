@@ -11,32 +11,58 @@ export class LineFlattenParser extends AnnotationParser {
         const pageHeight = page.getHeight()
         
         const konvaGroup = JSON.parse(annotation.konvaString)
+        
+        console.log('[LineFlattenParser] Full konva group:', konvaGroup)
+        console.log('[LineFlattenParser] Children:', konvaGroup.children.map((c: any) => ({ 
+            className: c.className, 
+            hasPoints: !!c.attrs.points,
+            pointsLength: c.attrs.points?.length 
+        })))
+        
         const arrows = konvaGroup.children.filter((item: any) => item.className === 'Arrow')
         
         const groupX = konvaGroup.attrs.x || 0
         const groupY = konvaGroup.attrs.y || 0
         const scaleX = konvaGroup.attrs.scaleX || 1
         const scaleY = konvaGroup.attrs.scaleY || 1
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 1
         
         const firstArrow = arrows[0]?.attrs || {}
-        const strokeWidth = firstArrow.strokeWidth ?? 2
+        // Use average of scales for uniform properties like stroke width
+        const avgScale = (scaleX + scaleY) / 2
+        const strokeWidth = (firstArrow.strokeWidth ?? 2) * avgScale
         const color = firstArrow.stroke ?? annotation.color ?? 'rgb(255, 0, 0)'
-        const pointerLength = firstArrow.pointerLength ?? 10
-        const pointerWidth = firstArrow.pointerWidth ?? 10
+        // For pointer dimensions, use the scale in the direction of the arrow
+        // We'll calculate this per arrow based on its angle
+        const pointerLength = (firstArrow.pointerLength ?? 10) * avgScale
+        const pointerWidth = (firstArrow.pointerWidth ?? 10) * avgScale
+        const opacity = firstArrow.opacity !== undefined ? firstArrow.opacity : groupOpacity
         
         // Parse color
         const { r, g, b } = parseColor(color)
         
+        console.log('[LineFlattenParser] Arrow config:', {
+            strokeWidth, originalStrokeWidth: firstArrow.strokeWidth,
+            pointerLength, originalPointerLength: firstArrow.pointerLength,
+            pointerWidth, originalPointerWidth: firstArrow.pointerWidth,
+            scaleX, scaleY, groupX, groupY, opacity, color
+        })
+        
         // Draw each arrow
         for (const arrow of arrows) {
             const points = arrow.attrs.points as number[]
+            const arrowOpacity = arrow.attrs.opacity !== undefined ? arrow.attrs.opacity : opacity
             
             if (points.length >= 4) {
-                // Get start and end points
+                // Get start and end points with scale
                 const startX = groupX + points[0] * scaleX
                 const startY = groupY + points[1] * scaleY
                 const endX = groupX + points[points.length - 2] * scaleX
                 const endY = groupY + points[points.length - 1] * scaleY
+                
+                console.log('[LineFlattenParser] Arrow points:', {
+                    points, startX, startY, endX, endY
+                })
                 
                 // Draw all line segments with round caps for smooth connections
                 for (let i = 0; i < points.length - 2; i += 2) {
@@ -50,7 +76,7 @@ export class LineFlattenParser extends AnnotationParser {
                         end: { x: x2, y: pageHeight - y2 },
                         thickness: strokeWidth,
                         color: rgb(r, g, b),
-                        opacity: 0.8,
+                        opacity: arrowOpacity,
                         lineCap: 2 // Round cap
                     })
                 }
@@ -58,15 +84,16 @@ export class LineFlattenParser extends AnnotationParser {
                 // Draw arrowhead at the end point
                 this.drawArrowhead(
                     page,
-                    points[points.length - 4] ? groupX + points[points.length - 4] * scaleX : startX,
-                    points[points.length - 3] ? groupY + points[points.length - 3] * scaleY : startY,
+                    points[points.length - 4] ? groupX + points[points.length - 4] : startX,
+                    points[points.length - 3] ? groupY + points[points.length - 3] : startY,
                     endX,
                     endY,
                     pageHeight,
-                    pointerLength * Math.max(scaleX, scaleY),
-                    pointerWidth * Math.max(scaleX, scaleY),
+                    pointerLength,
+                    pointerWidth,
                     strokeWidth,
-                    rgb(r, g, b)
+                    rgb(r, g, b),
+                    arrowOpacity
                 )
             }
         }
@@ -82,21 +109,30 @@ export class LineFlattenParser extends AnnotationParser {
         pointerLength: number,
         pointerWidth: number,
         strokeWidth: number,
-        color: any
+        color: any,
+        opacity: number
     ) {
         // Calculate angle of the line
         const angle = Math.atan2(toY - fromY, toX - fromX)
         
-        // Calculate arrowhead points
-        const arrowAngle = Math.PI / 6 // 30 degrees
+        // Calculate arrowhead points using pointerWidth for the spread
+        // pointerWidth determines how wide the arrowhead is
+        const halfWidth = pointerWidth / 2
         
-        // Left point of arrowhead
-        const leftX = toX - pointerLength * Math.cos(angle - arrowAngle)
-        const leftY = toY - pointerLength * Math.sin(angle - arrowAngle)
+        // Calculate perpendicular angle for width
+        const perpAngle = angle + Math.PI / 2
         
-        // Right point of arrowhead
-        const rightX = toX - pointerLength * Math.cos(angle + arrowAngle)
-        const rightY = toY - pointerLength * Math.sin(angle + arrowAngle)
+        // Base point of arrowhead (back from tip by pointerLength)
+        const baseX = toX - pointerLength * Math.cos(angle)
+        const baseY = toY - pointerLength * Math.sin(angle)
+        
+        // Left point of arrowhead (perpendicular from base)
+        const leftX = baseX + halfWidth * Math.cos(perpAngle)
+        const leftY = baseY + halfWidth * Math.sin(perpAngle)
+        
+        // Right point of arrowhead (perpendicular from base, other side)
+        const rightX = baseX - halfWidth * Math.cos(perpAngle)
+        const rightY = baseY - halfWidth * Math.sin(perpAngle)
         
         // Draw left side of arrowhead
         page.drawLine({
@@ -104,7 +140,7 @@ export class LineFlattenParser extends AnnotationParser {
             end: { x: leftX, y: pageHeight - leftY },
             thickness: strokeWidth,
             color: color,
-            opacity: 0.8,
+            opacity: opacity,
             lineCap: 2
         })
         
@@ -114,7 +150,7 @@ export class LineFlattenParser extends AnnotationParser {
             end: { x: rightX, y: pageHeight - rightY },
             thickness: strokeWidth,
             color: color,
-            opacity: 0.8,
+            opacity: opacity,
             lineCap: 2
         })
     }

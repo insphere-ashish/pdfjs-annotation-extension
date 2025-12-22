@@ -1,5 +1,6 @@
 import { AnnotationParser } from './parse'
 import { rgb } from 'pdf-lib'
+import { parseColor } from './color_utils'
 
 /**
  * HighlightFlattenParser - Draws highlight rectangles directly on page (truly flattened for printing)
@@ -15,13 +16,15 @@ export class HighlightFlattenParser extends AnnotationParser {
         
         // Extract color
         const color = annotation.color || '#FFFF00'
-        const r = parseInt(color.slice(1, 3), 16) / 255
-        const g = parseInt(color.slice(3, 5), 16) / 255
-        const b = parseInt(color.slice(5, 7), 16) / 255
+        const { r, g, b } = parseColor(color)
+        
+        // Get default opacity from group or use 0.3 for highlights
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 0.3
         
         // Draw each highlight rectangle
         for (const rect of rects) {
             const { x, y, width, height } = rect.attrs
+            const rectOpacity = rect.attrs.opacity !== undefined ? rect.attrs.opacity : groupOpacity
             const pdfX = x
             const pdfY = pageHeight - y - height
             
@@ -31,7 +34,7 @@ export class HighlightFlattenParser extends AnnotationParser {
                 width: width,
                 height: height,
                 color: rgb(r, g, b),
-                opacity: 0.3, // Semi-transparent for highlight effect
+                opacity: rectOpacity,
                 borderWidth: 0
             })
         }

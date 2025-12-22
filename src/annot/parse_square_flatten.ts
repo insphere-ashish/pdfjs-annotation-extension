@@ -19,6 +19,7 @@ export class SquareFlattenParser extends AnnotationParser {
         const groupY = konvaGroup.attrs.y || 0
         const scaleX = konvaGroup.attrs.scaleX || 1
         const scaleY = konvaGroup.attrs.scaleY || 1
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 1
         
         // Extract color
         const color = annotation.color || '#FF0000'
@@ -27,11 +28,13 @@ export class SquareFlattenParser extends AnnotationParser {
         // Draw each rectangle
         for (const rect of rects) {
             const attrs = rect.attrs
-            const x = (attrs.x || 0) * scaleX + groupX
-            const y = (attrs.y || 0) * scaleY + groupY
+            // Apply scale transformations
+            const x = groupX + (attrs.x || 0) * scaleX
+            const y = groupY + (attrs.y || 0) * scaleY
             const width = (attrs.width || 0) * scaleX
             const height = (attrs.height || 0) * scaleY
-            const strokeWidth = attrs.strokeWidth || 2
+            const strokeWidth = (attrs.strokeWidth || 2) * Math.max(scaleX, scaleY)
+            const opacity = attrs.opacity !== undefined ? attrs.opacity : groupOpacity
             
             // Convert to PDF coordinates (bottom-up)
             const pdfX = x
@@ -45,7 +48,7 @@ export class SquareFlattenParser extends AnnotationParser {
                 height: height,
                 borderColor: rgb(r, g, b),
                 borderWidth: strokeWidth,
-                opacity: 0.8
+                opacity: opacity
             })
         }
     }

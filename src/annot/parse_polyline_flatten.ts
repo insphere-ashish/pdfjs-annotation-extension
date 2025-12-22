@@ -17,10 +17,12 @@ export class PolylineFlattenParser extends AnnotationParser {
         const groupY = konvaGroup.attrs.y || 0
         const scaleX = konvaGroup.attrs.scaleX || 1
         const scaleY = konvaGroup.attrs.scaleY || 1
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 1
         
         const firstPath = paths[0]?.attrs || {}
-        const strokeWidth = firstPath.strokeWidth ?? 2
+        const strokeWidth = (firstPath.strokeWidth ?? 2) * Math.max(scaleX, scaleY)
         const color = firstPath.stroke ?? annotation.color ?? 'rgb(255, 0, 0)'
+        const opacity = firstPath.opacity !== undefined ? firstPath.opacity : groupOpacity
         
         // Parse color
         const { r, g, b } = parseColor(color)
@@ -29,6 +31,7 @@ export class PolylineFlattenParser extends AnnotationParser {
         for (const path of paths) {
             const pathData = path.attrs.data as string
             const points = this.parseSvgPathToPoints(pathData)
+            const pathOpacity = path.attrs.opacity !== undefined ? path.attrs.opacity : opacity
             
             // Draw lines between consecutive points
             for (let i = 0; i < points.length - 2; i += 2) {
@@ -42,7 +45,7 @@ export class PolylineFlattenParser extends AnnotationParser {
                     end: { x: x2, y: pageHeight - y2 },
                     thickness: strokeWidth,
                     color: rgb(r, g, b),
-                    opacity: 0.8,
+                    opacity: pathOpacity,
                     lineCap: 2 // Round cap
                 })
             }

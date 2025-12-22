@@ -15,6 +15,10 @@ export class TextFlattenParser extends AnnotationParser {
         const x = rect.x
         const y = pageHeight - rect.y - rect.height
         
+        // Parse konva string to get opacity from group if available
+        const konvaGroup = JSON.parse(annotation.konvaString)
+        const groupOpacity = konvaGroup.attrs?.opacity !== undefined ? konvaGroup.attrs.opacity : 0.8
+        
         // Extract color
         const color = annotation.color || '#FFFF00'
         const { r, g, b } = parseColor(color)
@@ -25,7 +29,7 @@ export class TextFlattenParser extends AnnotationParser {
             y: y + 10,
             size: 10,
             color: rgb(r, g, b),
-            opacity: 0.8
+            opacity: groupOpacity
         })
         
         // Draw "N" text to indicate it's a note

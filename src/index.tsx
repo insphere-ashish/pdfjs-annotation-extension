@@ -447,6 +447,67 @@ class PdfjsAnnotationExtension {
     }
 
     /**
+     * @description Show session expired popup
+     * @param message - The message to display
+     */
+    private showSessionExpiredPopup(message: string): void {
+        if (typeof (window as any).showSessionExpiredPopup === 'function') {
+            (window as any).showSessionExpiredPopup(message)
+        } else {
+            Modal.error({
+                content: message,
+                closable: false,
+                okButtonProps: {
+                    loading: false
+                },
+                okText: t('normal.ok'),
+                onOk: () => {
+                    // Optionally reload or redirect to login
+                    window.location.reload()
+                }
+            })
+        }
+    }
+
+    /**
+     * @description 获取当前可见的页码
+     * @returns 页码数组
+     */
+    private getVisiblePages(): number[] {
+        const visiblePages: number[] = []
+        const pdfViewer = this.PDFJS_PDFViewerApplication.pdfViewer
+        
+        if (!pdfViewer || !pdfViewer._pages) {
+            return visiblePages
+        }
+
+        // 获取所有页面
+        for (let i = 0; i < pdfViewer._pages.length; i++) {
+            const pageView = pdfViewer._pages[i]
+            if (pageView && pageView.div) {
+                // 检查页面是否在视口中
+                const rect = pageView.div.getBoundingClientRect()
+                const isVisible = (
+                    rect.top < window.innerHeight &&
+                    rect.bottom > 0 &&
+                    rect.left < window.innerWidth &&
+                    rect.right > 0
+                )
+                if (isVisible) {
+                    visiblePages.push(pageView.id)
+                }
+            }
+        }
+
+        // 如果没有找到可见页面，至少返回当前页
+        if (visiblePages.length === 0 && pdfViewer.currentPageNumber) {
+            visiblePages.push(pdfViewer.currentPageNumber)
+        }
+
+        return visiblePages
+    }
+
+    /**
      * @description 绑定 PDF.js 相关事件
      */
     private bindPdfjsEvents(): void {
@@ -469,6 +530,18 @@ class PdfjsAnnotationExtension {
                 // console.log('pagerendered', pageNumber)
                 // console.log('pageView source', source)
                 this.painter.initCanvas({ pageView: source, cssTransform, pageNumber })
+                
+                // 延迟加载该页面的注释
+                if (this.loadEnd && !this.painter.isPageLoaded(pageNumber)) {
+                    const pageAnnotations = await this.getPageAnnotations(pageNumber)
+                    if (pageAnnotations.length > 0) {
+                        await this.painter.loadPageAnnotations(pageNumber, pageAnnotations)
+                        // 通知评论组件更新
+                        pageAnnotations.forEach(annotation => {
+                            this.customCommentRef.current?.addAnnotation(annotation)
+                        })
+                    }
+                }
             }
         )
 
@@ -479,14 +552,88 @@ class PdfjsAnnotationExtension {
             this.clearInitialDataHash(); // custom code -- clear all existing annotations when a new document is loaded
             this.painter.clearData();// custom code -- clear all existing annotations when a new document is loaded
             this.painter.initWebSelection(this.$PDFJS_viewerContainer)
+            
+            // 首先加载评论类型的批注（类型 5 和 11）
+            const commentAnnotations = await this.getCommentAnnotations()
+            if (commentAnnotations.length > 0) {
+                await this.painter.initAnnotations(commentAnnotations, false)
+                commentAnnotations.forEach(annotation => {
+                    this.customCommentRef.current?.addAnnotation(annotation)
+                })
+            }
+            
+            // 然后加载其他可见页面的批注
             const data = await this.getData()
-            this.initialDataHash = hashArrayOfObjects(data)
+            this.initialDataHash = hashArrayOfObjects([...commentAnnotations, ...data])
             // console.log('%c [ initialDataHash - data ]', 'font-size:13px; background:#d10d00; color:#ff5144;', data) 
             await this.painter.initAnnotations(data, defaultOptions.setting.LOAD_PDF_ANNOTATION)
             if (this.loadEnd) {
                 this.updatePdfjs()
             }
         })
+    }
+
+    /**
+     * @description 获取评论类型的批注数据（类型 5 和 11）
+     * @returns 
+     */
+    private async getCommentAnnotations(): Promise<any[]> {
+        const getUrl = document.getElementById('docViewerContainer')?.dataset['annoGet'];
+        if (!getUrl) {
+            return [];
+        }
+        try {
+            const separator = getUrl.includes('?') ? '&' : '?'
+            const fetchUrl = `${getUrl}${separator}type=comments`
+            
+            const response = await fetch(fetchUrl, { method: 'GET' });
+
+            if (response.status === 401) {
+                this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+                return [];
+            }
+
+            if (!response.ok) {
+                const errorMessage = `HTTP Error ${response.status}: ${response.statusText || 'Unknown Status'}`;
+                throw new Error(errorMessage);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Fetch error for comment annotations:', error);
+            return [];
+        }
+    }
+
+    /**
+     * @description 获取指定页面的批注数据
+     * @param pageNumber - 页码
+     * @returns 
+     */
+    private async getPageAnnotations(pageNumber: number): Promise<any[]> {
+        const getUrl = document.getElementById('docViewerContainer')?.dataset['annoGet'];
+        if (!getUrl) {
+            return [];
+        }
+        try {
+            const separator = getUrl.includes('?') ? '&' : '?'
+            const fetchUrl = `${getUrl}${separator}pages=${pageNumber}`
+            
+            const response = await fetch(fetchUrl, { method: 'GET' });
+
+            if (response.status === 401) {
+                this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+                return [];
+            }
+
+            if (!response.ok) {
+                const errorMessage = `HTTP Error ${response.status}: ${response.statusText || 'Unknown Status'}`;
+                throw new Error(errorMessage);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Fetch error for page', pageNumber, ':', error);
+            return [];
+        }
     }
 
     /**
@@ -509,7 +656,30 @@ class PdfjsAnnotationExtension {
                 content: t('normal.processing'),
                 duration: 0,
             });
-            const response = await fetch(getUrl, { method: 'GET' });
+
+            // 获取可见页面
+            const visiblePages = this.getVisiblePages()
+            
+            // 构建带页码参数的URL
+            let fetchUrl = getUrl
+            if (visiblePages.length > 0) {
+                const separator = getUrl.includes('?') ? '&' : '?'
+                fetchUrl = `${getUrl}${separator}pages=${visiblePages.join(',')}`
+            }
+
+            const response = await fetch(fetchUrl, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            });
+
+            if (response.status === 401) {
+                this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+                return [];
+            }
 
             if (!response.ok) {
                 const errorMessage = `HTTP Error ${response.status}: ${response.statusText || 'Unknown Status'}`;
@@ -537,8 +707,18 @@ class PdfjsAnnotationExtension {
      * @returns 
      */
     private async saveData(): Promise<void> {
-        const dataToSave = this.painter.getData();
-        // console.log('%c [ dataToSave ]', 'font-size:13px; background:#d10d00; color:#ff5144;', dataToSave)
+        // 获取变更的注释而不是所有注释
+        const changedAnnotations = this.painter.getChangedAnnotations();
+        
+        console.log('[saveData] Changed annotations to save:', changedAnnotations)
+        
+        // 如果没有变更，不需要保存
+        if (changedAnnotations.length === 0) {
+            console.log('[saveData] No changes to save');
+            return;
+        }
+
+        // console.log('%c [ changedAnnotations ]', 'font-size:13px; background:#d10d00; color:#ff5144;', changedAnnotations)
         // const postUrl = this.getOption(HASH_PARAMS_POST_URL);
         const postUrl = document.getElementById('docViewerContainer').dataset['annoPost'];
         if (!postUrl) {
@@ -559,20 +739,39 @@ class PdfjsAnnotationExtension {
         try {
             const response = await fetch(postUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataToSave),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(changedAnnotations),
             });
+            
+            if (response.status === 401) {
+                this.showSessionExpiredPopup('Your session has expired. Please log in again.');
+                return;
+            }
+            
             if (!response.ok) {
                 throw new Error(`Failed to save PDF. Status: ${response.status} ${response.statusText}`);
             }
             const result = await response.json();
             // {"status": "ok", "message": "POST received!"}
-            this.initialDataHash = hashArrayOfObjects(dataToSave)
+            
+            // 保存成功后清除变更跟踪
+            this.painter.clearChangeTracking()
+            this.initialDataHash = hashArrayOfObjects(this.painter.getData())
+            
             // modal.destroy()
-            message.success({
-                content: t('save.success'),
-                key: 'save',
-            });
+            // Check if the operation was a deletion
+            const hasDeleted = changedAnnotations.some(ann => ann._changeType === 'deleted');
+            const successMessage = hasDeleted ? 'Deleted successfully' : t('save.success');
+            // message.success({
+            //     content: t('save.success'),
+            //     key: 'save',
+            // });
+            (window as any).CustomMessage.success(successMessage,2);
             // console.log('Saved successfully:', result);
         } catch (error) {
             // const modal = Modal.info({
@@ -1143,7 +1342,8 @@ class PdfjsAnnotationExtension {
             if (!resp || resp.result !== 'success') {
                 throw new Error(resp?.error || 'Save failed.');
             }
-            message.success(t('save.success'),{duration: 5});
+            // message.success(t('save.success'),{duration: 2});
+            (window as any).CustomMessage.success(t('save.success'),2);
             this.shareModalInstance && this.shareModalInstance.hide();
         })
         // .catch(function (error) {

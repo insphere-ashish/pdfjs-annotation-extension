@@ -23579,7 +23579,7 @@ const selectOrdinal = () => '';
 ;// ./src/locale/zh-cn.json
 const zh_cn_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"批注","annotations":{"select":"选择","highlight":"高亮","strikeout":"删除线","underline":"下划线","rectangle":"矩形","circle":"圆形","freehand":"自由绘制","freeHighlight":"自由高亮","freeText":"文字","signature":"签名","stamp":"盖章","note":"注解","arrow":"箭头","cloud":"云线"},"toolbar":{"buttons":{"createSignature":"创建签名","uploadImages":"上传图片","createStamp":"创建印章"},"message":{"selectPosition":"请选择放置位置","signatureArea":"签名处","uploadArea":"上传区域","uploadHint":"点击上传或请将图片拖拽到此处，支持格式{{format}}, 最大 {{maxSize}}"}},"editor":{"text":{"startTyping":"开始输入..."},"stamp":{"stampText":"印章内容","fontStyle":"字体样式","fontFamily":"字体","textColor":"文字颜色","backgroundColor":"背景颜色","borderColor":"边框颜色","borderStyle":"边框样式","timestampText":"时间戳","customTimestamp":"自定义","username":"用户名","date":"日期","time":"时间","dateFormat":"日期格式","solid":"实线","dashed":"虚线","defaultText":"草稿"}},"normal":{"ok":"确定","cancel":"取消","clear":"清空","fileSizeLimit":"文件大小超出 {{value}} 限制","deleteConfirm":"是否删除","yes":"是","no":"否","example":"例如：","color":"颜色","export":"导出","save":"保存","reply":"回复","edit":"编辑","delete":"删除","confirm":"确认","unknownUser":"不具名用户","processing":"处理中，请稍候...","filter":"过滤","author":"作者","type":"类型","selectAll":"全选","more":"更多","draw":"绘制","enter":"输入","upload":"上传","default":"默认","custom":"自定义","strokeWidth":"笔触宽度","opacity":"透明度"},"comment":{"total":" {{value}} 条批注","page":"第{{value}}页","status":{"accepted":"接受","rejected":"拒绝","cancelled":"取消","completed":"完成","none":"无","closed":"关闭"},"statusText":"将状态设置为 “{{value}}”"},"pdf":{"generationSuccess":"文件已生成！"},"dateFormat":{"full":"{{year}}-{{month}}-{{day}} {{hour}}:{{minute}}","dayMonth":"{{month}}-{{day}}","dayMonthYear":"{{year}}-{{month}}-{{day}}"},"save":{"start":"正在保存...","success":"保存成功！","fail":"保存失败，错误代码： {{value}}","noPostUrl":"未找到参数: {{value}}"},"load":{"fail":"外部批注加载失败，{{value}}"},"export":{"fields":{"id":"ID","page":"页码","author":"用户","date":"日期","content":"内容","status":"状态","annotationType":"批注类型","recordType":"类型"},"recordType":{"annotation":"批注","reply":"回复"}}}');
 ;// ./src/locale/en-us.json
-const en_us_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Comment","annotations":{"select":"Select","highlight":"Highlight","strikeout":"Strikeout","underline":"Underline","rectangle":"Rectangle","circle":"Circle","freehand":"Free Hand","freeHighlight":"Free Highlight","freeText":"Text","signature":"Signature","stamp":"Stamp","note":"Note","arrow":"Arrow","cloud":"Cloud"},"toolbar":{"buttons":{"createSignature":"Create signature","uploadImage":"Upload Image","createStamp":"Create Stamp"},"message":{"selectPosition":"Please select a position","signatureArea":"Signature","uploadArea":"Upload Area","uploadHint":"Click to upload or drag and drop to here {{format}}, maxSize {{maxSize}}"}},"editor":{"text":{"startTyping":"Start typing…"},"stamp":{"stampText":"Stamp Text","fontStyle":"Font Style","fontFamily":"Font Family","textColor":"Text Color","backgroundColor":"Background Color","borderColor":"Border Color","borderStyle":"Border Style","timestampText":"Timestamp Text","customTimestamp":"Custom Text","username":"Username","date":"Date","time":"Time","dateFormat":"Date Format","solid":"Solid","dashed":"Dashed","defaultText":"Draft"}},"normal":{"ok":"OK","cancel":"Cancel","clear":"Clear","fileSizeLimit":"The file size exceeds the {{value}} limit","deleteConfirm":"Are you sure you want to delete?","yes":"Yes","no":"No","example":"e.g. ","color":"Color","export":"Export","save":"Save","reply":"Reply","edit":"Edit","delete":"Delete","confirm":"Confirm","unknownUser":"Unknown User","processing":"Processing, please wait...","filter":"Filter","author":"Author","type":"Type","selectAll":"Select All","more":"More","less":"Less","draw":"Draw","enter":"Enter","upload":"Upload","default":"Default","custom":"Custom","strokeWidth":"Stroke","opacity":"Opacity"},"comment":{"total":"Comment {{value}}","page":"Page {{value}}","status":{"accepted":"Accepted","rejected":"Rejected","cancelled":"Cancelled","completed":"Completed","none":"None","closed":"Closed"},"statusText":"Set Status: {{value}}","required":"Please enter a comment","share":{"title":"Share Comment","noUsers":"No users selected to share the comment."}},"pdf":{"generationSuccess":"File has been successfully generated and downloaded"},"dateFormat":{"full":"{{month}}/{{day}}/{{year}} {{hour}}:{{minute}}","dayMonth":"{{month}}/{{day}}","dayMonthYear":"{{month}}/{{day}}/{{year}}"},"save":{"start":"Saving...","success":"Saved successfully!","fail":"Failed to save. {{value}}","noPostUrl":"{{value}} not found."},"load":{"fail":"Annotation Data Load Fail: {{value}}"},"export":{"fields":{"id":"ID","page":"Page","author":"Author","date":"Date","content":"Content","status":"Status","annotationType":"Annotation Type","recordType":"Type"},"recordType":{"annotation":"Annotation","reply":"Reply"}}}');
+const en_us_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Comment","annotations":{"select":"Select","highlight":"Highlight","strikeout":"Strikeout","underline":"Underline","rectangle":"Rectangle","circle":"Circle","freehand":"Free Hand","freeHighlight":"Free Highlight","freeText":"Text","signature":"Signature","stamp":"Stamp","note":"Note","arrow":"Arrow","cloud":"Cloud"},"toolbar":{"buttons":{"createSignature":"Create signature","uploadImage":"Upload Image","createStamp":"Create Stamp"},"message":{"selectPosition":"Please select a position","signatureArea":"Signature","uploadArea":"Upload Area","uploadHint":"Click to upload or drag and drop to here {{format}}, maxSize {{maxSize}}"}},"editor":{"text":{"startTyping":"Start typing…"},"stamp":{"stampText":"Stamp Text","fontStyle":"Font Style","fontFamily":"Font Family","textColor":"Text Color","backgroundColor":"Background Color","borderColor":"Border Color","borderStyle":"Border Style","timestampText":"Timestamp Text","customTimestamp":"Custom Text","username":"Username","date":"Date","time":"Time","dateFormat":"Date Format","solid":"Solid","dashed":"Dashed","defaultText":"Draft"}},"normal":{"ok":"OK","cancel":"Cancel","clear":"Clear","fileSizeLimit":"The file size exceeds the {{value}} limit","deleteConfirm":"Are you sure you want to delete?","yes":"Yes","no":"No","example":"e.g. ","color":"Color","export":"Export","save":"Save","print":"Print","reply":"Reply","edit":"Edit","delete":"Delete","confirm":"Confirm","unknownUser":"Unknown User","processing":"Processing, please wait...","filter":"Filter","author":"Author","type":"Type","selectAll":"Select All","more":"More","less":"Less","draw":"Draw","enter":"Enter","upload":"Upload","default":"Default","custom":"Custom","strokeWidth":"Stroke","opacity":"Opacity"},"comment":{"total":"Comment {{value}}","page":"Page {{value}}","status":{"accepted":"Accepted","rejected":"Rejected","cancelled":"Cancelled","completed":"Completed","none":"None","closed":"Closed"},"statusText":"Set Status: {{value}}","required":"Please enter a comment","share":{"title":"Share Comment","noUsers":"No users selected to share the comment."}},"pdf":{"generationSuccess":"File has been successfully generated and downloaded"},"dateFormat":{"full":"{{month}}/{{day}}/{{year}} {{hour}}:{{minute}}","dayMonth":"{{month}}/{{day}}","dayMonthYear":"{{month}}/{{day}}/{{year}}"},"save":{"start":"Saving...","success":"Saved successfully!","fail":"Failed to save. {{value}}","noPostUrl":"{{value}} not found."},"load":{"fail":"Annotation Data Load Fail: {{value}}"},"export":{"fields":{"id":"ID","page":"Page","author":"Author","date":"Date","content":"Content","status":"Status","annotationType":"Annotation Type","recordType":"Type"},"recordType":{"annotation":"Annotation","reply":"Reply"}}}');
 ;// ./src/locale/de-de.json
 const de_de_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Kommentare","annotations":{"select":"Auswählen","highlight":"Hervorheben","strikeout":"Durchstreichen","underline":"Unterstreichen","rectangle":"Rechteck","circle":"Kreis","freehand":"Freihand","freeHighlight":"Hervorheben","freeText":"Text","signature":"Unterschrift","stamp":"Stempel","note":"Notiz","arrow":"Pfeil","cloud":"Wolke"},"toolbar":{"buttons":{"createSignature":"Unterschrift erstellen","uploadImage":"Bild hochladen","createStamp":"Stempel erstellen"},"message":{"selectPosition":"Bitte wählen Sie eine Position","signatureArea":"Unterschriftbereich","uploadArea":"Hochladebereich","uploadHint":"Klicken Sie zum Hochladen oder ziehen Sie die Bilddatei in diese Zone {{format}} {{maxSize}}"}},"editor":{"text":{"startTyping":"Tippen beginnen…"},"stamp":{"stampText":"Stempelinhalt","fontStyle":"Schriftart","fontFamily":"Schriftfamilie","textColor":"Textfarbe","backgroundColor":"Hintergrundfarbe","borderColor":"Randfarbe","borderStyle":"Randstil","timestampText":"Zeitstempel","customTimestamp":"Benutzerdefiniert","username":"Benutzername","date":"Datum","time":"Zeit","dateFormat":"Datumsformat","solid":"Solide","dashed":"Gestrichelt","defaultText":"Entwurf"}},"normal":{"ok":"OK","cancel":"Abbrechen","clear":"Löschen","fileSizeLimit":"Die Dateigröße überschreitet die {{value}}-Grenze","deleteConfirm":"Sind Sie sicher, dass Sie Folgendes löschen möchten?","yes":"Ja","no":"Nein","example":"z.B. ","color":"Farbe","export":"Export","save":"Speichern","reply":"Antworten","edit":"Bearbeiten","delete":"Löschen","confirm":"Bestätigen","unknownUser":"Unbekannter Benutzer","processing":"Bearbeitung, bitte warten...","filter":"Filter","author":"Autor","type":"Typ","selectAll":"Alle auswählen","more":"Mehr","draw":"Zeichnen","enter":"Eingeben","upload":"Hochladen","default":"Standard","custom":"Benutzerdefiniert","strokeWidth":"Strichbreite","opacity":"Deckkraft"},"comment":{"total":"Kommentare: {{value}}","page":"Seite {{value}}","status":{"accepted":"Akzeptiert","rejected":"Abgelehnt","cancelled":"Abgebrochen","completed":"Abgeschlossen","none":"Keine","closed":"Geschlossen"},"statusText":"Status festlegen: {{value}}"},"pdf":{"generationSuccess":"Datei wurde erfolgreich generiert und heruntergeladen"},"dateFormat":{"full":"{{day}}.{{month}}.{{year}} {{hour}}:{{minute}}","dayMonth":"{{day}}.{{month}}","dayMonthYear":"{{day}}.{{month}}.{{year}}"},"save":{"start":"Speichern...","success":"Erfolgreich gespeichert!","fail":"Speichern fehlgeschlagen. {{value}}","noPostUrl":"{{value}} nicht gefunden."},"export":{"fields":{"id":"ID","page":"Seite","author":"Autor","date":"Datum","content":"Inhalt","status":"Status","annotationType":"Anmerkungstyp","recordType":"Typ"},"recordType":{"annotation":"Anmerkung","reply":"Antwort"}}}');
 ;// ./src/locale/index.ts
@@ -27961,6 +27961,8 @@ var default_options_defaultOptions = {
     // 保存按钮
     EXPORT_PDF: true,
     // 导出pdf
+    PRINT_PDF: true,
+    // 打印pdf
     EXPORT_EXCEL: true,
     // 导出excel
     LOAD_PDF_ANNOTATION: true,
@@ -101034,6 +101036,24 @@ var CustomToolbar = /*#__PURE__*/(0,react.forwardRef)(function CustomToolbar(pro
           icon: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_FilePdfOutlined, {})
         })
       })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
+      className: "buttons print-anno-pdf",
+      style: {
+        display: 'block'
+      },
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+        title: "Print With Annotations",
+        className: "print-button",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)(es_button, {
+          block: true,
+          color: "primary",
+          variant: "outlined",
+          onClick: function onClick() {
+            props.onExport('print');
+          },
+          icon: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_FilePdfOutlined, {})
+        })
+      })
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
       className: "buttons",
       style: {
@@ -101051,7 +101071,7 @@ var CustomToolbar = /*#__PURE__*/(0,react.forwardRef)(function CustomToolbar(pro
           className: "name",
           children: t('normal.save')
         })]
-      }), (default_options_defaultOptions.setting.EXPORT_PDF || default_options_defaultOptions.setting.EXPORT_EXCEL) && /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+      }), (default_options_defaultOptions.setting.EXPORT_PDF || default_options_defaultOptions.setting.PRINT_PDF || default_options_defaultOptions.setting.EXPORT_EXCEL) && /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         title: t('normal.export'),
         children: /*#__PURE__*/(0,jsx_runtime.jsxs)(popover, {
           content: /*#__PURE__*/(0,jsx_runtime.jsxs)(space, {
@@ -101065,6 +101085,15 @@ var CustomToolbar = /*#__PURE__*/(0,react.forwardRef)(function CustomToolbar(pro
               },
               icon: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_FilePdfOutlined, {}),
               children: "PDF"
+            }), default_options_defaultOptions.setting.PRINT_PDF && /*#__PURE__*/(0,jsx_runtime.jsx)(es_button, {
+              block: true,
+              color: "primary",
+              variant: "outlined",
+              onClick: function onClick() {
+                props.onExport('print');
+              },
+              icon: /*#__PURE__*/(0,jsx_runtime.jsx)(icons_FilePdfOutlined, {}),
+              children: "Print"
             }), default_options_defaultOptions.setting.EXPORT_EXCEL && /*#__PURE__*/(0,jsx_runtime.jsx)(es_button, {
               block: true,
               color: "primary",
@@ -115064,7 +115093,9 @@ var SquareParser = /*#__PURE__*/function (_AnnotationParser) {
                 M: objects_PDFString.of(annotation.date || ''),
                 NM: objects_PDFString.of(annotation.id),
                 // 唯一标识
-                Border: [0, 0, 1] // 可选：设置边框样式为实线宽度1
+                Border: [0, 0, 1],
+                // 可选：设置边框样式为实线宽度1
+                F: 4 // Print flag (2 = Hidden, 4 = Print, 6 = Hidden+Print)
               });
               mainAnnRef = context.register(mainAnn);
               this.addAnnotationToPage(page, mainAnnRef);
@@ -115872,6 +115903,1304 @@ var PolylineParser = /*#__PURE__*/function (_AnnotationParser) {
     }()
   }]);
 }(AnnotationParser);
+;// ./src/annot/color_utils.ts
+/**
+ * Utility function to parse color strings into RGB values (0-1 range)
+ * Handles hex colors (#RGB, #RRGGBB) and rgb/rgba formats
+ */
+function color_utils_parseColor(color) {
+  var r = 1,
+    g = 0,
+    b = 0;
+  if (!color) {
+    return {
+      r: 1,
+      g: 0,
+      b: 0
+    };
+  }
+  if (color.startsWith('#')) {
+    // Handle hex color
+    var hex = color.slice(1);
+    if (hex.length === 6) {
+      r = parseInt(hex.slice(0, 2), 16) / 255;
+      g = parseInt(hex.slice(2, 4), 16) / 255;
+      b = parseInt(hex.slice(4, 6), 16) / 255;
+    } else if (hex.length === 3) {
+      // Short form: #RGB -> #RRGGBB
+      r = parseInt(hex[0] + hex[0], 16) / 255;
+      g = parseInt(hex[1] + hex[1], 16) / 255;
+      b = parseInt(hex[2] + hex[2], 16) / 255;
+    }
+  } else if (color.startsWith('rgb')) {
+    // Handle rgb(r, g, b) or rgba(r, g, b, a)
+    var match = color.match(/\d+/g);
+    if (match && match.length >= 3) {
+      r = parseInt(match[0]) / 255;
+      g = parseInt(match[1]) / 255;
+      b = parseInt(match[2]) / 255;
+    }
+  }
+
+  // Ensure values are valid numbers between 0 and 1
+  r = isNaN(r) ? 1 : Math.max(0, Math.min(1, r));
+  g = isNaN(g) ? 0 : Math.max(0, Math.min(1, g));
+  b = isNaN(b) ? 0 : Math.max(0, Math.min(1, b));
+  return {
+    r: r,
+    g: g,
+    b: b
+  };
+}
+;// ./src/annot/parse_square_flatten.ts
+function parse_square_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_square_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_square_flatten_typeof(o); }
+function parse_square_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_square_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_square_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_square_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_square_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_square_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_square_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_square_flatten_regeneratorDefine2(u), parse_square_flatten_regeneratorDefine2(u, o, "Generator"), parse_square_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_square_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_square_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_square_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_square_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_square_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_square_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_square_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_square_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_square_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_square_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_square_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_square_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_square_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_square_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_square_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_square_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_square_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_square_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_square_flatten_toPropertyKey(o.key), o); } }
+function parse_square_flatten_createClass(e, r, t) { return r && parse_square_flatten_defineProperties(e.prototype, r), t && parse_square_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_square_flatten_toPropertyKey(t) { var i = parse_square_flatten_toPrimitive(t, "string"); return "symbol" == parse_square_flatten_typeof(i) ? i : i + ""; }
+function parse_square_flatten_toPrimitive(t, r) { if ("object" != parse_square_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_square_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_square_flatten_callSuper(t, o, e) { return o = parse_square_flatten_getPrototypeOf(o), parse_square_flatten_possibleConstructorReturn(t, parse_square_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_square_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_square_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_square_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_square_flatten_assertThisInitialized(t); }
+function parse_square_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_square_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_square_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_square_flatten_getPrototypeOf(t) { return parse_square_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_square_flatten_getPrototypeOf(t); }
+function parse_square_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_square_flatten_setPrototypeOf(t, e); }
+function parse_square_flatten_setPrototypeOf(t, e) { return parse_square_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_square_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * SquareFlattenParser - Draws rectangles directly on page (truly flattened for printing)
+ * Uses actual konva rectangle data to preserve exact shape
+ */
+var SquareFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function SquareFlattenParser() {
+    parse_square_flatten_classCallCheck(this, SquareFlattenParser);
+    return parse_square_flatten_callSuper(this, SquareFlattenParser, arguments);
+  }
+  parse_square_flatten_inherits(SquareFlattenParser, _AnnotationParser);
+  return parse_square_flatten_createClass(SquareFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_square_flatten_asyncToGenerator(/*#__PURE__*/parse_square_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs;
+        var annotation, page, pageHeight, konvaGroup, rects, groupX, groupY, scaleX, scaleY, groupOpacity, color, _parseColor, r, g, b, _iterator, _step, rect, attrs, x, y, width, height, strokeWidth, opacity, pdfX, pdfY;
+        return parse_square_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight(); // Parse konva string to get rectangle data
+              konvaGroup = JSON.parse(annotation.konvaString);
+              rects = konvaGroup.children.filter(function (item) {
+                return item.className === 'Rect';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1; // Extract color
+              color = annotation.color || '#FF0000';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Draw each rectangle
+              _iterator = parse_square_flatten_createForOfIteratorHelper(rects);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  rect = _step.value;
+                  attrs = rect.attrs; // Apply scale transformations
+                  x = groupX + (attrs.x || 0) * scaleX;
+                  y = groupY + (attrs.y || 0) * scaleY;
+                  width = (attrs.width || 0) * scaleX;
+                  height = (attrs.height || 0) * scaleY;
+                  strokeWidth = (attrs.strokeWidth || 2) * Math.max(scaleX, scaleY);
+                  opacity = attrs.opacity !== undefined ? attrs.opacity : groupOpacity; // Convert to PDF coordinates (bottom-up)
+                  pdfX = x;
+                  pdfY = pageHeight - y - height; // Draw rectangle directly on page (this will print!)
+                  page.drawRectangle({
+                    x: pdfX,
+                    y: pdfY,
+                    width: width,
+                    height: height,
+                    borderColor: rgb(r, g, b),
+                    borderWidth: strokeWidth,
+                    opacity: opacity
+                  });
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_circle_flatten.ts
+function parse_circle_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_circle_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_circle_flatten_typeof(o); }
+function parse_circle_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_circle_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_circle_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_circle_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_circle_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_circle_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_circle_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_circle_flatten_regeneratorDefine2(u), parse_circle_flatten_regeneratorDefine2(u, o, "Generator"), parse_circle_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_circle_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_circle_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_circle_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_circle_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_circle_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_circle_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_circle_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_circle_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_circle_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_circle_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_circle_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_circle_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_circle_flatten_toPropertyKey(o.key), o); } }
+function parse_circle_flatten_createClass(e, r, t) { return r && parse_circle_flatten_defineProperties(e.prototype, r), t && parse_circle_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_circle_flatten_toPropertyKey(t) { var i = parse_circle_flatten_toPrimitive(t, "string"); return "symbol" == parse_circle_flatten_typeof(i) ? i : i + ""; }
+function parse_circle_flatten_toPrimitive(t, r) { if ("object" != parse_circle_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_circle_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_circle_flatten_callSuper(t, o, e) { return o = parse_circle_flatten_getPrototypeOf(o), parse_circle_flatten_possibleConstructorReturn(t, parse_circle_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_circle_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_circle_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_circle_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_circle_flatten_assertThisInitialized(t); }
+function parse_circle_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_circle_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_circle_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_circle_flatten_getPrototypeOf(t) { return parse_circle_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_circle_flatten_getPrototypeOf(t); }
+function parse_circle_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_circle_flatten_setPrototypeOf(t, e); }
+function parse_circle_flatten_setPrototypeOf(t, e) { return parse_circle_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_circle_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * CircleFlattenParser - Draws ellipses/circles directly on page (truly flattened for printing)
+ * Preserves the exact shape including ovals and irregular circular shapes
+ */
+var CircleFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function CircleFlattenParser() {
+    parse_circle_flatten_classCallCheck(this, CircleFlattenParser);
+    return parse_circle_flatten_callSuper(this, CircleFlattenParser, arguments);
+  }
+  parse_circle_flatten_inherits(CircleFlattenParser, _AnnotationParser);
+  return parse_circle_flatten_createClass(CircleFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_circle_flatten_asyncToGenerator(/*#__PURE__*/parse_circle_flatten_regenerator().m(function _callee() {
+        var annotation, page, pdfDoc, pageHeight, pageWidth, _konvaGroup$attrs, konvaGroup, ellipses, groupX, groupY, scaleX, scaleY, groupOpacity, color, _parseColor, r, g, b, i, ellipse, attrs, centerX, centerY, radiusX, radiusY, strokeWidth, opacity, pdfCenterY, _t;
+        return parse_circle_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page, pdfDoc = this.pdfDoc;
+              pageHeight = page.getHeight();
+              pageWidth = page.getWidth();
+              _context.p = 1;
+              // Parse konva string to get ellipse data
+              konvaGroup = JSON.parse(annotation.konvaString);
+              ellipses = konvaGroup.children.filter(function (item) {
+                return item.className === 'Ellipse';
+              });
+              console.log("[CircleFlattenParser] Processing annotation ".concat(annotation.name, ", found ").concat(ellipses.length, " ellipse(s)"));
+
+              // Group position and scale
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1; // Extract and parse color
+              color = annotation.color || '#FF0000';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Draw each ellipse using drawEllipse for smooth continuous stroke
+              i = 0;
+            case 2:
+              if (!(i < ellipses.length)) {
+                _context.n = 6;
+                break;
+              }
+              ellipse = ellipses[i];
+              attrs = ellipse.attrs; // Apply scale transforms to coordinates and dimensions
+              centerX = groupX + (attrs.x || 0) * scaleX;
+              centerY = groupY + (attrs.y || 0) * scaleY;
+              radiusX = (attrs.radiusX || 0) * scaleX;
+              radiusY = (attrs.radiusY || 0) * scaleY;
+              strokeWidth = (attrs.strokeWidth || 2) * Math.max(scaleX, scaleY);
+              opacity = attrs.opacity !== undefined ? attrs.opacity : groupOpacity; // Convert center to PDF coordinates
+              pdfCenterY = pageHeight - centerY;
+              console.log("[CircleFlattenParser] Drawing ellipse ".concat(i, ":"), {
+                centerX: centerX,
+                centerY: centerY,
+                pdfCenterY: pdfCenterY,
+                radiusX: radiusX,
+                radiusY: radiusY,
+                strokeWidth: strokeWidth,
+                originalStrokeWidth: attrs.strokeWidth,
+                scaleX: scaleX,
+                scaleY: scaleY,
+                opacity: opacity,
+                pageWidth: pageWidth,
+                pageHeight: pageHeight,
+                inBounds: centerX >= 0 && centerX <= pageWidth && pdfCenterY >= 0 && pdfCenterY <= pageHeight
+              });
+
+              // Skip if ellipse is completely outside page bounds
+              if (!(centerX < -radiusX || centerX > pageWidth + radiusX || pdfCenterY < -radiusY || pdfCenterY > pageHeight + radiusY)) {
+                _context.n = 3;
+                break;
+              }
+              console.warn("[CircleFlattenParser] Ellipse ".concat(i, " is outside page bounds, skipping"));
+              return _context.a(3, 5);
+            case 3:
+              if (!(radiusX <= 0 || radiusY <= 0)) {
+                _context.n = 4;
+                break;
+              }
+              console.warn("[CircleFlattenParser] Ellipse ".concat(i, " has invalid radius (radiusX: ").concat(radiusX, ", radiusY: ").concat(radiusY, "), skipping"));
+              return _context.a(3, 5);
+            case 4:
+              try {
+                // Use drawEllipse for smooth continuous stroke
+                page.drawEllipse({
+                  x: centerX,
+                  y: pdfCenterY,
+                  xScale: radiusX,
+                  yScale: radiusY,
+                  borderWidth: strokeWidth,
+                  borderColor: rgb(r, g, b),
+                  color: undefined,
+                  // No fill, only stroke
+                  opacity: opacity // Use opacity, not borderOpacity
+                });
+                console.log("[CircleFlattenParser] Successfully drew ellipse ".concat(i));
+              } catch (drawError) {
+                console.error("[CircleFlattenParser] Error drawing ellipse ".concat(i, ":"), drawError);
+              }
+            case 5:
+              i++;
+              _context.n = 2;
+              break;
+            case 6:
+              _context.n = 8;
+              break;
+            case 7:
+              _context.p = 7;
+              _t = _context.v;
+              console.error('[CircleFlattenParser] Error parsing annotation:', _t);
+              console.error('[CircleFlattenParser] Annotation data:', annotation);
+            case 8:
+              return _context.a(2);
+          }
+        }, _callee, this, [[1, 7]]);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_highlight_flatten.ts
+function parse_highlight_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_highlight_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_highlight_flatten_typeof(o); }
+function parse_highlight_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_highlight_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_highlight_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_highlight_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_highlight_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_highlight_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_highlight_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_highlight_flatten_regeneratorDefine2(u), parse_highlight_flatten_regeneratorDefine2(u, o, "Generator"), parse_highlight_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_highlight_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_highlight_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_highlight_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_highlight_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_highlight_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_highlight_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_highlight_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_highlight_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_highlight_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_highlight_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_highlight_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_highlight_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_highlight_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_highlight_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_highlight_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_highlight_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_highlight_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_highlight_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_highlight_flatten_toPropertyKey(o.key), o); } }
+function parse_highlight_flatten_createClass(e, r, t) { return r && parse_highlight_flatten_defineProperties(e.prototype, r), t && parse_highlight_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_highlight_flatten_toPropertyKey(t) { var i = parse_highlight_flatten_toPrimitive(t, "string"); return "symbol" == parse_highlight_flatten_typeof(i) ? i : i + ""; }
+function parse_highlight_flatten_toPrimitive(t, r) { if ("object" != parse_highlight_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_highlight_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_highlight_flatten_callSuper(t, o, e) { return o = parse_highlight_flatten_getPrototypeOf(o), parse_highlight_flatten_possibleConstructorReturn(t, parse_highlight_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_highlight_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_highlight_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_highlight_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_highlight_flatten_assertThisInitialized(t); }
+function parse_highlight_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_highlight_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_highlight_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_highlight_flatten_getPrototypeOf(t) { return parse_highlight_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_highlight_flatten_getPrototypeOf(t); }
+function parse_highlight_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_highlight_flatten_setPrototypeOf(t, e); }
+function parse_highlight_flatten_setPrototypeOf(t, e) { return parse_highlight_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_highlight_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * HighlightFlattenParser - Draws highlight rectangles directly on page (truly flattened for printing)
+ */
+var HighlightFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function HighlightFlattenParser() {
+    parse_highlight_flatten_classCallCheck(this, HighlightFlattenParser);
+    return parse_highlight_flatten_callSuper(this, HighlightFlattenParser, arguments);
+  }
+  parse_highlight_flatten_inherits(HighlightFlattenParser, _AnnotationParser);
+  return parse_highlight_flatten_createClass(HighlightFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_highlight_flatten_asyncToGenerator(/*#__PURE__*/parse_highlight_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs;
+        var annotation, page, pageHeight, konvaGroup, rects, color, _parseColor, r, g, b, groupOpacity, _iterator, _step, rect, _rect$attrs, x, y, width, height, rectOpacity, pdfX, pdfY;
+        return parse_highlight_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight(); // Parse konva string to get individual highlight rects
+              konvaGroup = JSON.parse(annotation.konvaString);
+              rects = konvaGroup.children.filter(function (item) {
+                return item.className === 'Rect';
+              }); // Extract color
+              color = annotation.color || '#FFFF00';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Get default opacity from group or use 0.3 for highlights
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 0.3; // Draw each highlight rectangle
+              _iterator = parse_highlight_flatten_createForOfIteratorHelper(rects);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  rect = _step.value;
+                  _rect$attrs = rect.attrs, x = _rect$attrs.x, y = _rect$attrs.y, width = _rect$attrs.width, height = _rect$attrs.height;
+                  rectOpacity = rect.attrs.opacity !== undefined ? rect.attrs.opacity : groupOpacity;
+                  pdfX = x;
+                  pdfY = pageHeight - y - height;
+                  page.drawRectangle({
+                    x: pdfX,
+                    y: pdfY,
+                    width: width,
+                    height: height,
+                    color: rgb(r, g, b),
+                    opacity: rectOpacity,
+                    borderWidth: 0
+                  });
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_underline_flatten.ts
+function parse_underline_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_underline_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_underline_flatten_typeof(o); }
+function parse_underline_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_underline_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_underline_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_underline_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_underline_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_underline_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_underline_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_underline_flatten_regeneratorDefine2(u), parse_underline_flatten_regeneratorDefine2(u, o, "Generator"), parse_underline_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_underline_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_underline_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_underline_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_underline_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_underline_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_underline_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_underline_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_underline_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_underline_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_underline_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_underline_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_underline_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_underline_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_underline_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_underline_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_underline_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_underline_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_underline_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_underline_flatten_toPropertyKey(o.key), o); } }
+function parse_underline_flatten_createClass(e, r, t) { return r && parse_underline_flatten_defineProperties(e.prototype, r), t && parse_underline_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_underline_flatten_toPropertyKey(t) { var i = parse_underline_flatten_toPrimitive(t, "string"); return "symbol" == parse_underline_flatten_typeof(i) ? i : i + ""; }
+function parse_underline_flatten_toPrimitive(t, r) { if ("object" != parse_underline_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_underline_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_underline_flatten_callSuper(t, o, e) { return o = parse_underline_flatten_getPrototypeOf(o), parse_underline_flatten_possibleConstructorReturn(t, parse_underline_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_underline_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_underline_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_underline_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_underline_flatten_assertThisInitialized(t); }
+function parse_underline_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_underline_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_underline_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_underline_flatten_getPrototypeOf(t) { return parse_underline_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_underline_flatten_getPrototypeOf(t); }
+function parse_underline_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_underline_flatten_setPrototypeOf(t, e); }
+function parse_underline_flatten_setPrototypeOf(t, e) { return parse_underline_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_underline_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * UnderlineFlattenParser - Draws underlines directly on page (truly flattened for printing)
+ */
+var UnderlineFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function UnderlineFlattenParser() {
+    parse_underline_flatten_classCallCheck(this, UnderlineFlattenParser);
+    return parse_underline_flatten_callSuper(this, UnderlineFlattenParser, arguments);
+  }
+  parse_underline_flatten_inherits(UnderlineFlattenParser, _AnnotationParser);
+  return parse_underline_flatten_createClass(UnderlineFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_underline_flatten_asyncToGenerator(/*#__PURE__*/parse_underline_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _lines$;
+        var annotation, page, pageHeight, konvaGroup, lines, groupX, groupY, scaleX, scaleY, groupOpacity, color, _parseColor, r, g, b, firstLine, opacity, _iterator, _step, line, points, lineOpacity, i, x1, y1, x2, y2;
+        return parse_underline_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight();
+              konvaGroup = JSON.parse(annotation.konvaString);
+              lines = konvaGroup.children.filter(function (item) {
+                return item.className === 'Line';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1; // Extract color
+              color = annotation.color || '#0000FF';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Get opacity from first line
+              firstLine = ((_lines$ = lines[0]) === null || _lines$ === void 0 ? void 0 : _lines$.attrs) || {};
+              opacity = firstLine.opacity !== undefined ? firstLine.opacity : groupOpacity; // Draw each underline with round caps for smooth appearance
+              _iterator = parse_underline_flatten_createForOfIteratorHelper(lines);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  line = _step.value;
+                  points = line.attrs.points;
+                  lineOpacity = line.attrs.opacity !== undefined ? line.attrs.opacity : opacity; // Draw lines between consecutive points
+                  for (i = 0; i < points.length - 2; i += 2) {
+                    x1 = groupX + points[i] * scaleX;
+                    y1 = pageHeight - (groupY + points[i + 1] * scaleY);
+                    x2 = groupX + points[i + 2] * scaleX;
+                    y2 = pageHeight - (groupY + points[i + 3] * scaleY);
+                    page.drawLine({
+                      start: {
+                        x: x1,
+                        y: y1
+                      },
+                      end: {
+                        x: x2,
+                        y: y2
+                      },
+                      thickness: 1.5,
+                      color: rgb(r, g, b),
+                      opacity: lineOpacity,
+                      lineCap: 2 // Round cap
+                    });
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_strikeout_flatten.ts
+function parse_strikeout_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_strikeout_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_strikeout_flatten_typeof(o); }
+function parse_strikeout_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_strikeout_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_strikeout_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_strikeout_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_strikeout_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_strikeout_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_strikeout_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_strikeout_flatten_regeneratorDefine2(u), parse_strikeout_flatten_regeneratorDefine2(u, o, "Generator"), parse_strikeout_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_strikeout_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_strikeout_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_strikeout_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_strikeout_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_strikeout_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_strikeout_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_strikeout_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_strikeout_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_strikeout_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_strikeout_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_strikeout_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_strikeout_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_strikeout_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_strikeout_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_strikeout_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_strikeout_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_strikeout_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_strikeout_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_strikeout_flatten_toPropertyKey(o.key), o); } }
+function parse_strikeout_flatten_createClass(e, r, t) { return r && parse_strikeout_flatten_defineProperties(e.prototype, r), t && parse_strikeout_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_strikeout_flatten_toPropertyKey(t) { var i = parse_strikeout_flatten_toPrimitive(t, "string"); return "symbol" == parse_strikeout_flatten_typeof(i) ? i : i + ""; }
+function parse_strikeout_flatten_toPrimitive(t, r) { if ("object" != parse_strikeout_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_strikeout_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_strikeout_flatten_callSuper(t, o, e) { return o = parse_strikeout_flatten_getPrototypeOf(o), parse_strikeout_flatten_possibleConstructorReturn(t, parse_strikeout_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_strikeout_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_strikeout_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_strikeout_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_strikeout_flatten_assertThisInitialized(t); }
+function parse_strikeout_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_strikeout_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_strikeout_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_strikeout_flatten_getPrototypeOf(t) { return parse_strikeout_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_strikeout_flatten_getPrototypeOf(t); }
+function parse_strikeout_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_strikeout_flatten_setPrototypeOf(t, e); }
+function parse_strikeout_flatten_setPrototypeOf(t, e) { return parse_strikeout_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_strikeout_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * StrikeOutFlattenParser - Draws strikethrough lines directly on page (truly flattened for printing)
+ */
+var StrikeOutFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function StrikeOutFlattenParser() {
+    parse_strikeout_flatten_classCallCheck(this, StrikeOutFlattenParser);
+    return parse_strikeout_flatten_callSuper(this, StrikeOutFlattenParser, arguments);
+  }
+  parse_strikeout_flatten_inherits(StrikeOutFlattenParser, _AnnotationParser);
+  return parse_strikeout_flatten_createClass(StrikeOutFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_strikeout_flatten_asyncToGenerator(/*#__PURE__*/parse_strikeout_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _lines$;
+        var annotation, page, pageHeight, konvaGroup, lines, groupX, groupY, scaleX, scaleY, groupOpacity, color, _parseColor, r, g, b, firstLine, opacity, _iterator, _step, line, points, lineOpacity, i, x1, y1, x2, y2;
+        return parse_strikeout_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight();
+              konvaGroup = JSON.parse(annotation.konvaString);
+              lines = konvaGroup.children.filter(function (item) {
+                return item.className === 'Line';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1; // Extract color
+              color = annotation.color || '#FF0000';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Get opacity from first line
+              firstLine = ((_lines$ = lines[0]) === null || _lines$ === void 0 ? void 0 : _lines$.attrs) || {};
+              opacity = firstLine.opacity !== undefined ? firstLine.opacity : groupOpacity; // Draw each strikethrough line with round caps for smooth appearance
+              _iterator = parse_strikeout_flatten_createForOfIteratorHelper(lines);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  line = _step.value;
+                  points = line.attrs.points;
+                  lineOpacity = line.attrs.opacity !== undefined ? line.attrs.opacity : opacity; // Draw lines between consecutive points
+                  for (i = 0; i < points.length - 2; i += 2) {
+                    x1 = groupX + points[i] * scaleX;
+                    y1 = pageHeight - (groupY + points[i + 1] * scaleY);
+                    x2 = groupX + points[i + 2] * scaleX;
+                    y2 = pageHeight - (groupY + points[i + 3] * scaleY);
+                    page.drawLine({
+                      start: {
+                        x: x1,
+                        y: y1
+                      },
+                      end: {
+                        x: x2,
+                        y: y2
+                      },
+                      thickness: 1.5,
+                      color: rgb(r, g, b),
+                      opacity: lineOpacity,
+                      lineCap: 2 // Round cap
+                    });
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_ink_flatten.ts
+function parse_ink_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_ink_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_ink_flatten_typeof(o); }
+function parse_ink_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_ink_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_ink_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_ink_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_ink_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_ink_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_ink_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_ink_flatten_regeneratorDefine2(u), parse_ink_flatten_regeneratorDefine2(u, o, "Generator"), parse_ink_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_ink_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_ink_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_ink_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_ink_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_ink_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_ink_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_ink_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_ink_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_ink_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_ink_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_ink_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_ink_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_ink_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_ink_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_ink_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_ink_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_ink_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_ink_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_ink_flatten_toPropertyKey(o.key), o); } }
+function parse_ink_flatten_createClass(e, r, t) { return r && parse_ink_flatten_defineProperties(e.prototype, r), t && parse_ink_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_ink_flatten_toPropertyKey(t) { var i = parse_ink_flatten_toPrimitive(t, "string"); return "symbol" == parse_ink_flatten_typeof(i) ? i : i + ""; }
+function parse_ink_flatten_toPrimitive(t, r) { if ("object" != parse_ink_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_ink_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_ink_flatten_callSuper(t, o, e) { return o = parse_ink_flatten_getPrototypeOf(o), parse_ink_flatten_possibleConstructorReturn(t, parse_ink_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_ink_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_ink_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_ink_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_ink_flatten_assertThisInitialized(t); }
+function parse_ink_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_ink_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_ink_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_ink_flatten_getPrototypeOf(t) { return parse_ink_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_ink_flatten_getPrototypeOf(t); }
+function parse_ink_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_ink_flatten_setPrototypeOf(t, e); }
+function parse_ink_flatten_setPrototypeOf(t, e) { return parse_ink_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_ink_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * InkFlattenParser - Draws freehand ink paths directly on page (truly flattened for printing)
+ */
+var InkFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function InkFlattenParser() {
+    parse_ink_flatten_classCallCheck(this, InkFlattenParser);
+    return parse_ink_flatten_callSuper(this, InkFlattenParser, arguments);
+  }
+  parse_ink_flatten_inherits(InkFlattenParser, _AnnotationParser);
+  return parse_ink_flatten_createClass(InkFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_ink_flatten_asyncToGenerator(/*#__PURE__*/parse_ink_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _lines$, _firstLine$strokeWidt, _ref, _firstLine$stroke;
+        var annotation, page, pageHeight, konvaGroup, lines, groupX, groupY, scaleX, scaleY, groupOpacity, firstLine, strokeWidth, color, opacity, _parseColor, r, g, b, _iterator, _step, line, points, lineOpacity, i, x1, y1, x2, y2;
+        return parse_ink_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight();
+              konvaGroup = JSON.parse(annotation.konvaString);
+              lines = konvaGroup.children.filter(function (item) {
+                return item.className === 'Line';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1;
+              firstLine = ((_lines$ = lines[0]) === null || _lines$ === void 0 ? void 0 : _lines$.attrs) || {};
+              strokeWidth = ((_firstLine$strokeWidt = firstLine.strokeWidth) !== null && _firstLine$strokeWidt !== void 0 ? _firstLine$strokeWidt : 2) * Math.max(scaleX, scaleY);
+              color = (_ref = (_firstLine$stroke = firstLine.stroke) !== null && _firstLine$stroke !== void 0 ? _firstLine$stroke : annotation.color) !== null && _ref !== void 0 ? _ref : 'rgb(255, 0, 0)';
+              opacity = firstLine.opacity !== undefined ? firstLine.opacity : groupOpacity; // Parse color
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Draw each line using multiple drawLine calls with round caps for smooth appearance
+              _iterator = parse_ink_flatten_createForOfIteratorHelper(lines);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  line = _step.value;
+                  points = line.attrs.points;
+                  lineOpacity = line.attrs.opacity !== undefined ? line.attrs.opacity : opacity; // Draw lines between consecutive points with round caps for smoothness
+                  for (i = 0; i < points.length - 2; i += 2) {
+                    x1 = groupX + points[i] * scaleX;
+                    y1 = groupY + points[i + 1] * scaleY;
+                    x2 = groupX + points[i + 2] * scaleX;
+                    y2 = groupY + points[i + 3] * scaleY;
+                    page.drawLine({
+                      start: {
+                        x: x1,
+                        y: pageHeight - y1
+                      },
+                      end: {
+                        x: x2,
+                        y: pageHeight - y2
+                      },
+                      thickness: strokeWidth,
+                      color: rgb(r, g, b),
+                      opacity: lineOpacity,
+                      lineCap: 2 // Round cap for smooth connections
+                    });
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_line_flatten.ts
+function parse_line_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_line_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_line_flatten_typeof(o); }
+function parse_line_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_line_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_line_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_line_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_line_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_line_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_line_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_line_flatten_regeneratorDefine2(u), parse_line_flatten_regeneratorDefine2(u, o, "Generator"), parse_line_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_line_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_line_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_line_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_line_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_line_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_line_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_line_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_line_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_line_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_line_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_line_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_line_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_line_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_line_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_line_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_line_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_line_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_line_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_line_flatten_toPropertyKey(o.key), o); } }
+function parse_line_flatten_createClass(e, r, t) { return r && parse_line_flatten_defineProperties(e.prototype, r), t && parse_line_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_line_flatten_toPropertyKey(t) { var i = parse_line_flatten_toPrimitive(t, "string"); return "symbol" == parse_line_flatten_typeof(i) ? i : i + ""; }
+function parse_line_flatten_toPrimitive(t, r) { if ("object" != parse_line_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_line_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_line_flatten_callSuper(t, o, e) { return o = parse_line_flatten_getPrototypeOf(o), parse_line_flatten_possibleConstructorReturn(t, parse_line_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_line_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_line_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_line_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_line_flatten_assertThisInitialized(t); }
+function parse_line_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_line_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_line_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_line_flatten_getPrototypeOf(t) { return parse_line_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_line_flatten_getPrototypeOf(t); }
+function parse_line_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_line_flatten_setPrototypeOf(t, e); }
+function parse_line_flatten_setPrototypeOf(t, e) { return parse_line_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_line_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * LineFlattenParser - Draws arrow/line annotations directly on page (truly flattened for printing)
+ */
+var LineFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function LineFlattenParser() {
+    parse_line_flatten_classCallCheck(this, LineFlattenParser);
+    return parse_line_flatten_callSuper(this, LineFlattenParser, arguments);
+  }
+  parse_line_flatten_inherits(LineFlattenParser, _AnnotationParser);
+  return parse_line_flatten_createClass(LineFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_line_flatten_asyncToGenerator(/*#__PURE__*/parse_line_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _arrows$, _firstArrow$strokeWid, _ref, _firstArrow$stroke, _firstArrow$pointerLe, _firstArrow$pointerWi;
+        var annotation, page, pageHeight, konvaGroup, arrows, groupX, groupY, scaleX, scaleY, groupOpacity, firstArrow, avgScale, strokeWidth, color, pointerLength, pointerWidth, opacity, _parseColor, r, g, b, _iterator, _step, arrow, points, arrowOpacity, startX, startY, endX, endY, i, x1, y1, x2, y2;
+        return parse_line_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight();
+              konvaGroup = JSON.parse(annotation.konvaString);
+              console.log('[LineFlattenParser] Full konva group:', konvaGroup);
+              console.log('[LineFlattenParser] Children:', konvaGroup.children.map(function (c) {
+                var _c$attrs$points;
+                return {
+                  className: c.className,
+                  hasPoints: !!c.attrs.points,
+                  pointsLength: (_c$attrs$points = c.attrs.points) === null || _c$attrs$points === void 0 ? void 0 : _c$attrs$points.length
+                };
+              }));
+              arrows = konvaGroup.children.filter(function (item) {
+                return item.className === 'Arrow';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1;
+              firstArrow = ((_arrows$ = arrows[0]) === null || _arrows$ === void 0 ? void 0 : _arrows$.attrs) || {}; // Use average of scales for uniform properties like stroke width
+              avgScale = (scaleX + scaleY) / 2;
+              strokeWidth = ((_firstArrow$strokeWid = firstArrow.strokeWidth) !== null && _firstArrow$strokeWid !== void 0 ? _firstArrow$strokeWid : 2) * avgScale;
+              color = (_ref = (_firstArrow$stroke = firstArrow.stroke) !== null && _firstArrow$stroke !== void 0 ? _firstArrow$stroke : annotation.color) !== null && _ref !== void 0 ? _ref : 'rgb(255, 0, 0)'; // For pointer dimensions, use the scale in the direction of the arrow
+              // We'll calculate this per arrow based on its angle
+              pointerLength = ((_firstArrow$pointerLe = firstArrow.pointerLength) !== null && _firstArrow$pointerLe !== void 0 ? _firstArrow$pointerLe : 10) * avgScale;
+              pointerWidth = ((_firstArrow$pointerWi = firstArrow.pointerWidth) !== null && _firstArrow$pointerWi !== void 0 ? _firstArrow$pointerWi : 10) * avgScale;
+              opacity = firstArrow.opacity !== undefined ? firstArrow.opacity : groupOpacity; // Parse color
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b;
+              console.log('[LineFlattenParser] Arrow config:', {
+                strokeWidth: strokeWidth,
+                originalStrokeWidth: firstArrow.strokeWidth,
+                pointerLength: pointerLength,
+                originalPointerLength: firstArrow.pointerLength,
+                pointerWidth: pointerWidth,
+                originalPointerWidth: firstArrow.pointerWidth,
+                scaleX: scaleX,
+                scaleY: scaleY,
+                groupX: groupX,
+                groupY: groupY,
+                opacity: opacity,
+                color: color
+              });
+
+              // Draw each arrow
+              _iterator = parse_line_flatten_createForOfIteratorHelper(arrows);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  arrow = _step.value;
+                  points = arrow.attrs.points;
+                  arrowOpacity = arrow.attrs.opacity !== undefined ? arrow.attrs.opacity : opacity;
+                  if (points.length >= 4) {
+                    // Get start and end points with scale
+                    startX = groupX + points[0] * scaleX;
+                    startY = groupY + points[1] * scaleY;
+                    endX = groupX + points[points.length - 2] * scaleX;
+                    endY = groupY + points[points.length - 1] * scaleY;
+                    console.log('[LineFlattenParser] Arrow points:', {
+                      points: points,
+                      startX: startX,
+                      startY: startY,
+                      endX: endX,
+                      endY: endY
+                    });
+
+                    // Draw all line segments with round caps for smooth connections
+                    for (i = 0; i < points.length - 2; i += 2) {
+                      x1 = groupX + points[i] * scaleX;
+                      y1 = groupY + points[i + 1] * scaleY;
+                      x2 = groupX + points[i + 2] * scaleX;
+                      y2 = groupY + points[i + 3] * scaleY;
+                      page.drawLine({
+                        start: {
+                          x: x1,
+                          y: pageHeight - y1
+                        },
+                        end: {
+                          x: x2,
+                          y: pageHeight - y2
+                        },
+                        thickness: strokeWidth,
+                        color: rgb(r, g, b),
+                        opacity: arrowOpacity,
+                        lineCap: 2 // Round cap
+                      });
+                    }
+
+                    // Draw arrowhead at the end point
+                    this.drawArrowhead(page, points[points.length - 4] ? groupX + points[points.length - 4] : startX, points[points.length - 3] ? groupY + points[points.length - 3] : startY, endX, endY, pageHeight, pointerLength, pointerWidth, strokeWidth, rgb(r, g, b), arrowOpacity);
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }, {
+    key: "drawArrowhead",
+    value: function drawArrowhead(page, fromX, fromY, toX, toY, pageHeight, pointerLength, pointerWidth, strokeWidth, color, opacity) {
+      // Calculate angle of the line
+      var angle = Math.atan2(toY - fromY, toX - fromX);
+
+      // Calculate arrowhead points using pointerWidth for the spread
+      // pointerWidth determines how wide the arrowhead is
+      var halfWidth = pointerWidth / 2;
+
+      // Calculate perpendicular angle for width
+      var perpAngle = angle + Math.PI / 2;
+
+      // Base point of arrowhead (back from tip by pointerLength)
+      var baseX = toX - pointerLength * Math.cos(angle);
+      var baseY = toY - pointerLength * Math.sin(angle);
+
+      // Left point of arrowhead (perpendicular from base)
+      var leftX = baseX + halfWidth * Math.cos(perpAngle);
+      var leftY = baseY + halfWidth * Math.sin(perpAngle);
+
+      // Right point of arrowhead (perpendicular from base, other side)
+      var rightX = baseX - halfWidth * Math.cos(perpAngle);
+      var rightY = baseY - halfWidth * Math.sin(perpAngle);
+
+      // Draw left side of arrowhead
+      page.drawLine({
+        start: {
+          x: toX,
+          y: pageHeight - toY
+        },
+        end: {
+          x: leftX,
+          y: pageHeight - leftY
+        },
+        thickness: strokeWidth,
+        color: color,
+        opacity: opacity,
+        lineCap: 2
+      });
+
+      // Draw right side of arrowhead
+      page.drawLine({
+        start: {
+          x: toX,
+          y: pageHeight - toY
+        },
+        end: {
+          x: rightX,
+          y: pageHeight - rightY
+        },
+        thickness: strokeWidth,
+        color: color,
+        opacity: opacity,
+        lineCap: 2
+      });
+    }
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_freetext_flatten.ts
+function parse_freetext_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_freetext_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_freetext_flatten_typeof(o); }
+function parse_freetext_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_freetext_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_freetext_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_freetext_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_freetext_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_freetext_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_freetext_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_freetext_flatten_regeneratorDefine2(u), parse_freetext_flatten_regeneratorDefine2(u, o, "Generator"), parse_freetext_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_freetext_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_freetext_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_freetext_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_freetext_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_freetext_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_freetext_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_freetext_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_freetext_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_freetext_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_freetext_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_freetext_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_freetext_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_freetext_flatten_toPropertyKey(o.key), o); } }
+function parse_freetext_flatten_createClass(e, r, t) { return r && parse_freetext_flatten_defineProperties(e.prototype, r), t && parse_freetext_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_freetext_flatten_toPropertyKey(t) { var i = parse_freetext_flatten_toPrimitive(t, "string"); return "symbol" == parse_freetext_flatten_typeof(i) ? i : i + ""; }
+function parse_freetext_flatten_toPrimitive(t, r) { if ("object" != parse_freetext_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_freetext_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_freetext_flatten_callSuper(t, o, e) { return o = parse_freetext_flatten_getPrototypeOf(o), parse_freetext_flatten_possibleConstructorReturn(t, parse_freetext_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_freetext_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_freetext_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_freetext_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_freetext_flatten_assertThisInitialized(t); }
+function parse_freetext_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_freetext_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_freetext_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_freetext_flatten_getPrototypeOf(t) { return parse_freetext_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_freetext_flatten_getPrototypeOf(t); }
+function parse_freetext_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_freetext_flatten_setPrototypeOf(t, e); }
+function parse_freetext_flatten_setPrototypeOf(t, e) { return parse_freetext_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_freetext_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * FreeTextFlattenParser - Draws text annotations directly on page (truly flattened for printing)
+ */
+var FreeTextFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function FreeTextFlattenParser() {
+    parse_freetext_flatten_classCallCheck(this, FreeTextFlattenParser);
+    return parse_freetext_flatten_callSuper(this, FreeTextFlattenParser, arguments);
+  }
+  parse_freetext_flatten_inherits(FreeTextFlattenParser, _AnnotationParser);
+  return parse_freetext_flatten_createClass(FreeTextFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_freetext_flatten_asyncToGenerator(/*#__PURE__*/parse_freetext_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _annotation$contentsO;
+        var annotation, page, pdfDoc, pageHeight, pageWidth, konvaGroup, texts, groupX, groupY, scaleX, scaleY, groupOpacity, textContent, color, _parseColor, r, g, b, font, i, text, attrs, x, y, fontSize, opacity, lines, lineHeight, lineIndex, line, lineY, pdfLineY, textColor, _t;
+        return parse_freetext_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page, pdfDoc = this.pdfDoc;
+              pageHeight = page.getHeight();
+              pageWidth = page.getWidth();
+              console.log('=== FreeText Flatten Parser ===');
+              console.log('Page dimensions:', pageWidth, 'x', pageHeight);
+
+              // Parse konva string to get text data
+              konvaGroup = JSON.parse(annotation.konvaString);
+              console.log('Konva group:', konvaGroup);
+              texts = konvaGroup.children.filter(function (item) {
+                return item.className === 'Text';
+              });
+              console.log('Text elements found:', texts.length);
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1;
+              console.log('Group position:', groupX, groupY);
+              console.log('Group scale:', scaleX, scaleY);
+              console.log('Group opacity:', groupOpacity);
+
+              // Get text content from annotation
+              textContent = ((_annotation$contentsO = annotation.contentsObj) === null || _annotation$contentsO === void 0 ? void 0 : _annotation$contentsO.text) || annotation.contents || '';
+              console.log('Text content:', textContent);
+              if (!(!textContent || texts.length === 0)) {
+                _context.n = 1;
+                break;
+              }
+              console.log('Skipping: no text content or text elements');
+              return _context.a(2);
+            case 1:
+              // Extract color
+              color = annotation.color || '#000000';
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b;
+              console.log('Text color:', color, '-> RGB:', r, g, b);
+
+              // Embed a standard font
+              _context.n = 2;
+              return pdfDoc.embedFont(StandardFonts.Helvetica);
+            case 2:
+              font = _context.v;
+              i = 0;
+            case 3:
+              if (!(i < texts.length)) {
+                _context.n = 11;
+                break;
+              }
+              text = texts[i];
+              attrs = text.attrs;
+              console.log("Text element ".concat(i, " attrs:"), attrs);
+
+              // Apply scale transforms to position and size
+              x = groupX + (attrs.x || 0) * scaleX;
+              y = groupY + (attrs.y || 0) * scaleY;
+              fontSize = (attrs.fontSize || 12) * scaleY;
+              opacity = attrs.opacity !== undefined ? attrs.opacity : groupOpacity;
+              console.log("Drawing text at: x=".concat(x, ", y=").concat(y, " (konva) -> scaleX=").concat(scaleX, ", scaleY=").concat(scaleY));
+              console.log("Font size: ".concat(fontSize, ", Opacity: ").concat(opacity));
+              _context.p = 4;
+              // Handle multi-line text (split by \n)
+              lines = textContent.split('\n');
+              lineHeight = fontSize * 1.2; // Standard line height multiplier
+              // Draw each line separately
+              lineIndex = 0;
+            case 5:
+              if (!(lineIndex < lines.length)) {
+                _context.n = 8;
+                break;
+              }
+              line = lines[lineIndex];
+              if (line) {
+                _context.n = 6;
+                break;
+              }
+              return _context.a(3, 7);
+            case 6:
+              // Skip empty lines
+              // Calculate Y position for this line (adding lineHeight for each subsequent line)
+              lineY = y + lineIndex * lineHeight;
+              pdfLineY = pageHeight - lineY - fontSize;
+              console.log("  Line ".concat(lineIndex, ": \"").concat(line, "\" at pdfY=").concat(pdfLineY));
+
+              // Draw the text
+              // Note: pdf-lib's opacity parameter doesn't work with text color
+              textColor = opacity < 1 ? {
+                type: 'RGB',
+                red: r,
+                green: g,
+                blue: b
+              } : rgb(r, g, b);
+              page.drawText(line, {
+                x: x,
+                y: pdfLineY,
+                size: fontSize,
+                font: font,
+                color: textColor,
+                opacity: opacity // May not work for text, but include anyway
+              });
+            case 7:
+              lineIndex++;
+              _context.n = 5;
+              break;
+            case 8:
+              console.log('Text drawn successfully');
+              _context.n = 10;
+              break;
+            case 9:
+              _context.p = 9;
+              _t = _context.v;
+              console.error('Error drawing text:', _t);
+            case 10:
+              i++;
+              _context.n = 3;
+              break;
+            case 11:
+              console.log('=== End FreeText Flatten Parser ===');
+            case 12:
+              return _context.a(2);
+          }
+        }, _callee, this, [[4, 9]]);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_stamp_flatten.ts
+function parse_stamp_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_stamp_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_stamp_flatten_typeof(o); }
+function parse_stamp_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_stamp_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_stamp_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_stamp_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_stamp_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_stamp_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_stamp_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_stamp_flatten_regeneratorDefine2(u), parse_stamp_flatten_regeneratorDefine2(u, o, "Generator"), parse_stamp_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_stamp_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_stamp_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_stamp_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_stamp_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_stamp_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_stamp_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_stamp_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_stamp_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_stamp_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_stamp_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_stamp_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_stamp_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_stamp_flatten_toPropertyKey(o.key), o); } }
+function parse_stamp_flatten_createClass(e, r, t) { return r && parse_stamp_flatten_defineProperties(e.prototype, r), t && parse_stamp_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_stamp_flatten_toPropertyKey(t) { var i = parse_stamp_flatten_toPrimitive(t, "string"); return "symbol" == parse_stamp_flatten_typeof(i) ? i : i + ""; }
+function parse_stamp_flatten_toPrimitive(t, r) { if ("object" != parse_stamp_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_stamp_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_stamp_flatten_callSuper(t, o, e) { return o = parse_stamp_flatten_getPrototypeOf(o), parse_stamp_flatten_possibleConstructorReturn(t, parse_stamp_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_stamp_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_stamp_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_stamp_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_stamp_flatten_assertThisInitialized(t); }
+function parse_stamp_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_stamp_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_stamp_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_stamp_flatten_getPrototypeOf(t) { return parse_stamp_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_stamp_flatten_getPrototypeOf(t); }
+function parse_stamp_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_stamp_flatten_setPrototypeOf(t, e); }
+function parse_stamp_flatten_setPrototypeOf(t, e) { return parse_stamp_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_stamp_flatten_setPrototypeOf(t, e); }
+
+
+
+/**
+ * StampFlattenParser - Draws stamp images directly on page (truly flattened for printing)
+ */
+var StampFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function StampFlattenParser() {
+    parse_stamp_flatten_classCallCheck(this, StampFlattenParser);
+    return parse_stamp_flatten_callSuper(this, StampFlattenParser, arguments);
+  }
+  parse_stamp_flatten_inherits(StampFlattenParser, _AnnotationParser);
+  return parse_stamp_flatten_createClass(StampFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_stamp_flatten_asyncToGenerator(/*#__PURE__*/parse_stamp_flatten_regenerator().m(function _callee() {
+        var _annotation$contentsO;
+        var annotation, page, pdfDoc, pageHeight, rect, x, y, width, height, base64Str, pngImage, _t;
+        return parse_stamp_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page, pdfDoc = this.pdfDoc;
+              pageHeight = page.getHeight();
+              rect = annotation.konvaClientRect;
+              x = rect.x;
+              y = pageHeight - rect.y - rect.height;
+              width = rect.width;
+              height = rect.height; // If there's an image, embed and draw it
+              if (!((_annotation$contentsO = annotation.contentsObj) !== null && _annotation$contentsO !== void 0 && _annotation$contentsO.image)) {
+                _context.n = 5;
+                break;
+              }
+              _context.p = 1;
+              base64Str = annotation.contentsObj.image.replace(/^data:image\/png;base64,/, '');
+              _context.n = 2;
+              return pdfDoc.embedPng(base64Str);
+            case 2:
+              pngImage = _context.v;
+              page.drawImage(pngImage, {
+                x: x,
+                y: y,
+                width: width,
+                height: height,
+                opacity: 0.8
+              });
+              _context.n = 4;
+              break;
+            case 3:
+              _context.p = 3;
+              _t = _context.v;
+              // If image fails, draw a placeholder rectangle
+              page.drawRectangle({
+                x: x,
+                y: y,
+                width: width,
+                height: height,
+                color: rgb(1, 0, 0),
+                opacity: 0.3
+              });
+            case 4:
+              _context.n = 6;
+              break;
+            case 5:
+              // No image, draw placeholder
+              page.drawRectangle({
+                x: x,
+                y: y,
+                width: width,
+                height: height,
+                color: rgb(1, 0, 0),
+                opacity: 0.3
+              });
+            case 6:
+              return _context.a(2);
+          }
+        }, _callee, this, [[1, 3]]);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }]);
+}(AnnotationParser);
+;// ./src/annot/parse_polyline_flatten.ts
+function parse_polyline_flatten_typeof(o) { "@babel/helpers - typeof"; return parse_polyline_flatten_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_polyline_flatten_typeof(o); }
+function parse_polyline_flatten_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return parse_polyline_flatten_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (parse_polyline_flatten_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, parse_polyline_flatten_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, parse_polyline_flatten_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), parse_polyline_flatten_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", parse_polyline_flatten_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), parse_polyline_flatten_regeneratorDefine2(u), parse_polyline_flatten_regeneratorDefine2(u, o, "Generator"), parse_polyline_flatten_regeneratorDefine2(u, n, function () { return this; }), parse_polyline_flatten_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (parse_polyline_flatten_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function parse_polyline_flatten_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } parse_polyline_flatten_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { parse_polyline_flatten_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, parse_polyline_flatten_regeneratorDefine2(e, r, n, t); }
+function parse_polyline_flatten_createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = parse_polyline_flatten_unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function parse_polyline_flatten_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return parse_polyline_flatten_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? parse_polyline_flatten_arrayLikeToArray(r, a) : void 0; } }
+function parse_polyline_flatten_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function parse_polyline_flatten_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function parse_polyline_flatten_asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { parse_polyline_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { parse_polyline_flatten_asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function parse_polyline_flatten_classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function parse_polyline_flatten_defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, parse_polyline_flatten_toPropertyKey(o.key), o); } }
+function parse_polyline_flatten_createClass(e, r, t) { return r && parse_polyline_flatten_defineProperties(e.prototype, r), t && parse_polyline_flatten_defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function parse_polyline_flatten_toPropertyKey(t) { var i = parse_polyline_flatten_toPrimitive(t, "string"); return "symbol" == parse_polyline_flatten_typeof(i) ? i : i + ""; }
+function parse_polyline_flatten_toPrimitive(t, r) { if ("object" != parse_polyline_flatten_typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != parse_polyline_flatten_typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function parse_polyline_flatten_callSuper(t, o, e) { return o = parse_polyline_flatten_getPrototypeOf(o), parse_polyline_flatten_possibleConstructorReturn(t, parse_polyline_flatten_isNativeReflectConstruct() ? Reflect.construct(o, e || [], parse_polyline_flatten_getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function parse_polyline_flatten_possibleConstructorReturn(t, e) { if (e && ("object" == parse_polyline_flatten_typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return parse_polyline_flatten_assertThisInitialized(t); }
+function parse_polyline_flatten_assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function parse_polyline_flatten_isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (parse_polyline_flatten_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function parse_polyline_flatten_getPrototypeOf(t) { return parse_polyline_flatten_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, parse_polyline_flatten_getPrototypeOf(t); }
+function parse_polyline_flatten_inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && parse_polyline_flatten_setPrototypeOf(t, e); }
+function parse_polyline_flatten_setPrototypeOf(t, e) { return parse_polyline_flatten_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, parse_polyline_flatten_setPrototypeOf(t, e); }
+
+
+
+
+/**
+ * PolylineFlattenParser - Draws polyline/cloud shapes directly on page (truly flattened for printing)
+ */
+var PolylineFlattenParser = /*#__PURE__*/function (_AnnotationParser) {
+  function PolylineFlattenParser() {
+    parse_polyline_flatten_classCallCheck(this, PolylineFlattenParser);
+    return parse_polyline_flatten_callSuper(this, PolylineFlattenParser, arguments);
+  }
+  parse_polyline_flatten_inherits(PolylineFlattenParser, _AnnotationParser);
+  return parse_polyline_flatten_createClass(PolylineFlattenParser, [{
+    key: "parse",
+    value: function () {
+      var _parse = parse_polyline_flatten_asyncToGenerator(/*#__PURE__*/parse_polyline_flatten_regenerator().m(function _callee() {
+        var _konvaGroup$attrs, _paths$, _firstPath$strokeWidt, _ref, _firstPath$stroke;
+        var annotation, page, pageHeight, konvaGroup, paths, groupX, groupY, scaleX, scaleY, groupOpacity, firstPath, strokeWidth, color, opacity, _parseColor, r, g, b, _iterator, _step, path, pathData, points, pathOpacity, i, x1, y1, x2, y2;
+        return parse_polyline_flatten_regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              annotation = this.annotation, page = this.page;
+              pageHeight = page.getHeight();
+              konvaGroup = JSON.parse(annotation.konvaString);
+              paths = konvaGroup.children.filter(function (item) {
+                return item.className === 'Path';
+              });
+              groupX = konvaGroup.attrs.x || 0;
+              groupY = konvaGroup.attrs.y || 0;
+              scaleX = konvaGroup.attrs.scaleX || 1;
+              scaleY = konvaGroup.attrs.scaleY || 1;
+              groupOpacity = ((_konvaGroup$attrs = konvaGroup.attrs) === null || _konvaGroup$attrs === void 0 ? void 0 : _konvaGroup$attrs.opacity) !== undefined ? konvaGroup.attrs.opacity : 1;
+              firstPath = ((_paths$ = paths[0]) === null || _paths$ === void 0 ? void 0 : _paths$.attrs) || {};
+              strokeWidth = ((_firstPath$strokeWidt = firstPath.strokeWidth) !== null && _firstPath$strokeWidt !== void 0 ? _firstPath$strokeWidt : 2) * Math.max(scaleX, scaleY);
+              color = (_ref = (_firstPath$stroke = firstPath.stroke) !== null && _firstPath$stroke !== void 0 ? _firstPath$stroke : annotation.color) !== null && _ref !== void 0 ? _ref : 'rgb(255, 0, 0)';
+              opacity = firstPath.opacity !== undefined ? firstPath.opacity : groupOpacity; // Parse color
+              _parseColor = color_utils_parseColor(color), r = _parseColor.r, g = _parseColor.g, b = _parseColor.b; // Draw polyline/cloud by parsing SVG path and drawing lines with round caps
+              _iterator = parse_polyline_flatten_createForOfIteratorHelper(paths);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  path = _step.value;
+                  pathData = path.attrs.data;
+                  points = this.parseSvgPathToPoints(pathData);
+                  pathOpacity = path.attrs.opacity !== undefined ? path.attrs.opacity : opacity; // Draw lines between consecutive points
+                  for (i = 0; i < points.length - 2; i += 2) {
+                    x1 = groupX + points[i] * scaleX;
+                    y1 = groupY + points[i + 1] * scaleY;
+                    x2 = groupX + points[i + 2] * scaleX;
+                    y2 = groupY + points[i + 3] * scaleY;
+                    page.drawLine({
+                      start: {
+                        x: x1,
+                        y: pageHeight - y1
+                      },
+                      end: {
+                        x: x2,
+                        y: pageHeight - y2
+                      },
+                      thickness: strokeWidth,
+                      color: rgb(r, g, b),
+                      opacity: pathOpacity,
+                      lineCap: 2 // Round cap
+                    });
+                  }
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            case 1:
+              return _context.a(2);
+          }
+        }, _callee, this);
+      }));
+      function parse() {
+        return _parse.apply(this, arguments);
+      }
+      return parse;
+    }()
+  }, {
+    key: "parseSvgPathToPoints",
+    value: function parseSvgPathToPoints(data) {
+      var commands = data.match(/[a-zA-Z][^a-zA-Z]*/g) || [];
+      var points = [];
+      var _iterator2 = parse_polyline_flatten_createForOfIteratorHelper(commands),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var cmd = _step2.value;
+          var type = cmd[0];
+          var nums = cmd.slice(1).trim().split(/[\s,]+/).map(parseFloat);
+          if (type === 'M' || type === 'L') {
+            for (var i = 0; i < nums.length; i += 2) {
+              points.push(nums[i], nums[i + 1]);
+            }
+          } else if (type === 'Q' && nums.length >= 4) {
+            points.push(nums[2], nums[3]);
+          } else if (type === 'C' && nums.length >= 6) {
+            points.push(nums[4], nums[5]);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      return points;
+    }
+  }]);
+}(AnnotationParser);
 ;// ./src/annot/index.ts
 var _parserMap;
 function annot_toConsumableArray(r) { return annot_arrayWithoutHoles(r) || annot_iterableToArray(r) || annot_unsupportedIterableToArray(r) || annot_nonIterableSpread(); }
@@ -115907,11 +117236,26 @@ function annot_toPrimitive(t, r) { if ("object" != annot_typeof(t) || !t) return
 
 
 
+// Flatten parsers for print mode (draws directly on page)
+
+
+
+
+
+
+
+
+
+
+
 // import { HighlightParser } from './parse_highlight' // future
 // import { InkParser } from './parse_ink' // future
 
-// 映射不同批注类型到对应的解析器类
+// 映射不同批注类型到对应的解析器类 (for export PDF with annotation objects)
 var parserMap = (_parserMap = {}, annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(_parserMap, PdfjsAnnotationType.TEXT, TextParser), PdfjsAnnotationType.HIGHLIGHT, HighlightParser), PdfjsAnnotationType.UNDERLINE, UnderlineParser), PdfjsAnnotationType.STRIKEOUT, StrikeOutParser), PdfjsAnnotationType.SQUARE, SquareParser), PdfjsAnnotationType.CIRCLE, CircleParser), PdfjsAnnotationType.INK, InkParser), PdfjsAnnotationType.POLYLINE, PolylineParser), PdfjsAnnotationType.FREETEXT, FreeTextParser), PdfjsAnnotationType.STAMP, StampParser), annot_defineProperty(_parserMap, PdfjsAnnotationType.LINE, LineParser));
+
+// Flatten parser map for print mode (draws directly, no annotation objects)
+var flattenParserMap = annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty(annot_defineProperty({}, PdfjsAnnotationType.HIGHLIGHT, HighlightFlattenParser), PdfjsAnnotationType.UNDERLINE, UnderlineFlattenParser), PdfjsAnnotationType.STRIKEOUT, StrikeOutFlattenParser), PdfjsAnnotationType.SQUARE, SquareFlattenParser), PdfjsAnnotationType.CIRCLE, CircleFlattenParser), PdfjsAnnotationType.INK, InkFlattenParser), PdfjsAnnotationType.POLYLINE, PolylineFlattenParser), PdfjsAnnotationType.FREETEXT, FreeTextFlattenParser), PdfjsAnnotationType.STAMP, StampFlattenParser), PdfjsAnnotationType.LINE, LineFlattenParser);
 
 /**
  * 将单个注解对象解析并添加到指定 PDF 页面中。
@@ -115919,6 +117263,7 @@ var parserMap = (_parserMap = {}, annot_defineProperty(annot_defineProperty(anno
  * @param annotation - 批注数据对象（IAnnotationStore 格式）
  * @param page - 要添加注解的 PDF 页面
  * @param pdfDoc - 当前正在编辑的 PDF 文档实例
+ * @param useFlattenMode - 是否使用flatten模式（直接绘制在页面上，用于打印）
  */
 function parseAnnotationToPdf(_x, _x2, _x3) {
   return _parseAnnotationToPdf.apply(this, arguments);
@@ -115931,11 +117276,20 @@ function parseAnnotationToPdf(_x, _x2, _x3) {
  */
 function _parseAnnotationToPdf() {
   _parseAnnotationToPdf = annot_asyncToGenerator(/*#__PURE__*/annot_regenerator().m(function _callee(annotation, page, pdfDoc) {
-    var ParserClass, parser;
+    var useFlattenMode,
+      parserMapToUse,
+      ParserClass,
+      parser,
+      _args = arguments;
     return annot_regenerator().w(function (_context) {
       while (1) switch (_context.n) {
         case 0:
-          ParserClass = parserMap[annotation.pdfjsType];
+          useFlattenMode = _args.length > 3 && _args[3] !== undefined ? _args[3] : false;
+          parserMapToUse = useFlattenMode ? flattenParserMap : parserMap;
+          ParserClass = parserMapToUse[annotation.pdfjsType];
+          if (useFlattenMode) {
+            console.log("[parseAnnotationToPdf] Processing ".concat(annotation.pdfjsType, " annotation in flatten mode"));
+          }
           if (!ParserClass) {
             _context.n = 2;
             break;
@@ -115965,6 +117319,76 @@ function downloadPdf(data, filename) {
   });
   // 使用 saveAs 下载
   (0,FileSaver_min.saveAs)(blob, "".concat(filename, ".pdf"));
+}
+
+/**
+ * 触发 PDF 打印
+ *
+ * @param data - 保存后的 PDF 数据（Uint8Array）
+ * @param filename - 打印窗口标题使用的文件名
+ */
+function printPdf(data, filename) {
+  // 提取安全的 ArrayBuffer
+  var arrayBuffer = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  // 创建 Blob
+  var blob = new Blob([arrayBuffer], {
+    type: 'application/pdf'
+  });
+  // 创建 Blob URL
+  var blobUrl = URL.createObjectURL(blob);
+
+  // Open PDF in new window for printing (more reliable than iframe)
+  var printWindow = window.open(blobUrl, '_blank');
+  if (printWindow) {
+    // Wait for PDF to load in new window, then trigger print
+    printWindow.addEventListener('load', function () {
+      setTimeout(function () {
+        printWindow.print();
+        // Clean up after a delay
+        setTimeout(function () {
+          URL.revokeObjectURL(blobUrl);
+        }, 1000);
+      }, 500);
+    });
+  } else {
+    // Fallback: if popup blocked, use iframe method
+    var existingFrame = document.querySelector("#pdf-print-frame");
+    if (existingFrame) {
+      existingFrame.remove();
+    }
+    var printFrame = document.createElement('iframe');
+    printFrame.style.position = 'fixed';
+    printFrame.style.right = '0';
+    printFrame.style.bottom = '0';
+    printFrame.style.width = '0';
+    printFrame.style.height = '0';
+    printFrame.style.border = '0';
+    printFrame.id = 'pdf-print-frame';
+    document.body.appendChild(printFrame);
+    printFrame.onload = function () {
+      try {
+        setTimeout(function () {
+          if (printFrame.contentWindow) {
+            printFrame.contentWindow.focus();
+            printFrame.contentWindow.print();
+          }
+          setTimeout(function () {
+            if (document.body.contains(printFrame)) {
+              document.body.removeChild(printFrame);
+            }
+            URL.revokeObjectURL(blobUrl);
+          }, 1000);
+        }, 500);
+      } catch (error) {
+        console.error('Print failed:', error);
+        if (document.body.contains(printFrame)) {
+          document.body.removeChild(printFrame);
+        }
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+    printFrame.src = blobUrl;
+  }
 }
 function downloadExcel(data, filename) {
   var buffer = new Blob([data], {
@@ -116034,6 +117458,13 @@ function _loadFontBuffer() {
 function exportAnnotationsToPdf(_x5, _x6) {
   return _exportAnnotationsToPdf.apply(this, arguments);
 }
+/**
+ * 主导函数：加载 PDF，插入所有注解，然后触发打印。
+ * 使用 FLATTEN 模式 - 直接绘制到页面内容上，确保打印时可见
+ *
+ * @param PDFViewerApplication - PDF.js 应用实例
+ * @param annotations - 解析后的批注数据数组
+ */
 function _exportAnnotationsToPdf() {
   _exportAnnotationsToPdf = annot_asyncToGenerator(/*#__PURE__*/annot_regenerator().m(function _callee3(PDFViewerApplication, annotations) {
     var pdfData, pdfDoc, _iterator2, _step2, ann, page, modifiedPdf, baseName, fileName, _t;
@@ -116093,14 +117524,76 @@ function _exportAnnotationsToPdf() {
   }));
   return _exportAnnotationsToPdf.apply(this, arguments);
 }
-function exportAnnotationsToExcel(_x7, _x8) {
+function printAnnotationsToPdf(_x7, _x8) {
+  return _printAnnotationsToPdf.apply(this, arguments);
+}
+function _printAnnotationsToPdf() {
+  _printAnnotationsToPdf = annot_asyncToGenerator(/*#__PURE__*/annot_regenerator().m(function _callee4(PDFViewerApplication, annotations) {
+    var pdfData, pdfDoc, _iterator3, _step3, ann, page, modifiedPdf, baseName, fileName, _t2;
+    return annot_regenerator().w(function (_context4) {
+      while (1) switch (_context4.p = _context4.n) {
+        case 0:
+          _context4.n = 1;
+          return PDFViewerApplication.pdfDocument.getData();
+        case 1:
+          pdfData = _context4.v;
+          _context4.n = 2;
+          return api_PDFDocument.load(pdfData);
+        case 2:
+          pdfDoc = _context4.v;
+          // ✅ 清除原有的所有批注
+          clearAllAnnotations(pdfDoc);
+          // 遍历每一个注解并解析应用到对应页面 - 使用 FLATTEN 模式
+          _iterator3 = annot_createForOfIteratorHelper(annotations);
+          _context4.p = 3;
+          _iterator3.s();
+        case 4:
+          if ((_step3 = _iterator3.n()).done) {
+            _context4.n = 6;
+            break;
+          }
+          ann = _step3.value;
+          page = pdfDoc.getPages()[ann.pageNumber - 1];
+          _context4.n = 5;
+          return parseAnnotationToPdf(ann, page, pdfDoc, true);
+        case 5:
+          _context4.n = 4;
+          break;
+        case 6:
+          _context4.n = 8;
+          break;
+        case 7:
+          _context4.p = 7;
+          _t2 = _context4.v;
+          _iterator3.e(_t2);
+        case 8:
+          _context4.p = 8;
+          _iterator3.f();
+          return _context4.f(8);
+        case 9:
+          _context4.n = 10;
+          return pdfDoc.save();
+        case 10:
+          modifiedPdf = _context4.v;
+          // 使用 title + 时间戳作为文件名
+          baseName = PDFViewerApplication._title || 'annotated';
+          fileName = "".concat(baseName, "_").concat(getTimestampString());
+          printPdf(modifiedPdf, fileName);
+        case 11:
+          return _context4.a(2);
+      }
+    }, _callee4, null, [[3, 7, 8, 9]]);
+  }));
+  return _printAnnotationsToPdf.apply(this, arguments);
+}
+function exportAnnotationsToExcel(_x9, _x0) {
   return _exportAnnotationsToExcel.apply(this, arguments);
 }
 function _exportAnnotationsToExcel() {
-  _exportAnnotationsToExcel = annot_asyncToGenerator(/*#__PURE__*/annot_regenerator().m(function _callee4(PDFViewerApplication, annotations) {
+  _exportAnnotationsToExcel = annot_asyncToGenerator(/*#__PURE__*/annot_regenerator().m(function _callee5(PDFViewerApplication, annotations) {
     var rows, getLastStatusName, mainIndex, replyCounter, workbook, sheet, buffer, baseName, fileName;
-    return annot_regenerator().w(function (_context4) {
-      while (1) switch (_context4.n) {
+    return annot_regenerator().w(function (_context5) {
+      while (1) switch (_context5.n) {
         case 0:
           rows = []; // 先按页码升序，再按批注时间降序
           annotations.sort(function (a, b) {
@@ -116304,17 +117797,17 @@ function _exportAnnotationsToExcel() {
           });
 
           // 导出
-          _context4.n = 1;
+          _context5.n = 1;
           return workbook.xlsx.writeBuffer();
         case 1:
-          buffer = _context4.v;
+          buffer = _context5.v;
           baseName = PDFViewerApplication._title || 'annotated';
           fileName = "".concat(baseName, "_").concat(getTimestampString());
           downloadExcel(buffer, fileName);
         case 2:
-          return _context4.a(2);
+          return _context5.a(2);
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _exportAnnotationsToExcel.apply(this, arguments);
 }
@@ -117418,6 +118911,15 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 case 2:
                   return _context.a(2);
                 case 3:
+                  if (!(type === 'print')) {
+                    _context.n = 5;
+                    break;
+                  }
+                  _context.n = 4;
+                  return _this2.printPdf();
+                case 4:
+                  return _context.a(2);
+                case 5:
                   return _context.a(2);
               }
             }, _callee);
@@ -117859,15 +119361,51 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       return exportPdf;
     }()
   }, {
-    key: "exportExcel",
+    key: "printPdf",
     value: function () {
-      var _exportExcel = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee8() {
-        var annotations;
+      var _printPdf = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee8() {
+        var dataToSave, modal;
         return src_regenerator().w(function (_context8) {
           while (1) switch (_context8.n) {
             case 0:
-              annotations = this.painter.getData();
+              dataToSave = this.painter.getData();
+              modal = es_modal.info({
+                title: t('normal.print'),
+                content: /*#__PURE__*/(0,jsx_runtime.jsxs)(space, {
+                  children: [/*#__PURE__*/(0,jsx_runtime.jsx)(icons_SyncOutlined, {
+                    spin: true
+                  }), t('normal.processing')]
+                }),
+                closable: false,
+                okButtonProps: {
+                  loading: true
+                },
+                okText: t('normal.ok')
+              });
               _context8.n = 1;
+              return printAnnotationsToPdf(this.PDFJS_PDFViewerApplication, dataToSave);
+            case 1:
+              modal.destroy();
+            case 2:
+              return _context8.a(2);
+          }
+        }, _callee8, this);
+      }));
+      function printPdf() {
+        return _printPdf.apply(this, arguments);
+      }
+      return printPdf;
+    }()
+  }, {
+    key: "exportExcel",
+    value: function () {
+      var _exportExcel = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee9() {
+        var annotations;
+        return src_regenerator().w(function (_context9) {
+          while (1) switch (_context9.n) {
+            case 0:
+              annotations = this.painter.getData();
+              _context9.n = 1;
               return exportAnnotationsToExcel(this.PDFJS_PDFViewerApplication, annotations);
             case 1:
               es_modal.info({
@@ -117880,9 +119418,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 }
               });
             case 2:
-              return _context8.a(2);
+              return _context9.a(2);
           }
-        }, _callee8, this);
+        }, _callee9, this);
       }));
       function exportExcel() {
         return _exportExcel.apply(this, arguments);

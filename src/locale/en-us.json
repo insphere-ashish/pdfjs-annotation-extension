@@ -64,6 +64,7 @@
         "color": "Color",
         "export": "Export",
         "save": "Save",
+        "print": "Print",
         "reply": "Reply",
         "edit": "Edit",
         "delete": "Delete",
