@@ -103,7 +103,7 @@ interface CustomCommentProps {
     onDelete: (id: string) => void
     onScroll?: () => void
     onEditingStateChange?: (isEditing: boolean) => void // New callback to notify when editing state changes
-    // customToolbarRef: React.RefObject<CustomToolbarRef>
+    customToolbarRef: React.RefObject<CustomToolbarRef>
     onShareClick?: (annotation: IAnnotationStore) => void // custom code - e-court share comment click handler - for modal opening 
 }
 
@@ -119,7 +119,7 @@ const allowedType = [11, 5]; // only type to allow on comment section  // 11 = n
 /**
  * @description CustomComment
  */
-const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function CustomComment(props, ref) {
+const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomCommentProps> = (props, ref) => {
     const [annotations, setAnnotations] = useState<IAnnotationStore[]>([])
     const [currentAnnotation, setCurrentAnnotation] = useState<IAnnotationStore | null>(null)
     const [replyAnnotation, setReplyAnnotation] = useState<IAnnotationStore | null>(null)
@@ -420,7 +420,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
     }
 
     // Comment 编辑框
-    const { onEditingStateChange, onUpdate, onDelete, onSelected, userName, onShareClick } = props
+    const { onEditingStateChange, onUpdate, onDelete, onSelected, userName, onShareClick , toggleComment } = props
     
     const commentInput = useCallback(
         (annotation: IAnnotationStore) => {
@@ -791,7 +791,7 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
                     </Popover>
                 </div> */}
                 <div className="commentliner">
-                    <button id="commentlinerbt" className="toolbarButton closebt" type="button" disabled="disabled" tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
+                    <button id="commentlinerbt" onClick={() => {props.customToolbarRef.current?.toggleSidebarBtn(false);props?.toggleComment(false)}} className="toolbarButton closebt" type="button"  tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
                         <span data-l10n-id="pdfjs-commentlinerbt-outline-item-button-label"></span>
                     </button>
                 </div>
@@ -807,6 +807,9 @@ const CustomComment = forwardRef<CustomCommentRef, CustomCommentProps>(function 
             </div>
         </div>
     )
-})
+}
 
-export { CustomComment }
+const CustomCommentWithRef = forwardRef(CustomComment)
+CustomCommentWithRef.displayName = 'CustomComment'
+
+export { CustomCommentWithRef as CustomComment }
