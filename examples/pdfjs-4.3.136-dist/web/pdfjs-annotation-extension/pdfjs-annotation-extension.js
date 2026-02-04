@@ -101039,7 +101039,7 @@ var CustomToolbar = /*#__PURE__*/(0,react.forwardRef)(function CustomToolbar(pro
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
       className: "buttons print-anno-pdf",
       style: {
-        display: 'block'
+        display: 'none'
       },
       children: /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         title: "Print With Annotations",

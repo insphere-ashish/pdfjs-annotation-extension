@@ -192,7 +192,7 @@ const CustomToolbar = forwardRef<CustomToolbarRef, CustomToolbarProps>(function 
                     
                 </Button></li>
             </ul>
-            <ul className="buttons print-anno-pdf" style={{ display: 'block' }}>
+            <ul className="buttons print-anno-pdf" style={{ display: 'none' }}>
                 <li title='Print With Annotations' className='print-button'><Button
                     block
                     color="primary"
