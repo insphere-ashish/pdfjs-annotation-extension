@@ -202,22 +202,19 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
     }
 
     const updateAnnotation = (updatedAnnotation: IAnnotationStore) => {
+        if (!updatedAnnotation) return;
         setAnnotations(prevAnnotations =>
             prevAnnotations.map(annotation => {
                 if (annotation.id === updatedAnnotation.id) {
-                    // 更新内容、颜色或其他属性
-                    const newAnnotation = {
+                    return {
                         ...annotation,
-                        konvaClientRect: updatedAnnotation.konvaClientRect,
-                        date: formatTimestamp(Date.now()) // 更新最后修改时间
+                        ...updatedAnnotation
                     }
-                    return newAnnotation
                 }
                 return annotation
             })
         )
 
-        // 清除当前编辑的批注
         setEditAnnotation(null)
     }
 

@@ -305,7 +305,7 @@ export class Painter {
     /**
      * 保存到存储
      */
-    private saveToStore(annotationStore: IAnnotationStore, isOriginal: boolean = false) {
+    public saveToStore(annotationStore: IAnnotationStore, isOriginal: boolean = false) {
         const currentAnnotation = annotationDefinitions.find(item => item.pdfjsAnnotationType === annotationStore.pdfjsType)
         this.onStoreAdd(this.store.save(annotationStore, isOriginal), isOriginal, currentAnnotation)
     }
@@ -313,7 +313,7 @@ export class Painter {
     /**
      * 更新存储
      */
-    private updateStore(id: string, updates: Partial<IAnnotationStore>) {
+    public updateStore(id: string, updates: Partial<IAnnotationStore>) {
         this.onAnnotationChange(this.store.update(id, updates))
     }
 

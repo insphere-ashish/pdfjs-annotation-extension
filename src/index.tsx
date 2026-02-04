@@ -150,7 +150,9 @@ class PdfjsAnnotationExtension {
                 this.connectorLine?.drawConnection(annotation, selectorRect)
             },
             onAnnotationChange: (annotation) => {
-                this.customCommentRef.current.updateAnnotation(annotation)
+                if (annotation) {
+                    this.customCommentRef.current.updateAnnotation(annotation)
+                }
             },
             onAnnotationChanging: () => {
                 this.connectorLine?.clearConnection()
@@ -855,6 +857,7 @@ class PdfjsAnnotationExtension {
     /** START - share model setup  */
     private shareModalInstance: any = null;
     private currentShareAnnotation: IAnnotationStore | null = null;
+    private unshareUserIds: Set<string> = new Set(); // track users to be unshared
 
     private setupShareModal = (): void => {
         var container = document.getElementById('docViewerContainer');
@@ -1116,6 +1119,11 @@ class PdfjsAnnotationExtension {
             var roleCode = opt.getAttribute('data-strong-text') || '';
             if (existingIds[id]) return;
 
+            // Remove from unshare list if user is being re-added
+            if (this.unshareUserIds.has(id)) {
+                this.unshareUserIds.delete(id);
+            }
+
             var rowHtml = this.renderSharedUserRow({ 
                 id: id, 
                 email: email, 
@@ -1148,6 +1156,12 @@ class PdfjsAnnotationExtension {
             ev.preventDefault();
             var row = (removeAnchor as HTMLElement).closest('.userlist') as HTMLElement | null;
             if (!row) return;
+
+            // Track user for unsharing
+            var userId = row.getAttribute('data-user-id') || '';
+            if (userId) {
+                this.unshareUserIds.add(userId);
+            }
 
             row.remove();
 
@@ -1187,6 +1201,7 @@ class PdfjsAnnotationExtension {
         }
 
         this.currentShareAnnotation = annotation;
+        this.unshareUserIds = new Set(); // reset unshare tracking
 
         var postData = {
             action: 'fetch',
@@ -1298,7 +1313,7 @@ class PdfjsAnnotationExtension {
 
         if (!url || !caseGuid || !fileuuid) return;
 
-        // Gather rows
+        // Gather rows for users to share
         var list = document.getElementById('shared-users-list');
         if (!list) return;
 
@@ -1315,7 +1330,12 @@ class PdfjsAnnotationExtension {
             }
         }
 
-        if(items.length == 0){
+        // Get users to unshare (filter out any that are in items list)
+        var itemUserIds = new Set(items.map(item => item.userId));
+        var unshareUsers = Array.from(this.unshareUserIds).filter(id => !itemUserIds.has(id));
+
+        // Must have at least one action (share or unshare)
+        if (items.length === 0 && unshareUsers.length === 0) {
             message.warning(t('comment.share.noUsers'));
             return;
         }
@@ -1326,7 +1346,8 @@ class PdfjsAnnotationExtension {
             fileuuid: fileuuid,
             pageNumber: this.currentShareAnnotation.pageNumber,
             commentId: this.currentShareAnnotation.id, // IMPORTANT: backend expects commentId
-            items: items
+            items: items,
+            unshare_users: unshareUsers
         };
 
         var saveBtn = document.getElementById('save-shared-comment-btn') as HTMLButtonElement | null;
