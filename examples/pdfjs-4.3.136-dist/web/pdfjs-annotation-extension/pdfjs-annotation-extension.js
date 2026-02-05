@@ -23579,7 +23579,7 @@ const selectOrdinal = () => '';
 ;// ./src/locale/zh-cn.json
 const zh_cn_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"批注","annotations":{"select":"选择","highlight":"高亮","strikeout":"删除线","underline":"下划线","rectangle":"矩形","circle":"圆形","freehand":"自由绘制","freeHighlight":"自由高亮","freeText":"文字","signature":"签名","stamp":"盖章","note":"注解","arrow":"箭头","cloud":"云线"},"toolbar":{"buttons":{"createSignature":"创建签名","uploadImages":"上传图片","createStamp":"创建印章"},"message":{"selectPosition":"请选择放置位置","signatureArea":"签名处","uploadArea":"上传区域","uploadHint":"点击上传或请将图片拖拽到此处，支持格式{{format}}, 最大 {{maxSize}}"}},"editor":{"text":{"startTyping":"开始输入..."},"stamp":{"stampText":"印章内容","fontStyle":"字体样式","fontFamily":"字体","textColor":"文字颜色","backgroundColor":"背景颜色","borderColor":"边框颜色","borderStyle":"边框样式","timestampText":"时间戳","customTimestamp":"自定义","username":"用户名","date":"日期","time":"时间","dateFormat":"日期格式","solid":"实线","dashed":"虚线","defaultText":"草稿"}},"normal":{"ok":"确定","cancel":"取消","clear":"清空","fileSizeLimit":"文件大小超出 {{value}} 限制","deleteConfirm":"是否删除","yes":"是","no":"否","example":"例如：","color":"颜色","export":"导出","save":"保存","reply":"回复","edit":"编辑","delete":"删除","confirm":"确认","unknownUser":"不具名用户","processing":"处理中，请稍候...","filter":"过滤","author":"作者","type":"类型","selectAll":"全选","more":"更多","draw":"绘制","enter":"输入","upload":"上传","default":"默认","custom":"自定义","strokeWidth":"笔触宽度","opacity":"透明度"},"comment":{"total":" {{value}} 条批注","page":"第{{value}}页","status":{"accepted":"接受","rejected":"拒绝","cancelled":"取消","completed":"完成","none":"无","closed":"关闭"},"statusText":"将状态设置为 “{{value}}”"},"pdf":{"generationSuccess":"文件已生成！"},"dateFormat":{"full":"{{year}}-{{month}}-{{day}} {{hour}}:{{minute}}","dayMonth":"{{month}}-{{day}}","dayMonthYear":"{{year}}-{{month}}-{{day}}"},"save":{"start":"正在保存...","success":"保存成功！","fail":"保存失败，错误代码： {{value}}","noPostUrl":"未找到参数: {{value}}"},"load":{"fail":"外部批注加载失败，{{value}}"},"export":{"fields":{"id":"ID","page":"页码","author":"用户","date":"日期","content":"内容","status":"状态","annotationType":"批注类型","recordType":"类型"},"recordType":{"annotation":"批注","reply":"回复"}}}');
 ;// ./src/locale/en-us.json
-const en_us_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Comment","annotations":{"select":"Select","highlight":"Highlight","strikeout":"Strikeout","underline":"Underline","rectangle":"Rectangle","circle":"Circle","freehand":"Free Hand","freeHighlight":"Free Highlight","freeText":"Text","signature":"Signature","stamp":"Stamp","note":"Note","arrow":"Arrow","cloud":"Cloud"},"toolbar":{"buttons":{"createSignature":"Create signature","uploadImage":"Upload Image","createStamp":"Create Stamp"},"message":{"selectPosition":"Please select a position","signatureArea":"Signature","uploadArea":"Upload Area","uploadHint":"Click to upload or drag and drop to here {{format}}, maxSize {{maxSize}}"}},"editor":{"text":{"startTyping":"Start typing…"},"stamp":{"stampText":"Stamp Text","fontStyle":"Font Style","fontFamily":"Font Family","textColor":"Text Color","backgroundColor":"Background Color","borderColor":"Border Color","borderStyle":"Border Style","timestampText":"Timestamp Text","customTimestamp":"Custom Text","username":"Username","date":"Date","time":"Time","dateFormat":"Date Format","solid":"Solid","dashed":"Dashed","defaultText":"Draft"}},"normal":{"ok":"OK","cancel":"Cancel","clear":"Clear","fileSizeLimit":"The file size exceeds the {{value}} limit","deleteConfirm":"Are you sure you want to delete?","yes":"Yes","no":"No","example":"e.g. ","color":"Color","export":"Export","save":"Save","print":"Print","reply":"Reply","edit":"Edit","delete":"Delete","confirm":"Confirm","unknownUser":"Unknown User","processing":"Processing, please wait...","filter":"Filter","author":"Author","type":"Type","selectAll":"Select All","more":"More","less":"Less","draw":"Draw","enter":"Enter","upload":"Upload","default":"Default","custom":"Custom","strokeWidth":"Stroke","opacity":"Opacity"},"comment":{"total":"Comment {{value}}","page":"Page {{value}}","status":{"accepted":"Accepted","rejected":"Rejected","cancelled":"Cancelled","completed":"Completed","none":"None","closed":"Closed"},"statusText":"Set Status: {{value}}","required":"Please enter a comment","share":{"title":"Share Comment","noUsers":"No users selected to share the comment."}},"pdf":{"generationSuccess":"File has been successfully generated and downloaded"},"dateFormat":{"full":"{{month}}/{{day}}/{{year}} {{hour}}:{{minute}}","dayMonth":"{{month}}/{{day}}","dayMonthYear":"{{month}}/{{day}}/{{year}}"},"save":{"start":"Saving...","success":"Saved successfully!","fail":"Failed to save. {{value}}","noPostUrl":"{{value}} not found."},"load":{"fail":"Annotation Data Load Fail: {{value}}"},"export":{"fields":{"id":"ID","page":"Page","author":"Author","date":"Date","content":"Content","status":"Status","annotationType":"Annotation Type","recordType":"Type"},"recordType":{"annotation":"Annotation","reply":"Reply"}}}');
+const en_us_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Comment","annotations":{"select":"Select","highlight":"Highlight","strikeout":"Strikeout","underline":"Underline","rectangle":"Rectangle","circle":"Circle","freehand":"Free Hand","freeHighlight":"Free Highlight","freeText":"Text","signature":"Signature","stamp":"Stamp","note":"Note","arrow":"Arrow","cloud":"Cloud"},"toolbar":{"buttons":{"createSignature":"Create signature","uploadImage":"Upload Image","createStamp":"Create Stamp"},"message":{"selectPosition":"Please select a position","signatureArea":"Signature","uploadArea":"Upload Area","uploadHint":"Click to upload or drag and drop to here {{format}}, maxSize {{maxSize}}"}},"editor":{"text":{"startTyping":"Start typing…"},"stamp":{"stampText":"Stamp Text","fontStyle":"Font Style","fontFamily":"Font Family","textColor":"Text Color","backgroundColor":"Background Color","borderColor":"Border Color","borderStyle":"Border Style","timestampText":"Timestamp Text","customTimestamp":"Custom Text","username":"Username","date":"Date","time":"Time","dateFormat":"Date Format","solid":"Solid","dashed":"Dashed","defaultText":"Draft"}},"normal":{"ok":"OK","cancel":"Cancel","clear":"Clear","fileSizeLimit":"The file size exceeds the {{value}} limit","deleteConfirm":"Are you sure you want to delete?","yes":"Yes","no":"No","example":"e.g. ","color":"Color","export":"Export","save":"Save","print":"Print","reply":"Reply","edit":"Edit","delete":"Delete","confirm":"Confirm","unknownUser":"Unknown User","processing":"Processing, please wait...","filter":"Filter","author":"Author","type":"Type","selectAll":"Select All","..more":"..More","..less":"..Less","draw":"Draw","enter":"Enter","upload":"Upload","default":"Default","custom":"Custom","strokeWidth":"Stroke","opacity":"Opacity"},"comment":{"total":"Comment {{value}}","page":"Page {{value}}","status":{"accepted":"Accepted","rejected":"Rejected","cancelled":"Cancelled","completed":"Completed","none":"None","closed":"Closed"},"statusText":"Set Status: {{value}}","required":"Please enter a comment","share":{"title":"Share Comment","noUsers":"No users selected to share the comment."}},"pdf":{"generationSuccess":"File has been successfully generated and downloaded"},"dateFormat":{"full":"{{month}}/{{day}}/{{year}} {{hour}}:{{minute}}","dayMonth":"{{month}}/{{day}}","dayMonthYear":"{{month}}/{{day}}/{{year}}"},"save":{"start":"Saving...","success":"Saved successfully!","fail":"Failed to save. {{value}}","noPostUrl":"{{value}} not found."},"load":{"fail":"Annotation Data Load Fail: {{value}}"},"export":{"fields":{"id":"ID","page":"Page","author":"Author","date":"Date","content":"Content","status":"Status","annotationType":"Annotation Type","recordType":"Type"},"recordType":{"annotation":"Annotation","reply":"Reply"}}}');
 ;// ./src/locale/de-de.json
 const de_de_namespaceObject = /*#__PURE__*/JSON.parse('{"anno":"Kommentare","annotations":{"select":"Auswählen","highlight":"Hervorheben","strikeout":"Durchstreichen","underline":"Unterstreichen","rectangle":"Rechteck","circle":"Kreis","freehand":"Freihand","freeHighlight":"Hervorheben","freeText":"Text","signature":"Unterschrift","stamp":"Stempel","note":"Notiz","arrow":"Pfeil","cloud":"Wolke"},"toolbar":{"buttons":{"createSignature":"Unterschrift erstellen","uploadImage":"Bild hochladen","createStamp":"Stempel erstellen"},"message":{"selectPosition":"Bitte wählen Sie eine Position","signatureArea":"Unterschriftbereich","uploadArea":"Hochladebereich","uploadHint":"Klicken Sie zum Hochladen oder ziehen Sie die Bilddatei in diese Zone {{format}} {{maxSize}}"}},"editor":{"text":{"startTyping":"Tippen beginnen…"},"stamp":{"stampText":"Stempelinhalt","fontStyle":"Schriftart","fontFamily":"Schriftfamilie","textColor":"Textfarbe","backgroundColor":"Hintergrundfarbe","borderColor":"Randfarbe","borderStyle":"Randstil","timestampText":"Zeitstempel","customTimestamp":"Benutzerdefiniert","username":"Benutzername","date":"Datum","time":"Zeit","dateFormat":"Datumsformat","solid":"Solide","dashed":"Gestrichelt","defaultText":"Entwurf"}},"normal":{"ok":"OK","cancel":"Abbrechen","clear":"Löschen","fileSizeLimit":"Die Dateigröße überschreitet die {{value}}-Grenze","deleteConfirm":"Sind Sie sicher, dass Sie Folgendes löschen möchten?","yes":"Ja","no":"Nein","example":"z.B. ","color":"Farbe","export":"Export","save":"Speichern","reply":"Antworten","edit":"Bearbeiten","delete":"Löschen","confirm":"Bestätigen","unknownUser":"Unbekannter Benutzer","processing":"Bearbeitung, bitte warten...","filter":"Filter","author":"Autor","type":"Typ","selectAll":"Alle auswählen","more":"Mehr","draw":"Zeichnen","enter":"Eingeben","upload":"Hochladen","default":"Standard","custom":"Benutzerdefiniert","strokeWidth":"Strichbreite","opacity":"Deckkraft"},"comment":{"total":"Kommentare: {{value}}","page":"Seite {{value}}","status":{"accepted":"Akzeptiert","rejected":"Abgelehnt","cancelled":"Abgebrochen","completed":"Abgeschlossen","none":"Keine","closed":"Geschlossen"},"statusText":"Status festlegen: {{value}}"},"pdf":{"generationSuccess":"Datei wurde erfolgreich generiert und heruntergeladen"},"dateFormat":{"full":"{{day}}.{{month}}.{{year}} {{hour}}:{{minute}}","dayMonth":"{{day}}.{{month}}","dayMonthYear":"{{day}}.{{month}}.{{year}}"},"save":{"start":"Speichern...","success":"Erfolgreich gespeichert!","fail":"Speichern fehlgeschlagen. {{value}}","noPostUrl":"{{value}} nicht gefunden."},"export":{"fields":{"id":"ID","page":"Seite","author":"Autor","date":"Datum","content":"Inhalt","status":"Status","annotationType":"Anmerkungstyp","recordType":"Typ"},"recordType":{"annotation":"Anmerkung","reply":"Antwort"}}}');
 ;// ./src/locale/index.ts
@@ -113875,9 +113875,9 @@ var ExpandableParagraph = function ExpandableParagraph(_ref) {
     _ref$rows = _ref.rows,
     rows = _ref$rows === void 0 ? 3 : _ref$rows,
     _ref$moreLabel = _ref.moreLabel,
-    moreLabel = _ref$moreLabel === void 0 ? 'More' : _ref$moreLabel,
+    moreLabel = _ref$moreLabel === void 0 ? '..More' : _ref$moreLabel,
     _ref$lessLabel = _ref.lessLabel,
-    lessLabel = _ref$lessLabel === void 0 ? 'Less' : _ref$lessLabel;
+    lessLabel = _ref$lessLabel === void 0 ? '..Less' : _ref$lessLabel;
   var _useState = (0,react.useState)(false),
     _useState2 = paragraph_slicedToArray(_useState, 2),
     expanded = _useState2[0],
@@ -114038,7 +114038,7 @@ var allowedType = [11, 5]; // only type to allow on comment section  // 11 = not
 /**
  * @description CustomComment
  */
-var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(props, ref) {
+var CustomComment = function CustomComment(props, ref) {
   var _useState = (0,react.useState)([]),
     _useState2 = comment_slicedToArray(_useState, 2),
     annotations = _useState2[0],
@@ -114150,21 +114150,15 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
     }
   };
   var updateAnnotation = function updateAnnotation(updatedAnnotation) {
+    if (!updatedAnnotation) return;
     setAnnotations(function (prevAnnotations) {
       return prevAnnotations.map(function (annotation) {
         if (annotation.id === updatedAnnotation.id) {
-          // 更新内容、颜色或其他属性
-          var newAnnotation = comment_objectSpread(comment_objectSpread({}, annotation), {}, {
-            konvaClientRect: updatedAnnotation.konvaClientRect,
-            date: formatTimestamp(Date.now()) // 更新最后修改时间
-          });
-          return newAnnotation;
+          return comment_objectSpread(comment_objectSpread({}, annotation), updatedAnnotation);
         }
         return annotation;
       });
     });
-
-    // 清除当前编辑的批注
     setEditAnnotation(null);
   };
   var allUsers = (0,react.useMemo)(function () {
@@ -114410,7 +114404,8 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
     onDelete = props.onDelete,
     onSelected = props.onSelected,
     userName = props.userName,
-    onShareClick = props.onShareClick;
+    onShareClick = props.onShareClick,
+    toggleComment = props.toggleComment;
   var commentInput = (0,react.useCallback)(function (annotation) {
     var _annotation$contentsO;
     var comment = (_annotation$contentsO = annotation.contentsObj.text) !== null && _annotation$contentsO !== void 0 ? _annotation$contentsO : '';
@@ -114517,8 +114512,8 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
     // return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
     return /*#__PURE__*/(0,jsx_runtime.jsx)(paragraph, {
       text: annotation.contentsObj.text,
-      moreLabel: t('normal.more'),
-      lessLabel: t('normal.less')
+      moreLabel: t('normal...more'),
+      lessLabel: t('normal...less')
     });
   }, [editAnnotation, currentAnnotation, isToolbarDisabledByUs, deleteAnnotation, onEditingStateChange, t, updateComment]);
 
@@ -114763,9 +114758,13 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
         className: "commentliner",
         children: /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
           id: "commentlinerbt",
+          onClick: function onClick() {
+            var _props$customToolbarR;
+            (_props$customToolbarR = props.customToolbarRef.current) === null || _props$customToolbarR === void 0 || _props$customToolbarR.toggleSidebarBtn(false);
+            props === null || props === void 0 || props.toggleComment(false);
+          },
           className: "toolbarButton closebt",
           type: "button",
-          disabled: "disabled",
           tabindex: "0",
           "data-l10n-id": "pdfjs-commentlinerbt-outline-item-button",
           children: /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
@@ -114788,7 +114787,9 @@ var CustomComment = /*#__PURE__*/(0,react.forwardRef)(function CustomComment(pro
       })]
     })
   });
-});
+};
+var CustomCommentWithRef = /*#__PURE__*/(0,react.forwardRef)(CustomComment);
+CustomCommentWithRef.displayName = 'CustomComment';
 
 ;// ./src/annot/parse.ts
 function parse_typeof(o) { "@babel/helpers - typeof"; return parse_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, parse_typeof(o); }
@@ -118572,6 +118573,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     /** START - share model setup  */
     src_defineProperty(this, "shareModalInstance", null);
     src_defineProperty(this, "currentShareAnnotation", null);
+    src_defineProperty(this, "unshareUserIds", new Set());
+    // track users to be unshared
     src_defineProperty(this, "setupShareModal", function () {
       var container = document.getElementById('docViewerContainer');
       if (!container) return;
@@ -118649,6 +118652,11 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         var email = opt.textContent || '';
         var roleCode = opt.getAttribute('data-strong-text') || '';
         if (existingIds[id]) return;
+
+        // Remove from unshare list if user is being re-added
+        if (_this.unshareUserIds.has(id)) {
+          _this.unshareUserIds["delete"](id);
+        }
         var rowHtml = _this.renderSharedUserRow({
           id: id,
           email: email,
@@ -118680,6 +118688,12 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         ev.preventDefault();
         var row = removeAnchor.closest('.userlist');
         if (!row) return;
+
+        // Track user for unsharing
+        var userId = row.getAttribute('data-user-id') || '';
+        if (userId) {
+          _this.unshareUserIds.add(userId);
+        }
         row.remove();
 
         // If no rows left, restore the “empty” message
@@ -118712,6 +118726,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         return;
       }
       _this.currentShareAnnotation = annotation;
+      _this.unshareUserIds = new Set(); // reset unshare tracking
+
       var postData = {
         action: 'fetch',
         caseGuid: caseGuid,
@@ -118819,7 +118835,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       var fileuuid = container.dataset['currentFileuuid'];
       if (!url || !caseGuid || !fileuuid) return;
 
-      // Gather rows
+      // Gather rows for users to share
       var list = document.getElementById('shared-users-list');
       if (!list) return;
       var rows = Array.from(list.querySelectorAll('.userlist[data-user-id]'));
@@ -118837,7 +118853,17 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
           });
         }
       }
-      if (items.length == 0) {
+
+      // Get users to unshare (filter out any that are in items list)
+      var itemUserIds = new Set(items.map(function (item) {
+        return item.userId;
+      }));
+      var unshareUsers = Array.from(_this.unshareUserIds).filter(function (id) {
+        return !itemUserIds.has(id);
+      });
+
+      // Must have at least one action (share or unshare)
+      if (items.length === 0 && unshareUsers.length === 0) {
         es_message.warning(t('comment.share.noUsers'));
         return;
       }
@@ -118848,7 +118874,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         pageNumber: _this.currentShareAnnotation.pageNumber,
         commentId: _this.currentShareAnnotation.id,
         // IMPORTANT: backend expects commentId
-        items: items
+        items: items,
+        unshare_users: unshareUsers
       };
       var saveBtn = document.getElementById('save-shared-comment-btn');
       if (saveBtn) saveBtn.disabled = true;
@@ -118952,7 +118979,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
           _this.toggleComment(true);
           _this.jsAnnoComment(true);
         }
-        _this.customerAnnotationMenuRef.current.open(annotation, selectorRect);
+        if (!(annotation !== null && annotation !== void 0 && annotation.sharedToUser)) {
+          _this.customerAnnotationMenuRef.current.open(annotation, selectorRect);
+        }
         if (isClick && (_this.isCommentOpen() || isNoteAnnotation(annotation))) {
           // 如果是点击事件并且评论栏已打开，则选中批注
           _this.customCommentRef.current.selectedAnnotation(annotation, isClick); // custom code -- e-court
@@ -118960,7 +118989,9 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         (_this$connectorLine = _this.connectorLine) === null || _this$connectorLine === void 0 || _this$connectorLine.drawConnection(annotation, selectorRect);
       },
       onAnnotationChange: function onAnnotationChange(annotation) {
-        _this.customCommentRef.current.updateAnnotation(annotation);
+        if (annotation) {
+          _this.customCommentRef.current.updateAnnotation(annotation);
+        }
       },
       onAnnotationChanging: function onAnnotationChanging() {
         var _this$connectorLine2, _this$customerAnnotat;
@@ -118968,10 +118999,12 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         (_this$customerAnnotat = _this.customerAnnotationMenuRef) === null || _this$customerAnnotat === void 0 || (_this$customerAnnotat = _this$customerAnnotat.current) === null || _this$customerAnnotat === void 0 || _this$customerAnnotat.close();
       },
       onAnnotationChanged: function onAnnotationChanged(annotation, selectorRect) {
-        var _this$customerAnnotat2;
         // console.log('annotation changed', annotation)
         // this.connectorLine?.drawConnection(annotation, selectorRect) // custom code -- e-court removing the connection line after modified
-        (_this$customerAnnotat2 = _this.customerAnnotationMenuRef) === null || _this$customerAnnotat2 === void 0 || (_this$customerAnnotat2 = _this$customerAnnotat2.current) === null || _this$customerAnnotat2 === void 0 || _this$customerAnnotat2.open(annotation, selectorRect);
+        if (!(annotation !== null && annotation !== void 0 && annotation.sharedToUser)) {
+          var _this$customerAnnotat2;
+          (_this$customerAnnotat2 = _this.customerAnnotationMenuRef) === null || _this$customerAnnotat2 === void 0 || (_this$customerAnnotat2 = _this$customerAnnotat2.current) === null || _this$customerAnnotat2 === void 0 || _this$customerAnnotat2.open(annotation, selectorRect);
+        }
         if (shouldSaveNow(annotation)) {
           _this.saveData(); // custom code -- e-court auto save after modified
         }
@@ -119231,10 +119264,10 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
       var _this5 = this;
       var comment = document.createElement('div');
       this.$PDFJS_mainContainer.insertAdjacentElement('afterend', comment);
-      (0,client/* createRoot */.H)(comment).render(/*#__PURE__*/(0,jsx_runtime.jsx)(CustomComment, {
-        ref: this.customCommentRef
-        // customToolbarRef={this.customToolbarRef}
-        ,
+      (0,client/* createRoot */.H)(comment).render(/*#__PURE__*/(0,jsx_runtime.jsx)(CustomCommentWithRef, {
+        ref: this.customCommentRef,
+        customToolbarRef: this.customToolbarRef,
+        toggleComment: this.toggleComment.bind(this),
         userName: this.getOption(HASH_PARAMS_USERNAME),
         onSelected: (/*#__PURE__*/function () {
           var _ref2 = src_asyncToGenerator(/*#__PURE__*/src_regenerator().m(function _callee2(annotation) {
@@ -119944,6 +119977,13 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     key: "hasUnsavedChanges",
     value: function hasUnsavedChanges() {
       return hashArrayOfObjects(this.painter.getData()) !== this.initialDataHash;
+    }
+  }, {
+    key: "removeSharedComment",
+    value: function removeSharedComment(id) {
+      var _this$customCommentRe;
+      this.painter["delete"](id, false);
+      (_this$customCommentRe = this.customCommentRef.current) === null || _this$customCommentRe === void 0 || _this$customCommentRe.delAnnotation(id);
     }
   }, {
     key: "renderSharedUserRow",
