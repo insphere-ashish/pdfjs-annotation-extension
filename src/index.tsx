@@ -141,7 +141,9 @@ class PdfjsAnnotationExtension {
                     this.toggleComment(true)
                     this.jsAnnoComment(true)
                 }
-                this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
+                if(!annotation?.sharedToUser){
+                    this.customerAnnotationMenuRef.current.open(annotation, selectorRect)
+                }
                 if (isClick && (this.isCommentOpen() || isNoteAnnotation(annotation))) {
                     // 如果是点击事件并且评论栏已打开，则选中批注
                     this.customCommentRef.current.selectedAnnotation(annotation, isClick) // custom code -- e-court
@@ -161,7 +163,9 @@ class PdfjsAnnotationExtension {
             onAnnotationChanged: (annotation, selectorRect) => {
                 // console.log('annotation changed', annotation)
                 // this.connectorLine?.drawConnection(annotation, selectorRect) // custom code -- e-court removing the connection line after modified
-                this.customerAnnotationMenuRef?.current?.open(annotation, selectorRect)
+                if(!annotation?.sharedToUser){
+                    this.customerAnnotationMenuRef?.current?.open(annotation, selectorRect)
+                }
                 if (shouldSaveNow(annotation)) {
                     this.saveData() // custom code -- e-court auto save after modified
                 }
@@ -852,6 +856,11 @@ class PdfjsAnnotationExtension {
 
     public hasUnsavedChanges(): boolean {
         return hashArrayOfObjects(this.painter.getData()) !== this.initialDataHash
+    }
+
+    public removeSharedComment(id: string): void {
+        this.painter.delete(id, false)
+        this.customCommentRef.current?.delAnnotation(id)
     }
 
     /** START - share model setup  */

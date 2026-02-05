@@ -521,7 +521,7 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
                 )
             }
             // return <Paragraph style={{ margin: '8px 15px 8px 15px'}} ellipsis={{ rows: 3, expandable: true, symbol: t('normal.more') }}>{annotation.contentsObj.text}</Paragraph>
-            return <ExpandableParagraph text={annotation.contentsObj.text} moreLabel={t('normal.more')} lessLabel={t('normal.less')} />
+            return <ExpandableParagraph text={annotation.contentsObj.text} moreLabel={t('normal...more')} lessLabel={t('normal...less')} />
         },
         [editAnnotation, currentAnnotation, isToolbarDisabledByUs, deleteAnnotation, onEditingStateChange, t, updateComment]
     )

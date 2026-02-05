@@ -7,7 +7,7 @@ interface ExpandableParagraphProps {
     lessLabel?: string
 }
 
-const ExpandableParagraph: React.FC<ExpandableParagraphProps> = ({ text, rows = 3, moreLabel = 'More', lessLabel = 'Less' }) => {
+const ExpandableParagraph: React.FC<ExpandableParagraphProps> = ({ text, rows = 3, moreLabel = '..More', lessLabel = '..Less' }) => {
     const [expanded, setExpanded] = useState(false)
     const [isOverflowing, setIsOverflowing] = useState(false)
     const textRef = useRef<HTMLDivElement>(null)
