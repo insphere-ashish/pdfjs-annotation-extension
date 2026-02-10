@@ -162,10 +162,10 @@ export class Store {
     public getChangedAnnotations(): any[] {
         const changes: any[] = []
 
-        // 新创建的注释
+        // 新创建的注释 - skip shared comments (sharedToUser=true)
         this.createdAnnotations.forEach(id => {
             const annotation = this.annotationStore.get(id)
-            if (annotation) {
+            if (annotation && !annotation.sharedToUser) {
                 changes.push({
                     ...annotation,
                     _changeType: 'created'
@@ -173,10 +173,10 @@ export class Store {
             }
         })
 
-        // 修改的注释
+        // 修改的注释 - skip shared comments (sharedToUser=true)
         this.modifiedAnnotations.forEach(id => {
             const annotation = this.annotationStore.get(id)
-            if (annotation) {
+            if (annotation && !annotation.sharedToUser) {
                 changes.push({
                     ...annotation,
                     _changeType: 'modified'
@@ -184,10 +184,10 @@ export class Store {
             }
         })
 
-        // 删除的注释
+        // 删除的注释 - skip shared comments (sharedToUser=true)
         this.deletedAnnotations.forEach(id => {
             const originalAnnotation = this.originalAnnotationStore.get(id)
-            if (originalAnnotation) {
+            if (originalAnnotation && !originalAnnotation.sharedToUser) {
                 changes.push({
                     id: originalAnnotation.id,
                     pageNumber: originalAnnotation.pageNumber,

@@ -109422,30 +109422,30 @@ var Store = /*#__PURE__*/function () {
       var _this3 = this;
       var changes = [];
 
-      // 新创建的注释
+      // 新创建的注释 - skip shared comments (sharedToUser=true)
       this.createdAnnotations.forEach(function (id) {
         var annotation = _this3.annotationStore.get(id);
-        if (annotation) {
+        if (annotation && !annotation.sharedToUser) {
           changes.push(store_objectSpread(store_objectSpread({}, annotation), {}, {
             _changeType: 'created'
           }));
         }
       });
 
-      // 修改的注释
+      // 修改的注释 - skip shared comments (sharedToUser=true)
       this.modifiedAnnotations.forEach(function (id) {
         var annotation = _this3.annotationStore.get(id);
-        if (annotation) {
+        if (annotation && !annotation.sharedToUser) {
           changes.push(store_objectSpread(store_objectSpread({}, annotation), {}, {
             _changeType: 'modified'
           }));
         }
       });
 
-      // 删除的注释
+      // 删除的注释 - skip shared comments (sharedToUser=true)
       this.deletedAnnotations.forEach(function (id) {
         var originalAnnotation = _this3.originalAnnotationStore.get(id);
-        if (originalAnnotation) {
+        if (originalAnnotation && !originalAnnotation.sharedToUser) {
           changes.push({
             id: originalAnnotation.id,
             pageNumber: originalAnnotation.pageNumber,
@@ -111119,12 +111119,6 @@ var EditorCloud = /*#__PURE__*/function (_Editor) {
 }(Editor);
 ;// ./src/painter/index.ts
 function painter_typeof(o) { "@babel/helpers - typeof"; return painter_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, painter_typeof(o); }
-function painter_slicedToArray(r, e) { return painter_arrayWithHoles(r) || painter_iterableToArrayLimit(r, e) || painter_unsupportedIterableToArray(r, e) || painter_nonIterableRest(); }
-function painter_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function painter_unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return painter_arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? painter_arrayLikeToArray(r, a) : void 0; } }
-function painter_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function painter_iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function painter_arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function painter_regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return painter_regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (painter_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, painter_regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, painter_regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), painter_regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", painter_regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), painter_regeneratorDefine2(u), painter_regeneratorDefine2(u, o, "Generator"), painter_regeneratorDefine2(u, n, function () { return this; }), painter_regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (painter_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function painter_regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } painter_regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { painter_regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, painter_regeneratorDefine2(e, r, n, t); }
 function painter_asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -111770,10 +111764,11 @@ var Painter = /*#__PURE__*/function () {
     value: function deleteAnnotation(id) {
       var emit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var annotationStore = this.store.annotation(id);
-      var konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber); // 获取 KonvaCanvas 实例
       if (!annotationStore) {
+        console.warn("[deleteAnnotation] Annotation with id ".concat(id, " not found in store"));
         return;
       }
+      var konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber); // 获取 KonvaCanvas 实例
       this.store["delete"](id);
       var storeEditor = this.findEditor(annotationStore.pageNumber, annotationStore.type);
       if (storeEditor) {
@@ -111991,35 +111986,58 @@ var Painter = /*#__PURE__*/function () {
       this.selector["delete"]();
       this.deleteAnnotation(id, emit);
     }
-
-    /**
-     * @description 高亮选中 annotation
-     * @param annotation
-     */
   }, {
     key: "highlight",
-    value: (function () {
+    value: function () {
       var _highlight = painter_asyncToGenerator(/*#__PURE__*/painter_regenerator().m(function _callee3(annotation) {
         var _this7 = this;
-        var pageView, _annotation$konvaClie, x, y, _pageView$viewport$co, _pageView$viewport$co2, pdfX, pdfY, maxRetries, retryInterval, _attemptHighlight;
+        var viewerContainer, pageNumber, pageView, scale, _annotation$konvaClie, x, y, width, height, markerCenterX, markerCenterY, pageElement, pageRect, containerRect, markerAbsoluteX, markerAbsoluteY, targetScrollLeft, targetScrollTop, maxRetries, retryInterval, _attemptHighlight;
         return painter_regenerator().w(function (_context3) {
           while (1) switch (_context3.n) {
             case 0:
-              // 跳转至对应页面位置
-              pageView = this.pdfViewerApplication.pdfViewer._pages[annotation.pageNumber - 1] || this.pdfViewerApplication.pdfViewer.getPageView(annotation.pageNumber);
-              _annotation$konvaClie = annotation.konvaClientRect, x = _annotation$konvaClie.x, y = _annotation$konvaClie.y; // 把 Konva 的左上角坐标转换为 PDF 内部坐标（以页面左下角为原点）
-              _pageView$viewport$co = pageView.viewport.convertToPdfPoint(x, y - 200), _pageView$viewport$co2 = painter_slicedToArray(_pageView$viewport$co, 2), pdfX = _pageView$viewport$co2[0], pdfY = _pageView$viewport$co2[1];
-              this.pdfViewerApplication.pdfViewer.scrollPageIntoView({
-                pageNumber: annotation.pageNumber,
-                destArray: [null, {
-                  name: 'XYZ'
-                }, pdfX, pdfY, null],
-                // 可以加偏移
-                allowNegativeOffset: true
+              viewerContainer = document.getElementById('viewerContainer');
+              if (viewerContainer) {
+                _context3.n = 1;
+                break;
+              }
+              return _context3.a(2);
+            case 1:
+              pageNumber = annotation.pageNumber;
+              if (!(this.pdfViewerApplication.page !== pageNumber)) {
+                _context3.n = 2;
+                break;
+              }
+              this.pdfViewerApplication.page = pageNumber;
+              _context3.n = 2;
+              return new Promise(function (resolve) {
+                return setTimeout(resolve, 100);
               });
-              maxRetries = 5; // 最大重试次数
-              retryInterval = 200; // 每次重试间隔
-              // 封装递归重试机制
+            case 2:
+              pageView = this.pdfViewerApplication.pdfViewer.getPageView(pageNumber - 1);
+              if (!(!pageView || !pageView.div)) {
+                _context3.n = 3;
+                break;
+              }
+              return _context3.a(2);
+            case 3:
+              scale = pageView.viewport.scale;
+              _annotation$konvaClie = annotation.konvaClientRect, x = _annotation$konvaClie.x, y = _annotation$konvaClie.y, width = _annotation$konvaClie.width, height = _annotation$konvaClie.height;
+              markerCenterX = (x + width / 2) * scale;
+              markerCenterY = (y + height / 2) * scale;
+              pageElement = pageView.div;
+              pageRect = pageElement.getBoundingClientRect();
+              containerRect = viewerContainer.getBoundingClientRect();
+              markerAbsoluteX = pageRect.left - containerRect.left + viewerContainer.scrollLeft + markerCenterX;
+              markerAbsoluteY = pageRect.top - containerRect.top + viewerContainer.scrollTop + markerCenterY;
+              targetScrollLeft = markerAbsoluteX - containerRect.width / 2;
+              targetScrollTop = markerAbsoluteY - containerRect.height / 2;
+              viewerContainer.scrollTo({
+                left: Math.max(0, targetScrollLeft),
+                top: Math.max(0, targetScrollTop),
+                behavior: 'smooth'
+              });
+              maxRetries = 5;
+              retryInterval = 200;
               _attemptHighlight = function attemptHighlight(retries) {
                 var storeEditor = _this7.findEditor(annotation.pageNumber, annotation.type);
                 if (storeEditor) {
@@ -112029,16 +112047,15 @@ var Painter = /*#__PURE__*/function () {
                     _this7.selector.activate(annotation.pageNumber);
                   }
                 } else if (retries > 0) {
-                  // 如果没有找到且还有重试次数，继续重试
                   setTimeout(function () {
-                    _attemptHighlight(retries - 1);
+                    return _attemptHighlight(retries - 1);
                   }, retryInterval);
                 } else {
                   console.error('Failed to find editor after maximum retries.');
                 }
-              }; // 初次尝试执行
+              };
               _attemptHighlight(maxRetries);
-            case 1:
+            case 4:
               return _context3.a(2);
           }
         }, _callee3, this);
@@ -112047,7 +112064,7 @@ var Painter = /*#__PURE__*/function () {
         return _highlight.apply(this, arguments);
       }
       return highlight;
-    }())
+    }()
   }, {
     key: "getData",
     value: function getData() {

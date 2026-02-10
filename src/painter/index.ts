@@ -593,10 +593,11 @@ export class Painter {
      */
     private deleteAnnotation(id, emit: boolean = false): void {
         const annotationStore = this.store.annotation(id)
-        const konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber) // 获取 KonvaCanvas 实例
         if (!annotationStore) {
+            console.warn(`[deleteAnnotation] Annotation with id ${id} not found in store`)
             return
         }
+        const konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber) // 获取 KonvaCanvas 实例
         this.store.delete(id)
         const storeEditor = this.findEditor(annotationStore.pageNumber, annotationStore.type)
         if (storeEditor) {
@@ -772,19 +773,43 @@ export class Painter {
      */
     public async highlight(annotation: IAnnotationStore) {
         // 跳转至对应页面位置
-        const pageView = this.pdfViewerApplication.pdfViewer._pages[annotation.pageNumber - 1] || this.pdfViewerApplication.pdfViewer.getPageView(annotation.pageNumber)
-        const { x, y } = annotation.konvaClientRect
-        // 把 Konva 的左上角坐标转换为 PDF 内部坐标（以页面左下角为原点）
-        const [pdfX, pdfY] = pageView.viewport.convertToPdfPoint(x, y - 200)
-        this.pdfViewerApplication.pdfViewer.scrollPageIntoView({
-            pageNumber: annotation.pageNumber,
-            destArray: [null, { name: 'XYZ' }, pdfX, pdfY, null], // 可以加偏移
-            allowNegativeOffset: true
+        const viewerContainer = document.getElementById('viewerContainer')
+        if (!viewerContainer) return
+
+        const pageNumber = annotation.pageNumber
+
+        if (this.pdfViewerApplication.page !== pageNumber) {
+            this.pdfViewerApplication.page = pageNumber
+            await new Promise(resolve => setTimeout(resolve, 100))
+        }
+
+        const pageView = this.pdfViewerApplication.pdfViewer.getPageView(pageNumber - 1)
+        if (!pageView || !pageView.div) return
+
+        const scale = pageView.viewport.scale
+        const { x, y, width, height } = annotation.konvaClientRect
+        
+        const markerCenterX = (x + width / 2) * scale
+        const markerCenterY = (y + height / 2) * scale
+
+        const pageElement = pageView.div
+        const pageRect = pageElement.getBoundingClientRect()
+        const containerRect = viewerContainer.getBoundingClientRect()
+
+        const markerAbsoluteX = pageRect.left - containerRect.left + viewerContainer.scrollLeft + markerCenterX
+        const markerAbsoluteY = pageRect.top - containerRect.top + viewerContainer.scrollTop + markerCenterY
+
+        const targetScrollLeft = markerAbsoluteX - containerRect.width / 2
+        const targetScrollTop = markerAbsoluteY - containerRect.height / 2
+
+        viewerContainer.scrollTo({
+            left: Math.max(0, targetScrollLeft),
+            top: Math.max(0, targetScrollTop),
+            behavior: 'smooth'
         })
 
-        const maxRetries = 5 // 最大重试次数
-        const retryInterval = 200 // 每次重试间隔
-        // 封装递归重试机制
+        const maxRetries = 5
+        const retryInterval = 200
         const attemptHighlight = (retries: number): void => {
             const storeEditor = this.findEditor(annotation.pageNumber, annotation.type)
             if (storeEditor) {
@@ -794,15 +819,11 @@ export class Painter {
                     this.selector.activate(annotation.pageNumber)
                 }
             } else if (retries > 0) {
-                // 如果没有找到且还有重试次数，继续重试
-                setTimeout(() => {
-                    attemptHighlight(retries - 1)
-                }, retryInterval)
+                setTimeout(() => attemptHighlight(retries - 1), retryInterval)
             } else {
                 console.error('Failed to find editor after maximum retries.')
             }
         }
-        // 初次尝试执行
         attemptHighlight(maxRetries)
     }
 
