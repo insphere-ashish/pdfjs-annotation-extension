@@ -57,6 +57,7 @@ class PdfjsAnnotationExtension {
     initialDataHash: number
     _connectorLine: ConnectorLine | null = null
     isCommentEditing: boolean = false // Track if comment is being edited
+    isHighlighting: boolean = false
 
     /**
      * @description Handle comment editing state change
@@ -389,7 +390,12 @@ class PdfjsAnnotationExtension {
                 toggleComment={this.toggleComment.bind(this)}
                 userName={this.getOption(HASH_PARAMS_USERNAME)}
                 onSelected={async (annotation) => {
-                    await this.painter.highlight(annotation)
+                    this.isHighlighting = true
+                    await this.painter.highlight(annotation, () => {
+                        setTimeout(() => {
+                            this.isHighlighting = false
+                        }, 500)
+                    })
                 }}
                 onDelete={(id) => {
                     this.painter.delete(id)
@@ -526,7 +532,9 @@ class PdfjsAnnotationExtension {
         // 视图更新时隐藏菜单
         this.PDFJS_EventBus._on('updateviewarea', () => {
             this.customerAnnotationMenuRef.current?.close()
-            this.connectorLine?.clearConnection()
+            if (!this.isHighlighting) {
+                this.connectorLine?.clearConnection()
+            }
         })
 
         // 监听页面渲染完成事件

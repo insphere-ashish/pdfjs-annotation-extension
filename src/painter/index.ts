@@ -770,8 +770,9 @@ export class Painter {
     /**
      * @description 高亮选中 annotation
      * @param annotation
+     * @param onComplete
      */
-    public async highlight(annotation: IAnnotationStore) {
+    public async highlight(annotation: IAnnotationStore, onComplete?: () => void) {
         // 跳转至对应页面位置
         const viewerContainer = document.getElementById('viewerContainer')
         if (!viewerContainer) return
@@ -818,10 +819,16 @@ export class Painter {
                 if (this.currentAnnotation && this.currentAnnotation.type === AnnotationType.SELECT) {
                     this.selector.activate(annotation.pageNumber)
                 }
+                if (onComplete) {
+                    setTimeout(onComplete, 300)
+                }
             } else if (retries > 0) {
                 setTimeout(() => attemptHighlight(retries - 1), retryInterval)
             } else {
                 console.error('Failed to find editor after maximum retries.')
+                if (onComplete) {
+                    onComplete()
+                }
             }
         }
         attemptHighlight(maxRetries)

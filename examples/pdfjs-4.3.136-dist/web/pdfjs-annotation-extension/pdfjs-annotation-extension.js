@@ -111986,15 +111986,22 @@ var Painter = /*#__PURE__*/function () {
       this.selector["delete"]();
       this.deleteAnnotation(id, emit);
     }
+
+    /**
+     * @description 高亮选中 annotation
+     * @param annotation
+     * @param onComplete
+     */
   }, {
     key: "highlight",
-    value: function () {
-      var _highlight = painter_asyncToGenerator(/*#__PURE__*/painter_regenerator().m(function _callee3(annotation) {
+    value: (function () {
+      var _highlight = painter_asyncToGenerator(/*#__PURE__*/painter_regenerator().m(function _callee3(annotation, onComplete) {
         var _this7 = this;
         var viewerContainer, pageNumber, pageView, scale, _annotation$konvaClie, x, y, width, height, markerCenterX, markerCenterY, pageElement, pageRect, containerRect, markerAbsoluteX, markerAbsoluteY, targetScrollLeft, targetScrollTop, maxRetries, retryInterval, _attemptHighlight;
         return painter_regenerator().w(function (_context3) {
           while (1) switch (_context3.n) {
             case 0:
+              // 跳转至对应页面位置
               viewerContainer = document.getElementById('viewerContainer');
               if (viewerContainer) {
                 _context3.n = 1;
@@ -112046,12 +112053,18 @@ var Painter = /*#__PURE__*/function () {
                   if (_this7.currentAnnotation && _this7.currentAnnotation.type === AnnotationType.SELECT) {
                     _this7.selector.activate(annotation.pageNumber);
                   }
+                  if (onComplete) {
+                    setTimeout(onComplete, 300);
+                  }
                 } else if (retries > 0) {
                   setTimeout(function () {
                     return _attemptHighlight(retries - 1);
                   }, retryInterval);
                 } else {
                   console.error('Failed to find editor after maximum retries.');
+                  if (onComplete) {
+                    onComplete();
+                  }
                 }
               };
               _attemptHighlight(maxRetries);
@@ -112060,11 +112073,11 @@ var Painter = /*#__PURE__*/function () {
           }
         }, _callee3, this);
       }));
-      function highlight(_x8) {
+      function highlight(_x8, _x9) {
         return _highlight.apply(this, arguments);
       }
       return highlight;
-    }()
+    }())
   }, {
     key: "getData",
     value: function getData() {
@@ -112124,7 +112137,7 @@ var Painter = /*#__PURE__*/function () {
           }
         }, _callee4, this);
       }));
-      function loadPageAnnotations(_x9, _x0) {
+      function loadPageAnnotations(_x0, _x1) {
         return _loadPageAnnotations.apply(this, arguments);
       }
       return loadPageAnnotations;
@@ -118579,6 +118592,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     src_defineProperty(this, "_connectorLine", null);
     src_defineProperty(this, "isCommentEditing", false);
     // Track if comment is being edited
+    src_defineProperty(this, "isHighlighting", false);
     /**
      * @description Handle comment editing state change
      */
@@ -119291,8 +119305,13 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
             return src_regenerator().w(function (_context2) {
               while (1) switch (_context2.n) {
                 case 0:
+                  _this5.isHighlighting = true;
                   _context2.n = 1;
-                  return _this5.painter.highlight(annotation);
+                  return _this5.painter.highlight(annotation, function () {
+                    setTimeout(function () {
+                      _this5.isHighlighting = false;
+                    }, 500);
+                  });
                 case 1:
                   return _context2.a(2);
               }
@@ -119436,9 +119455,12 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
 
       // 视图更新时隐藏菜单
       this.PDFJS_EventBus._on('updateviewarea', function () {
-        var _this6$customerAnnota, _this6$connectorLine;
+        var _this6$customerAnnota;
         (_this6$customerAnnota = _this6.customerAnnotationMenuRef.current) === null || _this6$customerAnnota === void 0 || _this6$customerAnnota.close();
-        (_this6$connectorLine = _this6.connectorLine) === null || _this6$connectorLine === void 0 || _this6$connectorLine.clearConnection();
+        if (!_this6.isHighlighting) {
+          var _this6$connectorLine;
+          (_this6$connectorLine = _this6.connectorLine) === null || _this6$connectorLine === void 0 || _this6$connectorLine.clearConnection();
+        }
       });
 
       // 监听页面渲染完成事件
