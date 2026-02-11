@@ -797,7 +797,13 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
                     </Popover>
                 </div> */}
                 <div className="commentliner">
-                    <button id="commentlinerbt" onClick={() => {props.customToolbarRef.current?.toggleSidebarBtn(false);props?.toggleComment(false)}} className="toolbarButton closebt" type="button"  tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
+                    <button id="commentlinerbt" onClick={() => {
+                        props.customToolbarRef.current?.toggleSidebarBtn(false);
+                        props?.toggleComment(false);
+                        if (window.pdfjsAnnotationExtensionInstance?.connectorLine) {
+                            window.pdfjsAnnotationExtensionInstance.connectorLine.clearConnection();
+                        }
+                    }} className="toolbarButton closebt" type="button"  tabindex="0" data-l10n-id="pdfjs-commentlinerbt-outline-item-button">
                         <span data-l10n-id="pdfjs-commentlinerbt-outline-item-button-label"></span>
                     </button>
                 </div>
