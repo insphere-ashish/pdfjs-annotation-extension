@@ -114127,6 +114127,7 @@ var CustomComment = function CustomComment(props, ref) {
   // }
   // custom code - e-court
   var addAnnotation = function addAnnotation(annotation) {
+    var _window$pdfjsAnnotati, _window$pdfjsAnnotati2;
     setAnnotations(function (prevAnnotations) {
       // dedupe by id (safe guard)
       if (prevAnnotations.some(function (a) {
@@ -114137,8 +114138,13 @@ var CustomComment = function CustomComment(props, ref) {
       return [].concat(comment_toConsumableArray(prevAnnotations), [annotation]);
     });
     setCurrentAnnotation(null);
+    // Draw marker if page is loaded
+    if ((_window$pdfjsAnnotati = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.painter) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.konvaCanvasStore) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati2 = _window$pdfjsAnnotati.has) !== null && _window$pdfjsAnnotati2 !== void 0 && _window$pdfjsAnnotati2.call(_window$pdfjsAnnotati, annotation.pageNumber)) {
+      window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber);
+    }
   };
   var delAnnotation = function delAnnotation(id) {
+    var _window$pdfjsAnnotati3, _window$pdfjsAnnotati4;
     setAnnotations(function (prevAnnotations) {
       return prevAnnotations.filter(function (annotation) {
         return annotation.id !== id;
@@ -114151,6 +114157,13 @@ var CustomComment = function CustomComment(props, ref) {
       setReplyAnnotation(null);
     }
     setCurrentReply(null);
+    // Remove marker if page is loaded
+    var annotation = annotations.find(function (a) {
+      return a.id === id;
+    });
+    if (annotation && (_window$pdfjsAnnotati3 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.painter) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.konvaCanvasStore) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati4 = _window$pdfjsAnnotati3.has) !== null && _window$pdfjsAnnotati4 !== void 0 && _window$pdfjsAnnotati4.call(_window$pdfjsAnnotati3, annotation.pageNumber)) {
+      window.pdfjsAnnotationExtensionInstance.painter.deleteAnnotation(id);
+    }
   };
   var selectedAnnotation = function selectedAnnotation(annotation, isClick) {
     setCurrentAnnotation(annotation);
@@ -114789,9 +114802,12 @@ var CustomComment = function CustomComment(props, ref) {
         children: /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
           id: "commentlinerbt",
           onClick: function onClick() {
-            var _props$customToolbarR;
+            var _props$customToolbarR, _window$pdfjsAnnotati5;
             (_props$customToolbarR = props.customToolbarRef.current) === null || _props$customToolbarR === void 0 || _props$customToolbarR.toggleSidebarBtn(false);
             props === null || props === void 0 || props.toggleComment(false);
+            if ((_window$pdfjsAnnotati5 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati5 !== void 0 && _window$pdfjsAnnotati5.connectorLine) {
+              window.pdfjsAnnotationExtensionInstance.connectorLine.clearConnection();
+            }
           },
           className: "toolbarButton closebt",
           type: "button",
