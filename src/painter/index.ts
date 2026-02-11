@@ -567,7 +567,7 @@ export class Painter {
      * 重新绘制批注
      * @param pageNumber - 页码
      */
-    private reDrawAnnotation(pageNumber: number): void {
+    public reDrawAnnotation(pageNumber: number): void {
         const konvaCanvasStore = this.konvaCanvasStore.get(pageNumber) // 获取 KonvaCanvas 实例
         const annotationStores = this.store.getByPage(pageNumber) // 获取指定页码的批注存储
         annotationStores.forEach(annotationStore => {

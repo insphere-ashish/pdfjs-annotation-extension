@@ -161,6 +161,10 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
             return [...prevAnnotations, annotation]
         })
         setCurrentAnnotation(null)
+        // Draw marker if page is loaded
+        if (window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+            window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber)
+        }
     }
 
     const delAnnotation = (id: string) => {
@@ -172,6 +176,11 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
             setReplyAnnotation(null)
         }
         setCurrentReply(null)
+        // Remove marker if page is loaded
+        const annotation = annotations.find(a => a.id === id)
+        if (annotation && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+            window.pdfjsAnnotationExtensionInstance.painter.deleteAnnotation(id)
+        }
     }
 
     const selectedAnnotation = (annotation: IAnnotationStore, isClick: boolean) => {
