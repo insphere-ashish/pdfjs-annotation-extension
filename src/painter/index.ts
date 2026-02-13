@@ -158,6 +158,20 @@ export class Painter {
         this.bindGlobalEvents() // 绑定全局事件
     }
 
+    public clearAndRedrawPage(pageNumber: number) {
+        const konvaCanvas = this.konvaCanvasStore.get(pageNumber);
+        if (konvaCanvas) {
+            // remove all from layer (background layer)
+            const layer = konvaCanvas.konvaStage.findOne('Layer');
+            if (layer) {
+                layer.removeChildren();
+                layer.draw();
+            }
+            // redraw all annotations for this page
+            this.reDrawAnnotation(pageNumber);
+        }
+    }
+
     /**
      * 绑定全局事件。
      */
