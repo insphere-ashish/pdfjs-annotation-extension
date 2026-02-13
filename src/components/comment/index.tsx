@@ -161,13 +161,16 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
             return [...prevAnnotations, annotation]
         })
         setCurrentAnnotation(null)
-        // Draw marker if page is loaded
-        if (window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
-            window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber)
-        }
+        console.log("------------------addAnnotation----------------------",annotation)
+        // // Draw marker if page is loaded
+        // if (annotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+        //     window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber)
+        // }
     }
 
     const delAnnotation = (id: string) => {
+        // console.log("------------------delAnnotation Before prevAnnotations----------------------", prevAnnotations)
+        // console.log("------------------delAnnotation Before currentAnnotation----------------------",currentAnnotation)
         setAnnotations(prevAnnotations => prevAnnotations.filter(annotation => annotation.id !== id))
         if (currentAnnotation?.id === id) {
             setCurrentAnnotation(null)
@@ -176,9 +179,10 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
             setReplyAnnotation(null)
         }
         setCurrentReply(null)
+        // console.log("------------------delAnnotation After----------------------",prevAnnotations)
         // Remove marker if page is loaded
         const annotation = annotations.find(a => a.id === id)
-        if (annotation && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+        if (currentAnnotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
             window.pdfjsAnnotationExtensionInstance.painter.deleteAnnotation(id)
         }
     }
