@@ -111301,11 +111301,26 @@ var Painter = /*#__PURE__*/function () {
     this.transform = new transform_Transform(PDFViewerApplication);
     this.bindGlobalEvents(); // 绑定全局事件
   }
-
-  /**
-   * 绑定全局事件。
-   */
   return painter_createClass(Painter, [{
+    key: "clearAndRedrawPage",
+    value: function clearAndRedrawPage(pageNumber) {
+      var konvaCanvas = this.konvaCanvasStore.get(pageNumber);
+      if (konvaCanvas) {
+        // remove all from layer (background layer)
+        var layer = konvaCanvas.konvaStage.findOne('Layer');
+        if (layer) {
+          layer.removeChildren();
+          layer.draw();
+        }
+        // redraw all annotations for this page
+        this.reDrawAnnotation(pageNumber);
+      }
+    }
+
+    /**
+     * 绑定全局事件。
+     */
+  }, {
     key: "bindGlobalEvents",
     value: function bindGlobalEvents() {
       window.addEventListener('keyup', this.globalKeyUpHandler); // 监听全局键盘事件
@@ -111779,7 +111794,7 @@ var Painter = /*#__PURE__*/function () {
       if (!annotationStore) {
         console.warn("[deleteAnnotation] Annotation with id ".concat(id, " not found in store"));
         console.log('Current store state:', this.store.annotations);
-        // return
+        return;
       }
       var konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber); // 获取 KonvaCanvas 实例
       this.store["delete"](id);
@@ -114167,13 +114182,19 @@ var CustomComment = function CustomComment(props, ref) {
       return [].concat(comment_toConsumableArray(prevAnnotations), [annotation]);
     });
     setCurrentAnnotation(null);
-    // Draw marker if page is loaded
-    if ((_window$pdfjsAnnotati = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.painter) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.konvaCanvasStore) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati2 = _window$pdfjsAnnotati.has) !== null && _window$pdfjsAnnotati2 !== void 0 && _window$pdfjsAnnotati2.call(_window$pdfjsAnnotati, annotation.pageNumber)) {
-      window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber);
+    console.log("------------------addAnnotation----------------------", annotation);
+    // // Draw marker if page is loaded
+    if (annotation !== null && annotation !== void 0 && annotation.sharedToUser && (_window$pdfjsAnnotati = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.painter) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.konvaCanvasStore) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati2 = _window$pdfjsAnnotati.has) !== null && _window$pdfjsAnnotati2 !== void 0 && _window$pdfjsAnnotati2.call(_window$pdfjsAnnotati, annotation.pageNumber)) {
+      window.pdfjsAnnotationExtensionInstance.painter.clearAndRedrawPage(annotation.pageNumber);
     }
+    // if (annotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+    //     window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber)
+    // }
   };
   var delAnnotation = function delAnnotation(id) {
     var _window$pdfjsAnnotati3, _window$pdfjsAnnotati4;
+    // console.log("------------------delAnnotation Before prevAnnotations----------------------", prevAnnotations)
+    // console.log("------------------delAnnotation Before currentAnnotation----------------------",currentAnnotation)
     setAnnotations(function (prevAnnotations) {
       return prevAnnotations.filter(function (annotation) {
         return annotation.id !== id;
@@ -114186,11 +114207,12 @@ var CustomComment = function CustomComment(props, ref) {
       setReplyAnnotation(null);
     }
     setCurrentReply(null);
+    // console.log("------------------delAnnotation After----------------------",prevAnnotations)
     // Remove marker if page is loaded
     var annotation = annotations.find(function (a) {
       return a.id === id;
     });
-    if (annotation && (_window$pdfjsAnnotati3 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.painter) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.konvaCanvasStore) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati4 = _window$pdfjsAnnotati3.has) !== null && _window$pdfjsAnnotati4 !== void 0 && _window$pdfjsAnnotati4.call(_window$pdfjsAnnotati3, annotation.pageNumber)) {
+    if (currentAnnotation !== null && currentAnnotation !== void 0 && currentAnnotation.sharedToUser && (_window$pdfjsAnnotati3 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.painter) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.konvaCanvasStore) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati4 = _window$pdfjsAnnotati3.has) !== null && _window$pdfjsAnnotati4 !== void 0 && _window$pdfjsAnnotati4.call(_window$pdfjsAnnotati3, annotation.pageNumber)) {
       window.pdfjsAnnotationExtensionInstance.painter.deleteAnnotation(id);
     }
   };
