@@ -93,6 +93,8 @@ class PdfjsAnnotationExtension {
             [HASH_PARAMS_DEFAULT_SIDEBAR_OPEN]: defaultOptions.setting.HASH_PARAMS_DEFAULT_SIDEBAR_OPEN,
         };
 
+        this.isLoadingPageAnnotation = new Map() // this.isLoadingPageAnnotation[pagenumber]: true/false . NOTE; willl update later
+
         // 处理地址栏参数
         this.parseHashParams()
 
@@ -674,10 +676,12 @@ class PdfjsAnnotationExtension {
 
             // 获取可见页面
             const visiblePages = this.getVisiblePages()
+            console.log('Visible pages:', visiblePages)
             
             // 构建带页码参数的URL
             let fetchUrl = getUrl
             if (visiblePages.length > 0) {
+                // let pagesToFetch = visiblePages.filter(pageNum => !this.isLoadingPageAnnotation.get(pageNum))
                 const separator = getUrl.includes('?') ? '&' : '?'
                 fetchUrl = `${getUrl}${separator}pages=${visiblePages.join(',')}`
             }
