@@ -595,6 +595,7 @@ export class Painter {
         const annotationStore = this.store.annotation(id)
         if (!annotationStore) {
             console.warn(`[deleteAnnotation] Annotation with id ${id} not found in store`)
+            console.log('Current store state:', this.store.annotations)
             return
         }
         const konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber) // 获取 KonvaCanvas 实例
@@ -872,6 +873,22 @@ export class Painter {
      */
     public async loadPageAnnotations(pageNumber: number, annotations: IAnnotationStore[]): Promise<void> {
         this.store.loadPageAnnotations(pageNumber, annotations, true)
+
+        // // After loading annotations into the store, ensure they are drawn
+        // // If a Konva canvas exists for the page, redraw annotations
+        // try {
+        //     if (this.konvaCanvasStore.has(pageNumber)) {
+        //         this.reDrawAnnotation(pageNumber)
+        //     } else {
+        //         // If canvas is not yet inserted (edge cases), attempt to create it
+        //         const pageView = this.pdfViewerApplication.pdfViewer.getPageView(pageNumber - 1)
+        //         if (pageView && pageView.div) {
+        //             this.insertCanvas(pageView, pageNumber)
+        //         }
+        //     }
+        // } catch (err) {
+        //     console.error('[Painter] Failed to re-draw annotations for page', pageNumber, err)
+        // }
     }
 
     // custom method to clear all data -- otherwise the annotations were showing as before from the older file

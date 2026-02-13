@@ -358,18 +358,20 @@ export abstract class Editor {
         this.konvaStage = konvaStage // 更新 Konva Stage对象
         const ghostGroup = Konva.Node.create(konvaString) // 根据序列化字符串创建 Konva.Group 对象
         const id = ghostGroup.id()
-        // 如果已经有相同 id 的 shape group，跳过添加，避免重复渲染
-        if (this.shapeGroupStore.has(id)) {
-            // destroy the created node since we won't add it to the stage
-            try {
-                ghostGroup.destroy()
-            } catch (e) {
-                // ignore
-            }
-            return
-        }
-        // 将 Konva.Group 对象添加到背景图层
-        this.getBgLayer(konvaStage).add(ghostGroup)
+        // // 如果已经有相同 id 的 shape group，跳过添加，避免重复渲染
+        // if (this.shapeGroupStore.has(id)) {
+        //     // destroy the created node since we won't add it to the stage
+        //     try {
+        //         ghostGroup.destroy()
+        //     } catch (e) {
+        //         // ignore
+        //     }
+        //     return
+        // }
+        // // 将 Konva.Group 对象添加到背景图层
+        // this.getBgLayer(konvaStage).add(ghostGroup)
+        this.getBgLayer(konvaStage).add(ghostGroup) // 将 Konva.Group 对象添加到背景图层
+        if (this.shapeGroupStore.has(id)) return
         const shapeGroup: IShapeGroup = {
             // 创建形状组对象
             id,

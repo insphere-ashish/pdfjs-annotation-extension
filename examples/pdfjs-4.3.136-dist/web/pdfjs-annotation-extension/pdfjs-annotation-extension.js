@@ -101556,18 +101556,20 @@ var Editor = /*#__PURE__*/function () {
       this.konvaStage = konvaStage; // 更新 Konva Stage对象
       var ghostGroup = lib_default().Node.create(konvaString); // 根据序列化字符串创建 Konva.Group 对象
       var id = ghostGroup.id();
-      // 如果已经有相同 id 的 shape group，跳过添加，避免重复渲染
-      if (this.shapeGroupStore.has(id)) {
-        // destroy the created node since we won't add it to the stage
-        try {
-          ghostGroup.destroy();
-        } catch (e) {
-          // ignore
-        }
-        return;
-      }
-      // 将 Konva.Group 对象添加到背景图层
-      this.getBgLayer(konvaStage).add(ghostGroup);
+      // // 如果已经有相同 id 的 shape group，跳过添加，避免重复渲染
+      // if (this.shapeGroupStore.has(id)) {
+      //     // destroy the created node since we won't add it to the stage
+      //     try {
+      //         ghostGroup.destroy()
+      //     } catch (e) {
+      //         // ignore
+      //     }
+      //     return
+      // }
+      // // 将 Konva.Group 对象添加到背景图层
+      // this.getBgLayer(konvaStage).add(ghostGroup)
+      this.getBgLayer(konvaStage).add(ghostGroup); // 将 Konva.Group 对象添加到背景图层
+      if (this.shapeGroupStore.has(id)) return;
       var shapeGroup = {
         // 创建形状组对象
         id: id,
@@ -111776,7 +111778,8 @@ var Painter = /*#__PURE__*/function () {
       var annotationStore = this.store.annotation(id);
       if (!annotationStore) {
         console.warn("[deleteAnnotation] Annotation with id ".concat(id, " not found in store"));
-        return;
+        console.log('Current store state:', this.store.annotations);
+        // return
       }
       var konvaCanvasStore = this.konvaCanvasStore.get(annotationStore.pageNumber); // 获取 KonvaCanvas 实例
       this.store["delete"](id);
@@ -112142,6 +112145,22 @@ var Painter = /*#__PURE__*/function () {
           while (1) switch (_context4.n) {
             case 0:
               this.store.loadPageAnnotations(pageNumber, annotations, true);
+
+              // // After loading annotations into the store, ensure they are drawn
+              // // If a Konva canvas exists for the page, redraw annotations
+              // try {
+              //     if (this.konvaCanvasStore.has(pageNumber)) {
+              //         this.reDrawAnnotation(pageNumber)
+              //     } else {
+              //         // If canvas is not yet inserted (edge cases), attempt to create it
+              //         const pageView = this.pdfViewerApplication.pdfViewer.getPageView(pageNumber - 1)
+              //         if (pageView && pageView.div) {
+              //             this.insertCanvas(pageView, pageNumber)
+              //         }
+              //     }
+              // } catch (err) {
+              //     console.error('[Painter] Failed to re-draw annotations for page', pageNumber, err)
+              // }
             case 1:
               return _context4.a(2);
           }
@@ -118986,6 +119005,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
     // 加载多语言
     initializeI18n(this.PDFJS_PDFViewerApplication.l10n.getLanguage());
     this.appOptions = src_defineProperty(src_defineProperty(src_defineProperty(src_defineProperty(src_defineProperty({}, HASH_PARAMS_USERNAME, instance.t('normal.unknownUser')), HASH_PARAMS_GET_URL, default_options_defaultOptions.setting.HASH_PARAMS_GET_URL), HASH_PARAMS_POST_URL, default_options_defaultOptions.setting.HASH_PARAMS_POST_URL), HASH_PARAMS_DEFAULT_EDITOR_ACTIVE, default_options_defaultOptions.setting.HASH_PARAMS_DEFAULT_EDITOR_ACTIVE), HASH_PARAMS_DEFAULT_SIDEBAR_OPEN, default_options_defaultOptions.setting.HASH_PARAMS_DEFAULT_SIDEBAR_OPEN);
+    this.isLoadingPageAnnotation = new Map(); // this.isLoadingPageAnnotation[pagenumber]: true/false . NOTE; willl update later
 
     // 处理地址栏参数
     this.parseHashParams();
@@ -119740,9 +119760,13 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
               });
 
               // 获取可见页面
-              visiblePages = this.getVisiblePages(); // 构建带页码参数的URL
+              visiblePages = this.getVisiblePages();
+              console.log('Visible pages:', visiblePages);
+
+              // 构建带页码参数的URL
               fetchUrl = getUrl;
               if (visiblePages.length > 0) {
+                // let pagesToFetch = visiblePages.filter(pageNum => !this.isLoadingPageAnnotation.get(pageNum))
                 separator = getUrl.includes('?') ? '&' : '?';
                 fetchUrl = "".concat(getUrl).concat(separator, "pages=").concat(visiblePages.join(','));
               }
