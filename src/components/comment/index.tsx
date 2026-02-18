@@ -161,7 +161,7 @@ const CustomComment: React.ForwardRefRenderFunction<CustomCommentRef, CustomComm
             return [...prevAnnotations, annotation]
         })
         setCurrentAnnotation(null)
-        console.log("------------------addAnnotation----------------------",annotation)
+        // console.log("------------------addAnnotation----------------------",annotation)
         // // Draw marker if page is loaded
         if (annotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
             window.pdfjsAnnotationExtensionInstance.painter.clearAndRedrawPage(annotation.pageNumber);
