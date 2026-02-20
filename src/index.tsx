@@ -544,15 +544,18 @@ class PdfjsAnnotationExtension {
             'pagerendered',
             async ({ source, cssTransform, pageNumber }: { source: PDFPageView; cssTransform: boolean; pageNumber: number }) => {
                 setLoadEnd()
-                // console.log('pagerendered', pageNumber)
+                // console.log('EVNT BUS---------------pagerendered', pageNumber)
                 // console.log('pageView source', source)
                 this.painter.initCanvas({ pageView: source, cssTransform, pageNumber })
                 
                 // 延迟加载该页面的注释
+                // console.log('EVNT BUS---------------pagerendered -- this.loadEnd', this.loadEnd)
                 if (this.loadEnd && !this.painter.isPageLoaded(pageNumber)) {
+                    // console.log('EVNT BUS---------------pagerendered -- isPageLoaded', this.painter.isPageLoaded(pageNumber))
                     const pageAnnotations = await this.getPageAnnotations(pageNumber)
                     if (pageAnnotations.length > 0) {
                         await this.painter.loadPageAnnotations(pageNumber, pageAnnotations)
+                        // console.log('EVNT BUS---------------pagerendered -- loadPageAnnotations')
                         // 通知评论组件更新
                         pageAnnotations.forEach(annotation => {
                             this.customCommentRef.current?.addAnnotation(annotation)
@@ -627,6 +630,8 @@ class PdfjsAnnotationExtension {
      * @returns 
      */
     private async getPageAnnotations(pageNumber: number): Promise<any[]> {
+        // console.log('getPageAnnotations called for page:', pageNumber)
+        // console.trace();
         const getUrl = document.getElementById('docViewerContainer')?.dataset['annoGet'];
         if (!getUrl) {
             return [];
@@ -658,6 +663,8 @@ class PdfjsAnnotationExtension {
      * @returns 
      */
     private async getData(): Promise<any[]> {
+        // console.log('--- get data is being called ');
+        // console.trace();
         // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
         const getUrl = document.getElementById('docViewerContainer').dataset['annoGet'];
         // alert('getUrl', getUrl)
