@@ -374,6 +374,7 @@ class PdfjsAnnotationExtension {
                 }}
                 onDelete={(currentAnnotation) => {
                     this.painter.delete(currentAnnotation.id, true)
+                    this.handleCommentEditingStateChange(false) // Ensure toolbar is enabled after deletion
                 }}
             />
         )
