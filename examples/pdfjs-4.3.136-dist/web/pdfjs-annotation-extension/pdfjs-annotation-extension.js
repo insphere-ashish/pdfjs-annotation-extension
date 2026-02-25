@@ -27976,7 +27976,7 @@ var default_options_defaultOptions = {
     // 默认 GET URL -- ( updated custom for e-court)
     HASH_PARAMS_POST_URL: '',
     // 默认 POST URL -- ( updated custom for e-court)
-    HASH_PARAMS_DEFAULT_EDITOR_ACTIVE: 'null',
+    HASH_PARAMS_DEFAULT_EDITOR_ACTIVE: 'select',
     // 默认激活的编辑工具 select、 circle ...
     HASH_PARAMS_DEFAULT_SIDEBAR_OPEN: 'false' // 默认侧边栏打开
   }
@@ -114171,7 +114171,6 @@ var CustomComment = function CustomComment(props, ref) {
   // }
   // custom code - e-court
   var addAnnotation = function addAnnotation(annotation) {
-    var _window$pdfjsAnnotati, _window$pdfjsAnnotati2;
     setAnnotations(function (prevAnnotations) {
       // dedupe by id (safe guard)
       if (prevAnnotations.some(function (a) {
@@ -114182,17 +114181,17 @@ var CustomComment = function CustomComment(props, ref) {
       return [].concat(comment_toConsumableArray(prevAnnotations), [annotation]);
     });
     setCurrentAnnotation(null);
-    console.log("------------------addAnnotation----------------------", annotation);
+    // console.log("------------------addAnnotation----------------------",annotation)
     // // Draw marker if page is loaded
-    if (annotation !== null && annotation !== void 0 && annotation.sharedToUser && (_window$pdfjsAnnotati = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.painter) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.konvaCanvasStore) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati2 = _window$pdfjsAnnotati.has) !== null && _window$pdfjsAnnotati2 !== void 0 && _window$pdfjsAnnotati2.call(_window$pdfjsAnnotati, annotation.pageNumber)) {
-      window.pdfjsAnnotationExtensionInstance.painter.clearAndRedrawPage(annotation.pageNumber);
-    }
+    // if (annotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
+    window.pdfjsAnnotationExtensionInstance.painter.clearAndRedrawPage(annotation.pageNumber);
+    // }
     // if (annotation?.sharedToUser && window.pdfjsAnnotationExtensionInstance?.painter?.konvaCanvasStore?.has?.(annotation.pageNumber)) {
     //     window.pdfjsAnnotationExtensionInstance.painter.reDrawAnnotation(annotation.pageNumber)
     // }
   };
   var delAnnotation = function delAnnotation(id) {
-    var _window$pdfjsAnnotati3, _window$pdfjsAnnotati4;
+    var _window$pdfjsAnnotati, _window$pdfjsAnnotati2;
     // console.log("------------------delAnnotation Before prevAnnotations----------------------", prevAnnotations)
     // console.log("------------------delAnnotation Before currentAnnotation----------------------",currentAnnotation)
     setAnnotations(function (prevAnnotations) {
@@ -114212,7 +114211,7 @@ var CustomComment = function CustomComment(props, ref) {
     var annotation = annotations.find(function (a) {
       return a.id === id;
     });
-    if (currentAnnotation !== null && currentAnnotation !== void 0 && currentAnnotation.sharedToUser && (_window$pdfjsAnnotati3 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.painter) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati3 = _window$pdfjsAnnotati3.konvaCanvasStore) !== null && _window$pdfjsAnnotati3 !== void 0 && (_window$pdfjsAnnotati4 = _window$pdfjsAnnotati3.has) !== null && _window$pdfjsAnnotati4 !== void 0 && _window$pdfjsAnnotati4.call(_window$pdfjsAnnotati3, annotation.pageNumber)) {
+    if (currentAnnotation !== null && currentAnnotation !== void 0 && currentAnnotation.sharedToUser && (_window$pdfjsAnnotati = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.painter) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati = _window$pdfjsAnnotati.konvaCanvasStore) !== null && _window$pdfjsAnnotati !== void 0 && (_window$pdfjsAnnotati2 = _window$pdfjsAnnotati.has) !== null && _window$pdfjsAnnotati2 !== void 0 && _window$pdfjsAnnotati2.call(_window$pdfjsAnnotati, annotation.pageNumber)) {
       window.pdfjsAnnotationExtensionInstance.painter.deleteAnnotation(id);
     }
   };
@@ -114853,10 +114852,10 @@ var CustomComment = function CustomComment(props, ref) {
         children: /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
           id: "commentlinerbt",
           onClick: function onClick() {
-            var _props$customToolbarR, _window$pdfjsAnnotati5;
+            var _props$customToolbarR, _window$pdfjsAnnotati3;
             (_props$customToolbarR = props.customToolbarRef.current) === null || _props$customToolbarR === void 0 || _props$customToolbarR.toggleSidebarBtn(false);
             props === null || props === void 0 || props.toggleComment(false);
-            if ((_window$pdfjsAnnotati5 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati5 !== void 0 && _window$pdfjsAnnotati5.connectorLine) {
+            if ((_window$pdfjsAnnotati3 = window.pdfjsAnnotationExtensionInstance) !== null && _window$pdfjsAnnotati3 !== void 0 && _window$pdfjsAnnotati3.connectorLine) {
               window.pdfjsAnnotationExtensionInstance.connectorLine.clearConnection();
             }
           },
@@ -119350,6 +119349,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         },
         onDelete: function onDelete(currentAnnotation) {
           _this4.painter["delete"](currentAnnotation.id, true);
+          _this4.handleCommentEditingStateChange(false); // Ensure toolbar is enabled after deletion
         }
       }));
     }
@@ -119540,7 +119540,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
               case 0:
                 source = _ref3.source, cssTransform = _ref3.cssTransform, pageNumber = _ref3.pageNumber;
                 setLoadEnd();
-                // console.log('pagerendered', pageNumber)
+                // console.log('EVNT BUS---------------pagerendered', pageNumber)
                 // console.log('pageView source', source)
                 _this6.painter.initCanvas({
                   pageView: source,
@@ -119549,6 +119549,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 });
 
                 // 延迟加载该页面的注释
+                // console.log('EVNT BUS---------------pagerendered -- this.loadEnd', this.loadEnd)
                 if (!(_this6.loadEnd && !_this6.painter.isPageLoaded(pageNumber))) {
                   _context3.n = 3;
                   break;
@@ -119564,6 +119565,7 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
                 _context3.n = 2;
                 return _this6.painter.loadPageAnnotations(pageNumber, pageAnnotations);
               case 2:
+                // console.log('EVNT BUS---------------pagerendered -- loadPageAnnotations')
                 // 通知评论组件更新
                 pageAnnotations.forEach(function (annotation) {
                   var _this6$customCommentR;
@@ -119703,6 +119705,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         return src_regenerator().w(function (_context6) {
           while (1) switch (_context6.p = _context6.n) {
             case 0:
+              // console.log('getPageAnnotations called for page:', pageNumber)
+              // console.trace();
               getUrl = (_document$getElementB2 = document.getElementById('docViewerContainer')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2.dataset['annoGet'];
               if (getUrl) {
                 _context6.n = 1;
@@ -119763,6 +119767,8 @@ var PdfjsAnnotationExtension = /*#__PURE__*/function () {
         return src_regenerator().w(function (_context7) {
           while (1) switch (_context7.p = _context7.n) {
             case 0:
+              // console.log('--- get data is being called ');
+              // console.trace();
               // const getUrl = this.getOption(HASH_PARAMS_GET_URL);
               getUrl = document.getElementById('docViewerContainer').dataset['annoGet']; // alert('getUrl', getUrl)
               // console.log('--------------------------------- this.appOptions', this.appOptions)
